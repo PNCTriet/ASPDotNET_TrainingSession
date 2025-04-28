@@ -6,6 +6,10 @@
 ### Yêu cầu:
 Tạo một trang web sử dụng MasterPage để thực hiện chức năng ghép tên (First Name + Last Name = Full Name)
 
+### Giao diện và kết quả:
+![Giao diện trang web](photos/ver_280425.0.1_photo_1.png)
+![Kết quả ghép tên](photos/ver_280425.0.1_photo_2.png)
+
 ### Các bước thực hiện:
 
 1. **Tạo trang Default.aspx**
