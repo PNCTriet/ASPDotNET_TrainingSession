@@ -1,43 +1,73 @@
-# ASP.NET Training Session
+# ASP.NET Web Forms Training - Exercise 1
+*Date: April 28, 2024*
 
-Đây là dự án ASP.NET Web Forms được tạo ra cho mục đích học tập và thực hành.
+## Bài tập 1: Tạo trang Default.aspx với chức năng ghép tên
 
-## Cấu trúc dự án
+### Yêu cầu:
+Tạo một trang web sử dụng MasterPage để thực hiện chức năng ghép tên (First Name + Last Name = Full Name)
 
-Dự án được xây dựng trên nền tảng ASP.NET Web Forms với các thành phần chính:
+### Giao diện và kết quả:
+![Giao diện trang web](photos/ver_280425.0.1_photo_1.png)
+![Kết quả ghép tên](photos/ver_280425.0.1_photo_2.png)
 
-- **App_Start**: Chứa các file cấu hình khởi tạo ứng dụng
-- **Content**: Chứa các file CSS và hình ảnh
-- **Scripts**: Chứa các file JavaScript
-- **App_Data**: Thư mục lưu trữ dữ liệu
-- **Properties**: Chứa các cấu hình của dự án
+### Các bước thực hiện:
 
-## Các trang chính
+1. **Tạo trang Default.aspx**
+   - Sử dụng MasterPage (Site.Master)
+   - Thêm các control cần thiết:
+     - TextBox với ID=txtFirstName
+     - TextBox với ID=txtLastName
+     - Label với ID=blFullName
+     - Button với ID=btnGenFullname
 
-- **Default.aspx**: Trang chủ
-- **About.aspx**: Trang giới thiệu
-- **Contact.aspx**: Trang liên hệ
+2. **Thiết kế giao diện**
+   - Sử dụng Bootstrap để tạo layout đẹp
+   - Đặt các control trong container và row
+   - Sử dụng form-group để nhóm các control
+   - Thêm CSS class form-control cho TextBox
+   - Thêm CSS class btn btn-primary cho Button
 
-## Yêu cầu hệ thống
+3. **Xử lý sự kiện**
+   - Double click vào Button để tạo sự kiện Click
+   - Viết code xử lý trong Default.aspx.cs
+   - Sử dụng string interpolation để ghép tên: `$"{txtFirstName.Text} {txtLastName.Text}"`
 
-- Visual Studio 2019 trở lên
-- .NET Framework 4.7.2
-- SQL Server (nếu cần)
+4. **Khai báo control trong Designer**
+   - Mở file Default.aspx.designer.cs
+   - Thêm khai báo cho các control:
+     ```csharp
+     protected global::System.Web.UI.WebControls.TextBox txtFirstName;
+     protected global::System.Web.UI.WebControls.TextBox txtLastName;
+     protected global::System.Web.UI.WebControls.Label blFullName;
+     protected global::System.Web.UI.WebControls.Button btnGenFullname;
+     ```
 
-## Cài đặt và chạy
+5. **Kiểm tra và chạy thử**
+   - Build solution
+   - Chạy ứng dụng
+   - Nhập First Name và Last Name
+   - Click nút Generate Full Name
+   - Kiểm tra kết quả hiển thị
 
-1. Clone repository về máy local
-2. Mở file solution `asp_trainning_exp1.sln` bằng Visual Studio
-3. Build solution (F6)
-4. Chạy ứng dụng (F5)
+### Lưu ý quan trọng:
+- Luôn đảm bảo khai báo control trong file .designer.cs
+- Sử dụng đúng ID cho các control
+- Kiểm tra namespace trong các file
+- Build solution sau mỗi lần thay đổi code
 
-## Cấu hình
+### Các file liên quan:
+- Default.aspx
+- Default.aspx.cs
+- Default.aspx.designer.cs
+- Site.Master (MasterPage)
 
-Các file cấu hình chính:
-- `Web.config`: Cấu hình chung của ứng dụng
-- `Web.Debug.config`: Cấu hình cho môi trường Debug
-- `Web.Release.config`: Cấu hình cho môi trường Release
+### Cách sửa lỗi thường gặp:
+1. Nếu gặp lỗi "The name 'xxx' does not exist in the current context":
+   - Kiểm tra file .designer.cs
+   - Đảm bảo đã khai báo control
+   - Build lại solution
 
-## Giấy phép
-
-Dự án này được tạo ra cho mục đích học tập và thực hành. 
+2. Nếu gặp lỗi "Could not load type 'TrietPhamShopWeb.Global'":
+   - Kiểm tra namespace trong Global.asax và Global.asax.cs
+   - Clean và build lại solution
+   - Kiểm tra file Global.asax.cs có được include trong project 
