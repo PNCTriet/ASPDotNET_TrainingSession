@@ -2,19 +2,6 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <style>
-        .form-group {
-            margin-bottom: 20px;
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            width: 100%;
-            justify-content: flex-start;
-            gap: 20px;
-        }
-        .form-control {
-            padding: 5px;
-            width: 300px !important;
-        }
         .form-container {
             max-width: 800px;
             margin: 0 auto;
@@ -22,188 +9,225 @@
             background-color: #f8f9fa;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        .form-container-2 {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
         }
         .page-title {
-            text-align: left;
+            text-align: center;
             margin-bottom: 30px;
             color: #333;
             width: 100%;
-            padding-left: 170px;
+        }
+        .form-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        .form-table td {
+            padding: 15px 30px;
+            vertical-align: middle;
+        }
+        .form-table td:first-child {
+            width: 180px;
+            text-align: left;
+            font-weight: 500;
+            padding-left: 50px;
+        }
+        .form-table td:last-child {
+            text-align: center;
+            padding-right: 50px;
+        }
+        .form-control {
+            width: 300px !important;
+            padding: 5px;
+            margin: 0 auto;
+        }
+        .text-danger {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 5px;
+            display: block;
+            text-align: center;
         }
         .btn-submit {
             width: 300px !important;
-            margin-top: 20px;
-            margin-left: 170px;
-        }
-        .text-danger {
-            text-align: left;
-            width: 100%;
-            margin-top: 5px;
-        }
-        .form-group label {
-            min-width: 150px;
-            text-align: left;
-            font-weight: 500;
-            padding-top: 5px;
-        }
-        /* Đảm bảo dropdown có cùng chiều rộng với input */
-        select.form-control {
-            width: 300px !important;
-        }
-        /* Điều chỉnh validator để hiển thị dưới input */
-        .form-group .validator-container {
-            width: 100%;
-            display: flex;
-            justify-content: flex-start;
-            margin-top: 5px;
+            margin: 20px auto 0;
+            display: block;
         }
         .input-container {
+            width: 300px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            width: 300px;
+            align-items: center;
         }
-        .form-row {
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
             display: flex;
-            justify-content: flex-start;
-            width: 100%;
-            margin-bottom: 20px;
+            justify-content: center;
+            gap: 20px;
+        }
+        .button-container .btn {
+            min-width: 150px;
+            padding: 10px 30px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .btn-primary {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .btn:hover {
+            opacity: 0.9;
         }
     </style>
 
     <div class="container">
         <div class="form-container">
             <h2 class="page-title">Add New/ Edit Product</h2>
-            <div class="form-container-2">
-            <div class="form-group">
-                <asp:Label ID="lblProductEdit" runat="server" Text="Product Edit:"></asp:Label>
-                <div class="input-container">
-                    <asp:TextBox ID="txtProductEdit" runat="server" CssClass="form-control"></asp:TextBox>
-                    <div class="validator-container">
-                        <asp:RequiredFieldValidator ID="rfvProductEdit" runat="server" 
-                            ControlToValidate="txtProductEdit"
-                            ErrorMessage="Product Edit is required"
-                            CssClass="text-danger"
-                            Display="Dynamic">
-                        </asp:RequiredFieldValidator>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <asp:Label ID="lblProductName" runat="server" Text="Product Name:"></asp:Label>
-                <div class="input-container">
-                    <asp:TextBox ID="txtProductName" runat="server" CssClass="form-control"></asp:TextBox>
-                    <div class="validator-container">
-                        <asp:RequiredFieldValidator ID="rfvProductName" runat="server" 
-                            ControlToValidate="txtProductName"
-                            ErrorMessage="Product Name is required"
-                            CssClass="text-danger"
-                            Display="Dynamic">
-                        </asp:RequiredFieldValidator>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <asp:Label ID="lblSupplier" runat="server" Text="Supplier:"></asp:Label>
-                <div class="input-container">
-                    <asp:DropDownList ID="ddlSupplier" runat="server" CssClass="form-control">
-                        <asp:ListItem Text="1" Value="1" />
-                        <asp:ListItem Text="2" Value="2" />
-                        <asp:ListItem Text="3" Value="3" />
-                        <asp:ListItem Text="4" Value="4" />
-                    </asp:DropDownList>
-                    <div class="validator-container">
-                        <asp:RequiredFieldValidator ID="rfvSupplier" runat="server" 
-                            ControlToValidate="ddlSupplier"
-                            ErrorMessage="Supplier is required"
-                            CssClass="text-danger"
-                            Display="Dynamic">
-                        </asp:RequiredFieldValidator>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <asp:Label ID="lblCategory" runat="server" Text="Category:"></asp:Label>
-                <div class="input-container">
-                    <asp:TextBox ID="txtCategory" runat="server" CssClass="form-control"></asp:TextBox>
-                    <div class="validator-container">
-                        <asp:RequiredFieldValidator ID="rfvCategory" runat="server" 
-                            ControlToValidate="txtCategory"
-                            ErrorMessage="Category is required"
-                            CssClass="text-danger"
-                            Display="Dynamic">
-                        </asp:RequiredFieldValidator>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <asp:Label ID="lblQuantityPerUnit" runat="server" Text="Quantity per Unit:"></asp:Label>
-                <div class="input-container">
-                    <asp:TextBox ID="txtQuantityPerUnit" runat="server" CssClass="form-control" MaxLength="20"></asp:TextBox>
-                    <div class="validator-container">
-                        <asp:RequiredFieldValidator ID="rfvQuantityPerUnit" runat="server" 
-                            ControlToValidate="txtQuantityPerUnit"
-                            ErrorMessage="Quantity per Unit is required"
-                            CssClass="text-danger"
-                            Display="Dynamic">
-                        </asp:RequiredFieldValidator>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <asp:Label ID="lblUnitPrice" runat="server" Text="Unit Price:"></asp:Label>
-                <div class="input-container">
-                    <asp:TextBox ID="txtUnitPrice" runat="server" CssClass="form-control" TextMode="Number" Step="0.01" min="0"></asp:TextBox>
-                    <div class="validator-container">
-                        <asp:RequiredFieldValidator ID="rfvUnitPrice" runat="server" 
-                            ControlToValidate="txtUnitPrice"
-                            ErrorMessage="Unit Price is required"
-                            CssClass="text-danger"
-                            Display="Dynamic">
-                        </asp:RequiredFieldValidator>
-                        <asp:RangeValidator ID="rvUnitPrice" runat="server"
-                            ControlToValidate="txtUnitPrice"
-                            Type="Double"
-                            MinimumValue="0"
-                            MaximumValue="999999.99"
-                            ErrorMessage="Unit Price must be greater than or equal to 0"
-                            CssClass="text-danger"
-                            Display="Dynamic">
-                        </asp:RangeValidator>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <asp:Label ID="lblUnitStock" runat="server" Text="Unit Stock:"></asp:Label>
-                <div class="input-container">
-                    <asp:TextBox ID="txtUnitStock" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
-                    <div class="validator-container">
-                        <asp:RequiredFieldValidator ID="rfvUnitStock" runat="server" 
-                            ControlToValidate="txtUnitStock"
-                            ErrorMessage="Unit Stock is required"
-                            CssClass="text-danger"
-                            Display="Dynamic">
-                        </asp:RequiredFieldValidator>
-                    </div>
-                </div>
-            </div>
-            </div>
-            <div class="form-group">
-                <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-primary btn-submit" OnClientClick="return showConfirmModal();" />
+            <table class="form-table">
+                <tr>
+                    <td>
+                        <asp:Label ID="lblProductEdit" runat="server" Text="Product Edit:"></asp:Label>
+                    </td>
+                    <td>
+                        <div class="input-container">
+                            <asp:TextBox ID="txtProductEdit" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="rfvProductEdit" runat="server" 
+                                ControlToValidate="txtProductEdit"
+                                ErrorMessage="Product Edit is required"
+                                CssClass="text-danger"
+                                Display="Dynamic">
+                            </asp:RequiredFieldValidator>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="lblProductName" runat="server" Text="Product Name:"></asp:Label>
+                    </td>
+                    <td>
+                        <div class="input-container">
+                            <asp:TextBox ID="txtProductName" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="rfvProductName" runat="server" 
+                                ControlToValidate="txtProductName"
+                                ErrorMessage="Product Name is required"
+                                CssClass="text-danger"
+                                Display="Dynamic">
+                            </asp:RequiredFieldValidator>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="lblSupplier" runat="server" Text="Supplier:"></asp:Label>
+                    </td>
+                    <td>
+                        <div class="input-container">
+                            <asp:DropDownList ID="ddlSupplier" runat="server" CssClass="form-control">
+                                <asp:ListItem Text="1" Value="1" />
+                                <asp:ListItem Text="2" Value="2" />
+                                <asp:ListItem Text="3" Value="3" />
+                                <asp:ListItem Text="4" Value="4" />
+                            </asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="rfvSupplier" runat="server" 
+                                ControlToValidate="ddlSupplier"
+                                ErrorMessage="Supplier is required"
+                                CssClass="text-danger"
+                                Display="Dynamic">
+                            </asp:RequiredFieldValidator>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="lblCategory" runat="server" Text="Category:"></asp:Label>
+                    </td>
+                    <td>
+                        <div class="input-container">
+                            <asp:TextBox ID="txtCategory" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="rfvCategory" runat="server" 
+                                ControlToValidate="txtCategory"
+                                ErrorMessage="Category is required"
+                                CssClass="text-danger"
+                                Display="Dynamic">
+                            </asp:RequiredFieldValidator>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="lblQuantityPerUnit" runat="server" Text="Quantity per Unit:"></asp:Label>
+                    </td>
+                    <td>
+                        <div class="input-container">
+                            <asp:TextBox ID="txtQuantityPerUnit" runat="server" CssClass="form-control" MaxLength="20"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="rfvQuantityPerUnit" runat="server" 
+                                ControlToValidate="txtQuantityPerUnit"
+                                ErrorMessage="Quantity per Unit is required"
+                                CssClass="text-danger"
+                                Display="Dynamic">
+                            </asp:RequiredFieldValidator>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="lblUnitPrice" runat="server" Text="Unit Price:"></asp:Label>
+                    </td>
+                    <td>
+                        <div class="input-container">
+                            <asp:TextBox ID="txtUnitPrice" runat="server" CssClass="form-control" TextMode="Number" Step="0.01" min="0"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="rfvUnitPrice" runat="server" 
+                                ControlToValidate="txtUnitPrice"
+                                ErrorMessage="Unit Price is required"
+                                CssClass="text-danger"
+                                Display="Dynamic">
+                            </asp:RequiredFieldValidator>
+                            <asp:RangeValidator ID="rvUnitPrice" runat="server"
+                                ControlToValidate="txtUnitPrice"
+                                Type="Double"
+                                MinimumValue="0"
+                                MaximumValue="999999.99"
+                                ErrorMessage="Unit Price must be greater than or equal to 0"
+                                CssClass="text-danger"
+                                Display="Dynamic">
+                            </asp:RangeValidator>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="lblUnitStock" runat="server" Text="Unit Stock:"></asp:Label>
+                    </td>
+                    <td>
+                        <div class="input-container">
+                            <asp:TextBox ID="txtUnitStock" runat="server" CssClass="form-control" TextMode="Number" Step="1" min="0"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="rfvUnitStock" runat="server" 
+                                ControlToValidate="txtUnitStock"
+                                ErrorMessage="Unit Stock is required"
+                                CssClass="text-danger"
+                                Display="Dynamic">
+                            </asp:RequiredFieldValidator>
+                            <asp:RangeValidator ID="rvUnitStock" runat="server"
+                                ControlToValidate="txtUnitStock"
+                                Type="Integer"
+                                MinimumValue="0"
+                                MaximumValue="999999"
+                                ErrorMessage="Unit Stock must be greater than or equal to 0"
+                                CssClass="text-danger"
+                                Display="Dynamic">
+                            </asp:RangeValidator>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="button-container">
+                <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="btn btn-secondary" OnClientClick="return resetForm(event);" />
+                <asp:Button ID="btnSubmit" runat="server" Text="Save" CssClass="btn btn-primary" OnClientClick="return validateAndShowModal(event);" />
             </div>
         </div>
     </div>
@@ -228,9 +252,51 @@
     </div>
 
     <script type="text/javascript">
-        function showConfirmModal() {
+        function validateAndShowModal(event) {
+            // Ngăn form submit mặc định
+            if (event) {
+                event.preventDefault();
+            }
+
+            // Kiểm tra validation sử dụng Page_ClientValidate
+            var isValid = Page_ClientValidate();
+            console.log('Kết quả validation:', isValid);
+
+            if (!isValid) {
+                return false;
+            }
+
+            // Nếu validation pass thì hiện modal
+            console.log('Hiển thị modal');
             var myModal = new bootstrap.Modal(document.getElementById('confirmModal'));
             myModal.show();
+            return false;
+        }
+
+        function resetForm(event) {
+            // Ngăn form submit mặc định
+            if (event) {
+                event.preventDefault();
+            }
+
+            // Reset tất cả các input
+            var inputs = document.querySelectorAll('input[type="text"], input[type="number"]');
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].value = '';
+            }
+
+            // Reset dropdown về giá trị đầu tiên
+            var dropdowns = document.querySelectorAll('select');
+            for (var i = 0; i < dropdowns.length; i++) {
+                dropdowns[i].selectedIndex = 0;
+            }
+
+            // Reset validation messages
+            var validators = document.querySelectorAll('.text-danger');
+            for (var i = 0; i < validators.length; i++) {
+                validators[i].style.display = 'none';
+            }
+
             return false;
         }
     </script>
