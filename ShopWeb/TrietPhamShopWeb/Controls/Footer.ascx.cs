@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Web.UI;
 
 namespace TrietPhamShopWeb.Controls
 {
@@ -6,7 +7,16 @@ namespace TrietPhamShopWeb.Controls
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Add any initialization code here
+            if (!IsPostBack)
+            {
+                // Set active link based on current page
+                string currentPage = Request.Path.ToLower();
+                
+                lnkFooterHome.CssClass = currentPage.Contains("default.aspx") ? "active" : "";
+                lnkFooterProducts.CssClass = currentPage.Contains("products.aspx") ? "active" : "";
+                lnkFooterAbout.CssClass = currentPage.Contains("about.aspx") ? "active" : "";
+                lnkFooterContact.CssClass = currentPage.Contains("contact.aspx") ? "active" : "";
+            }
         }
     }
-} 
+}

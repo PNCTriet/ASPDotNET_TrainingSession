@@ -1,53 +1,26 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Navbar.ascx.cs" Inherits="TrietPhamShopWeb.Controls.Navbar" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Navbar.ascx.cs" Inherits="TrietPhamShopWeb.Controls.Navbar" %>
 
-<nav class="navbar">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
     <div class="container">
-        <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="/" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item">
-                <a href="/Products" class="nav-link">Products</a>
-            </li>
-            <li class="nav-item">
-                <a href="/Categories" class="nav-link">Categories</a>
-            </li>
-            <li class="nav-item">
-                <a href="/About" class="nav-link">About</a>
-            </li>
-            <li class="nav-item">
-                <a href="/Contact" class="nav-link">Contact</a>
-            </li>
-        </ul>
+        <a class="navbar-brand" href="../Default.aspx">
+            <i class="fas fa-store me-2"></i>Triet Pham Shop
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <asp:HyperLink ID="lnkHome" runat="server" NavigateUrl="~/Default.aspx" CssClass="nav-link">
+                        <i class="fas fa-home me-1"></i> Trang chủ
+                    </asp:HyperLink>
+                </li>
+                <li class="nav-item">
+                    <asp:HyperLink ID="lnkAdmin" runat="server" NavigateUrl="~/Adminpage/AdminHome.aspx" CssClass="nav-link">
+                        <i class="fas fa-user-shield me-1"></i> Admin
+                    </asp:HyperLink>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
-
-<style>
-    .navbar {
-        background-color: #343a40;
-        padding: 10px 0;
-    }
-    .nav-menu {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        gap: 20px;
-    }
-    .nav-item {
-        position: relative;
-    }
-    .nav-link {
-        color: #fff;
-        text-decoration: none;
-        padding: 8px 15px;
-        display: block;
-        transition: color 0.3s;
-    }
-    .nav-link:hover {
-        color: #17a2b8;
-    }
-    .nav-item.active .nav-link {
-        color: #17a2b8;
-    }
-</style> 

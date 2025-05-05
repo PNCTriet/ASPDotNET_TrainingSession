@@ -1,98 +1,35 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Footer.ascx.cs" Inherits="TrietPhamShopWeb.Controls.Footer" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Footer.ascx.cs" Inherits="TrietPhamShopWeb.Controls.Footer" %>
 
-<footer class="footer">
+<footer class="footer mt-5 py-4 bg-light">
     <div class="container">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>About Us</h4>
-                <p>Your trusted online shopping destination for quality products and excellent service.</p>
+        <div class="row">
+            <div class="col-md-4">
+                <h5>Về chúng tôi</h5>
+                <p>Triet Pham Shop - Nơi cung cấp các sản phẩm chất lượng cao với giá cả phải chăng.</p>
             </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="/About">About Us</a></li>
-                    <li><a href="/Contact">Contact Us</a></li>
-                    <li><a href="/Privacy">Privacy Policy</a></li>
-                    <li><a href="/Terms">Terms & Conditions</a></li>
+            <div class="col-md-4">
+                <h5>Liên kết nhanh</h5>
+                <ul class="list-unstyled">
+                    <li><asp:HyperLink ID="lnkFooterHome" runat="server" NavigateUrl="~/Default.aspx">Trang chủ</asp:HyperLink></li>
+                    <li><asp:HyperLink ID="lnkFooterProducts" runat="server" NavigateUrl="~/Products.aspx">Sản phẩm</asp:HyperLink></li>
+                    <li><asp:HyperLink ID="lnkFooterAbout" runat="server" NavigateUrl="~/About.aspx">Giới thiệu</asp:HyperLink></li>
+                    <li><asp:HyperLink ID="lnkFooterContact" runat="server" NavigateUrl="~/Contact.aspx">Liên hệ</asp:HyperLink></li>
                 </ul>
             </div>
-            <div class="footer-section">
-                <h4>Contact Info</h4>
-                <ul class="contact-info">
-                    <li><i class="fas fa-map-marker-alt"></i> 123 Street, City, Country</li>
-                    <li><i class="fas fa-phone"></i> +123 456 7890</li>
-                    <li><i class="fas fa-envelope"></i> info@example.com</li>
+            <div class="col-md-4">
+                <h5>Liên hệ</h5>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-phone"></i> Hotline: 0123 456 789</li>
+                    <li><i class="fas fa-envelope"></i> Email: info@trietphamshop.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Địa chỉ: 123 Đường ABC, Quận XYZ, TP.HCM</li>
                 </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Follow Us</h4>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Your Company. All rights reserved.</p>
+        <hr class="my-4" />
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p class="mb-0">&copy; <%= DateTime.Now.Year %> Triet Pham Shop. All rights reserved.</p>
+            </div>
         </div>
     </div>
 </footer>
-
-<style>
-    .footer {
-        background-color: #343a40;
-        color: #fff;
-        padding: 50px 0 20px;
-        margin-top: 50px;
-    }
-    .footer-content {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 30px;
-        margin-bottom: 30px;
-    }
-    .footer-section h4 {
-        color: #17a2b8;
-        margin-bottom: 20px;
-    }
-    .footer-section ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    .footer-section ul li {
-        margin-bottom: 10px;
-    }
-    .footer-section ul li a {
-        color: #fff;
-        text-decoration: none;
-        transition: color 0.3s;
-    }
-    .footer-section ul li a:hover {
-        color: #17a2b8;
-    }
-    .contact-info li {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    .social-links {
-        display: flex;
-        gap: 15px;
-    }
-    .social-links a {
-        color: #fff;
-        font-size: 20px;
-        transition: color 0.3s;
-    }
-    .social-links a:hover {
-        color: #17a2b8;
-    }
-    .footer-bottom {
-        text-align: center;
-        padding-top: 20px;
-        border-top: 1px solid rgba(255,255,255,0.1);
-    }
-</style> 
