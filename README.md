@@ -7,8 +7,8 @@
 Tạo một trang web sử dụng MasterPage để thực hiện chức năng ghép tên (First Name + Last Name = Full Name)
 
 ### Giao diện và kết quả:
-![Giao diện trang web](photos/ver_280425.0.1_photo_1.png)
-![Kết quả ghép tên](photos/ver_280425.0.1_photo_2.png)
+![Giao diện trang web](ShopWeb/TrietPhamShopWeb/photos/ver_280425.0.1_photo_1.png)
+![Kết quả ghép tên](ShopWeb/TrietPhamShopWeb/photos/ver_280425.0.1_photo_2.png)
 
 ### Các bước thực hiện:
 
