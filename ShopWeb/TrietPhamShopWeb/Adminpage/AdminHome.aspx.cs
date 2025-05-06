@@ -7,11 +7,14 @@ using System.Web.UI.WebControls;
 
 namespace TrietPhamShopWeb.Adminpage
 {
-    public partial class AdminHome : System.Web.UI.Page
+    public partial class AdminHome : AdminBasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Xử lý logic khi trang được tải
+            if (!IsPostBack)
+            {
+                // Xử lý logic khi trang được tải
+            }
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)

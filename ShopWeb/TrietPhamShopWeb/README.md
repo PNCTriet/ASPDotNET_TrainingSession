@@ -49,17 +49,110 @@ Tạo một trang web sử dụng MasterPage để thực hiện chức năng gh
    - Click nút Generate Full Name
    - Kiểm tra kết quả hiển thị
 
-### Lưu ý quan trọng:
-- Luôn đảm bảo khai báo control trong file .designer.cs
-- Sử dụng đúng ID cho các control
-- Kiểm tra namespace trong các file
-- Build solution sau mỗi lần thay đổi code
+## Bài tập 2: Xây dựng hệ thống Authentication cho Admin
 
-### Các file liên quan:
-- Default.aspx
-- Default.aspx.cs
-- Default.aspx.designer.cs
-- Site.Master (MasterPage)
+### Yêu cầu:
+Tạo hệ thống đăng nhập cho admin với các chức năng:
+- Form đăng nhập với username/password
+- Kiểm tra quyền truy cập trang admin
+- Lưu trạng thái đăng nhập trong Session
+- Chuyển hướng về trang đăng nhập nếu chưa xác thực
+
+### Các bước thực hiện:
+
+1. **Tạo trang Login2.aspx**
+   - Sử dụng MasterPage (Site.Master)
+   - Thêm các control cần thiết:
+     ```aspx
+     <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" />
+     <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="form-control" />
+     <asp:CheckBox ID="chkRemember" runat="server" />
+     <asp:Button ID="btnLogin" runat="server" Text="Đăng nhập" OnClick="btnLogin_Click" />
+     <asp:Label ID="lblMessage" runat="server" CssClass="text-danger" />
+     ```
+   - Thêm validation:
+     ```aspx
+     <asp:RequiredFieldValidator ID="rfvUsername" runat="server" 
+         ControlToValidate="txtUsername"
+         ErrorMessage="Vui lòng nhập tên đăng nhập"
+         CssClass="text-danger"
+         Display="Dynamic">
+     </asp:RequiredFieldValidator>
+     ```
+
+2. **Xử lý đăng nhập trong Login2.aspx.cs**
+   ```csharp
+   protected void btnLogin_Click(object sender, EventArgs e)
+   {
+       string username = txtUsername.Text.Trim();
+       string password = txtPassword.Text.Trim();
+
+       // Hard-coded authentication
+       if (username == "admin" && password == "@123123")
+       {
+           // Set session
+           Session["IsAdmin"] = true;
+           Session["Username"] = username;
+
+           // Redirect to admin page
+           Response.Redirect("~/Adminpage/AdminHome.aspx");
+       }
+       else
+       {
+           lblMessage.Text = "Tên đăng nhập hoặc mật khẩu không đúng!";
+       }
+   }
+   ```
+
+3. **Tạo AdminBasePage để kiểm tra quyền truy cập**
+   ```csharp
+   public class AdminBasePage : Page
+   {
+       protected override void OnInit(EventArgs e)
+       {
+           base.OnInit(e);
+           CheckAdminAuthentication();
+       }
+
+       private void CheckAdminAuthentication()
+       {
+           if (Session["IsAdmin"] == null || !(bool)Session["IsAdmin"])
+           {
+               Response.Redirect("~/Login2.aspx");
+           }
+       }
+   }
+   ```
+
+4. **Cập nhật Navbar để thêm link Admin**
+   ```aspx
+   <asp:HyperLink ID="lnkAdmin" runat="server" 
+       NavigateUrl="~/Login2.aspx" 
+       CssClass="nav-link">
+       <i class="fas fa-user-shield me-1"></i> Admin
+   </asp:HyperLink>
+   ```
+
+5. **Kế thừa AdminBasePage cho các trang admin**
+   ```csharp
+   public partial class AdminHome : AdminBasePage
+   {
+       protected void Page_Load(object sender, EventArgs e)
+       {
+           if (!IsPostBack)
+           {
+               // Xử lý logic khi trang được tải
+           }
+       }
+   }
+   ```
+
+### Lưu ý quan trọng:
+- Luôn kiểm tra Session["IsAdmin"] trước khi cho phép truy cập trang admin
+- Sử dụng AdminBasePage để tránh lặp code kiểm tra quyền
+- Xử lý logout bằng cách xóa Session
+- Bảo mật mật khẩu trong môi trường production
+- Sử dụng HTTPS để bảo vệ thông tin đăng nhập
 
 ### Cách sửa lỗi thường gặp:
 1. Nếu gặp lỗi "The name 'xxx' does not exist in the current context":
@@ -71,3 +164,8 @@ Tạo một trang web sử dụng MasterPage để thực hiện chức năng gh
    - Kiểm tra namespace trong Global.asax và Global.asax.cs
    - Clean và build lại solution
    - Kiểm tra file Global.asax.cs có được include trong project 
+
+3. Nếu gặp lỗi "The type or namespace name 'AdminBasePage' could not be found":
+   - Kiểm tra namespace trong AdminBasePage.cs
+   - Đảm bảo file AdminBasePage.cs được include trong project
+   - Clean và build lại solution 
