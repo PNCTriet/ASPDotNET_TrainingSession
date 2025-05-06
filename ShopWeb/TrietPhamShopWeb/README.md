@@ -169,3 +169,111 @@ Tạo hệ thống đăng nhập cho admin với các chức năng:
    - Kiểm tra namespace trong AdminBasePage.cs
    - Đảm bảo file AdminBasePage.cs được include trong project
    - Clean và build lại solution 
+
+### Giải thích chi tiết về AdminBasePage và luồng xử lý Authentication
+
+#### 1. AdminBasePage là gì?
+AdminBasePage là một lớp cơ sở (base class) được tạo ra để:
+- Kiểm tra quyền truy cập cho tất cả các trang admin
+- Tránh việc lặp lại code kiểm tra authentication
+- Đảm bảo tính nhất quán trong việc kiểm tra quyền truy cập
+
+#### 2. Cấu trúc của AdminBasePage
+```csharp
+public class AdminBasePage : Page
+{
+    protected override void OnInit(EventArgs e)
+    {
+        base.OnInit(e);
+        CheckAdminAuthentication();
+    }
+
+    private void CheckAdminAuthentication()
+    {
+        if (Session["IsAdmin"] == null || !(bool)Session["IsAdmin"])
+        {
+            Response.Redirect("~/Login2.aspx");
+        }
+    }
+}
+```
+
+#### 3. Luồng xử lý Authentication
+1. **Khi người dùng truy cập trang admin:**
+   ```
+   User -> AdminPage -> AdminBasePage.OnInit() -> CheckAdminAuthentication()
+   ```
+
+2. **Kiểm tra Session:**
+   ```csharp
+   if (Session["IsAdmin"] == null || !(bool)Session["IsAdmin"])
+   ```
+   - Nếu Session["IsAdmin"] chưa tồn tại hoặc là false
+   - Chuyển hướng về trang Login2.aspx
+   - Nếu không, cho phép truy cập trang admin
+
+3. **Khi đăng nhập thành công:**
+   ```csharp
+   Session["IsAdmin"] = true;
+   Session["Username"] = username;
+   ```
+   - Lưu trạng thái đăng nhập vào Session
+   - Chuyển hướng đến trang admin
+
+#### 4. Cách sử dụng AdminBasePage
+1. **Tạo trang admin mới:**
+   ```csharp
+   public partial class AdminHome : AdminBasePage
+   {
+       protected void Page_Load(object sender, EventArgs e)
+       {
+           // Code xử lý trang admin
+       }
+   }
+   ```
+
+2. **Thứ tự thực thi:**
+   ```
+   Page_Init -> AdminBasePage.OnInit() -> CheckAdminAuthentication() -> Page_Load
+   ```
+
+#### 5. Ví dụ về luồng xử lý
+1. **Truy cập trang admin khi chưa đăng nhập:**
+   ```
+   User -> AdminHome.aspx 
+   -> AdminBasePage.OnInit() 
+   -> CheckAdminAuthentication() 
+   -> Session["IsAdmin"] = null 
+   -> Redirect to Login2.aspx
+   ```
+
+2. **Đăng nhập thành công:**
+   ```
+   User -> Login2.aspx 
+   -> Nhập thông tin 
+   -> btnLogin_Click() 
+   -> Set Session["IsAdmin"] = true 
+   -> Redirect to AdminHome.aspx
+   ```
+
+3. **Truy cập trang admin sau khi đăng nhập:**
+   ```
+   User -> AdminHome.aspx 
+   -> AdminBasePage.OnInit() 
+   -> CheckAdminAuthentication() 
+   -> Session["IsAdmin"] = true 
+   -> Load AdminHome.aspx
+   ```
+
+#### 6. Lợi ích của việc sử dụng AdminBasePage
+1. **Tính tái sử dụng:**
+   - Không cần viết lại code kiểm tra authentication
+   - Dễ dàng thêm trang admin mới
+
+2. **Bảo mật:**
+   - Kiểm tra quyền truy cập ở mức Page_Init
+   - Ngăn chặn truy cập trái phép
+
+3. **Bảo trì:**
+   - Dễ dàng thay đổi logic kiểm tra quyền
+   - Tập trung code authentication tại một nơi
