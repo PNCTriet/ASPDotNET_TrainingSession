@@ -205,7 +205,7 @@
                     </td>
                     <td>
                         <div class="input-container">
-                            <asp:TextBox ID="txtUnitStock" runat="server" CssClass="form-control" TextMode="Number" Step="1" min="0"></asp:TextBox>
+                             <asp:TextBox ID="txtUnitStock" runat="server" CssClass="form-control" TextMode="Number" Step="1" min="0"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="rfvUnitStock" runat="server" 
                                 ControlToValidate="txtUnitStock"
                                 ErrorMessage="Unit Stock is required"
@@ -226,8 +226,8 @@
                 </tr>
             </table>
             <div class="button-container">
-                <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="btn btn-secondary" OnClientClick="return resetForm(event);" />
                 <asp:Button ID="btnSubmit" runat="server" Text="Save" CssClass="btn btn-primary" OnClientClick="return validateAndShowModal(event);" />
+                <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="btn btn-secondary" OnClientClick="return resetForm(event);" />
             </div>
         </div>
     </div>
