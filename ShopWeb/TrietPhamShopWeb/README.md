@@ -277,3 +277,80 @@ public class AdminBasePage : Page
 3. **Bảo trì:**
    - Dễ dàng thay đổi logic kiểm tra quyền
    - Tập trung code authentication tại một nơi
+
+#### 7. Quản lý Session Timeout
+1. **Thời gian mặc định của Session:**
+   - Session mặc định có thời gian timeout là 20 phút
+   - Sau thời gian này, Session sẽ tự động hết hạn
+   - Người dùng sẽ phải đăng nhập lại
+
+2. **Cấu hình Session Timeout:**
+   ```xml
+   <!-- Trong file Web.config -->
+   <configuration>
+     <system.web>
+       <!-- Cấu hình timeout cho toàn bộ ứng dụng -->
+       <sessionState timeout="30" />
+     </system.web>
+   </configuration>
+   ```
+   - Thời gian được tính bằng phút
+   - Có thể điều chỉnh giá trị timeout tùy nhu cầu
+   - Nên đặt giá trị phù hợp với yêu cầu bảo mật
+
+3. **Cấu hình Session cho từng trang:**
+   ```csharp
+   // Trong code-behind của trang
+   protected void Page_Load(object sender, EventArgs e)
+   {
+       // Đặt timeout cho Session hiện tại
+       Session.Timeout = 60; // 60 phút
+   }
+   ```
+
+4. **Kiểm tra Session hết hạn:**
+   ```csharp
+   protected void CheckSessionExpired()
+   {
+       if (Session["IsAdmin"] == null)
+       {
+           // Session đã hết hạn
+           Response.Redirect("~/Login2.aspx");
+       }
+   }
+   ```
+
+5. **Xử lý Session hết hạn:**
+   - Tự động chuyển hướng về trang đăng nhập
+   - Hiển thị thông báo cho người dùng
+   - Lưu lại URL trang đang xem để quay lại sau khi đăng nhập
+
+6. **Best Practices:**
+   - Nên đặt timeout ngắn cho các ứng dụng có tính bảo mật cao
+   - Thông báo cho người dùng khi Session sắp hết hạn
+   - Có cơ chế "Remember Me" để kéo dài thời gian đăng nhập
+   - Lưu log khi Session hết hạn để theo dõi
+
+7. **Ví dụ về cấu hình Session trong Web.config:**
+   ```xml
+   <configuration>
+     <system.web>
+       <sessionState 
+         mode="InProc"
+         timeout="30"
+         cookieName=".ASPXSESSION"
+         cookieless="UseCookies"
+         />
+     </system.web>
+   </configuration>
+   ```
+   - mode="InProc": Lưu Session trong bộ nhớ của web server
+   - timeout="30": Session timeout sau 30 phút
+   - cookieName: Tên cookie lưu Session ID
+   - cookieless: Sử dụng cookie để lưu Session ID
+
+8. **Các mode lưu trữ Session:**
+   - InProc: Lưu trong bộ nhớ web server (mặc định)
+   - StateServer: Lưu trong Windows Service
+   - SQLServer: Lưu trong database
+   - Custom: Lưu tùy chỉnh
