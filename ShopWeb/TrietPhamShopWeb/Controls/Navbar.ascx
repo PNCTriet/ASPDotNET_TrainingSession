@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
     <div class="container">
-        <a class="navbar-brand" href="../Default.aspx">
+        <a class="navbar-brand" href="Default.aspx">
             <i class="fas fa-store me-2"></i>Triet Pham Shop
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,7 +16,7 @@
                     </asp:HyperLink>
                 </li>
                 <li class="nav-item">
-                    <asp:HyperLink ID="lnkAdmin" runat="server" NavigateUrl="~/Adminpage/AdminHome.aspx" CssClass="nav-link">
+                    <asp:HyperLink ID="lnkAdmin" runat="server" NavigateUrl="~/Login2.aspx" CssClass="nav-link">
                         <i class="fas fa-user-shield me-1"></i> Admin
                     </asp:HyperLink>
                 </li>
