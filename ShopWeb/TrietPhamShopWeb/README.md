@@ -354,3 +354,158 @@ public class AdminBasePage : Page
    - StateServer: Lưu trong Windows Service
    - SQLServer: Lưu trong database
    - Custom: Lưu tùy chỉnh
+
+# Phân tích luồng kết nối và hiển thị dữ liệu trong ManageProducts.aspx
+
+## 1. Cấu hình kết nối Database
+
+### 1.1. Cấu hình Connection String
+- File: `Web.config`
+- Vị trí: Thẻ `<connectionStrings>`
+- Cấu hình:
+```xml
+<connectionStrings>
+  <add name="Northwind" 
+       connectionString="Data Source=.;Initial Catalog=Northwind;Integrated Security=True" 
+       providerName="System.Data.SqlClient" />
+</connectionStrings>
+```
+- Giải thích:
+  - `Data Source=.`: Kết nối tới SQL Server local
+  - `Initial Catalog=Northwind`: Sử dụng database Northwind
+  - `Integrated Security=True`: Sử dụng Windows Authentication
+
+### 1.2. Class Connection
+- File: `Models/Connection.cs`
+- Chức năng: Đọc connection string từ Web.config
+```csharp
+public static string GetConnectionString()
+{
+    return ConfigurationManager.ConnectionStrings["Northwind"].ConnectionString;
+}
+```
+
+## 2. Luồng xử lý dữ liệu trong ManageProducts.aspx
+
+### 2.1. Cấu trúc trang
+- Master Page: `Adminpage/Adminsite.Master`
+- Controls:
+  - GridView (ID: gvProducts): Hiển thị danh sách sản phẩm
+  - Các nút thao tác: Sửa, Xóa
+
+### 2.2. Code-behind (ManageProducts.aspx.cs)
+
+#### 2.2.1. Load dữ liệu
+```csharp
+protected void Page_Load(object sender, EventArgs e)
+{
+    if (!IsPostBack)
+    {
+        LoadProducts();
+    }
+}
+```
+
+#### 2.2.2. Truy vấn dữ liệu
+```csharp
+private void LoadProducts()
+{
+    using (SqlConnection conn = new SqlConnection(Connection.GetConnectionString()))
+    {
+        string query = @"SELECT p.ProductID, p.ProductName, c.CategoryName, 
+                        p.UnitPrice as Price, p.UnitsInStock as Stock
+                        FROM Products p
+                        LEFT JOIN Categories c ON p.CategoryID = c.CategoryID";
+        
+        using (SqlCommand cmd = new SqlCommand(query, conn))
+        {
+            conn.Open();
+            using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+            {
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                gvProducts.DataSource = dt;
+                gvProducts.DataBind();
+            }
+        }
+    }
+}
+```
+
+### 2.3. Xử lý sự kiện
+
+#### 2.3.1. Xử lý nút Sửa/Xóa
+```csharp
+protected void gvProducts_RowCommand(object sender, GridViewCommandEventArgs e)
+{
+    if (e.CommandName == "EditProduct")
+    {
+        Response.Redirect($"EditProduct.aspx?id={e.CommandArgument}");
+    }
+    else if (e.CommandName == "DeleteProduct")
+    {
+        DeleteProduct(Convert.ToInt32(e.CommandArgument));
+    }
+}
+```
+
+#### 2.3.2. Xóa sản phẩm
+```csharp
+private void DeleteProduct(int productId)
+{
+    using (SqlConnection conn = new SqlConnection(Connection.GetConnectionString()))
+    {
+        string query = "DELETE FROM Products WHERE ProductID = @ProductID";
+        using (SqlCommand cmd = new SqlCommand(query, conn))
+        {
+            cmd.Parameters.AddWithValue("@ProductID", productId);
+            conn.Open();
+            cmd.ExecuteNonQuery();
+        }
+    }
+    LoadProducts(); // Reload data
+}
+```
+
+## 3. Luồng dữ liệu
+
+1. **Khởi tạo trang**:
+   - Page_Load được gọi
+   - Kiểm tra IsPostBack
+   - Gọi LoadProducts() nếu là lần đầu load
+
+2. **Load dữ liệu**:
+   - Tạo kết nối SQL
+   - Thực thi query JOIN Products và Categories
+   - Đổ dữ liệu vào DataTable
+   - Bind dữ liệu vào GridView
+
+3. **Hiển thị dữ liệu**:
+   - GridView hiển thị các cột:
+     - ProductID
+     - ProductName
+     - CategoryName
+     - Price (định dạng tiền tệ)
+     - Stock
+     - Các nút thao tác
+
+4. **Xử lý thao tác**:
+   - Edit: Chuyển hướng tới EditProduct.aspx
+   - Delete: Xóa sản phẩm và reload dữ liệu
+
+## 4. Các điểm cần lưu ý
+
+1. **Bảo mật**:
+   - Sử dụng Windows Authentication
+   - Parameterized queries để tránh SQL Injection
+   - Kiểm tra quyền truy cập trang admin
+
+2. **Hiệu năng**:
+   - Sử dụng using để đảm bảo giải phóng tài nguyên
+   - Chỉ load dữ liệu khi cần thiết (IsPostBack)
+   - Sử dụng JOIN để lấy dữ liệu một lần
+
+3. **UX/UI**:
+   - Hiển thị thông báo xác nhận khi xóa
+   - Định dạng tiền tệ cho cột giá
+   - Responsive design với Bootstrap
