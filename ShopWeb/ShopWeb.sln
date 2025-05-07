@@ -5,9 +5,9 @@ VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrietPhamShopWeb", "TrietPhamShopWeb\TrietPhamShopWeb.csproj", "{06EFD2F5-B8DF-4FFB-91F3-FE70A8CC8455}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BussinessLogic", "BussinessLayer\BussinessLogic.csproj", "{56E03005-C6EE-4BF4-932E-1CA49C5C841F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BussinessLayer\BusinessLogic.csproj", "{56E03005-C6EE-4BF4-932E-1CA49C5C841F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccessLayer\DataAccess.csproj", "{F402B847-A3AC-4BBA-BC0A-5676FDCF5DD8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{F402B847-A3AC-4BBA-BC0A-5676FDCF5DD8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessEntity", "BusinessEntity\BusinessEntity.csproj", "{85AAD126-9E5D-4F47-A31F-2B440D0DF1F1}"
 EndProject

@@ -6,7 +6,12 @@ namespace DataAccessLayer
 {
     public class Connection
     {
-        private static string connectionString = "Data Source=.;Initial Catalog=ShopDB;Integrated Security=True";
+        private static string connectionString = "Data Source=.;Initial Catalog=Northwind;Integrated Security=True";
+
+        public static string GetConnectionString()
+        {
+            return connectionString;
+        }
 
         public static SqlConnection GetConnection()
         {

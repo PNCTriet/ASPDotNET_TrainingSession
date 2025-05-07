@@ -12,7 +12,7 @@ namespace TrietPhamShopWeb
                 // Check if user is already logged in
                 if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
                 {
-                    Response.Redirect("~/Adminpage/AdminHome.aspx");
+                    Response.Redirect("~/Adminpage/ManageProducts.aspx");
                 }
             }
         }
@@ -30,7 +30,7 @@ namespace TrietPhamShopWeb
                 Session["Username"] = username;
 
                 // Redirect to admin page
-                Response.Redirect("~/Adminpage/AdminHome.aspx");
+                Response.Redirect("~/Adminpage/ManageProducts.aspx");
             }
             else
             {
