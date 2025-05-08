@@ -564,3 +564,205 @@ private void DeleteProduct(int productId)
 ### Lưu ý:
 - Đảm bảo tài khoản đăng nhập có quyền xóa dữ liệu trong database.
 - Nếu muốn tách riêng các lớp DAL/BLL, hãy tạo các class tương ứng và gọi qua các lớp này thay vì code trực tiếp trong file .cs.
+
+# Hướng dẫn thiết lập chức năng Edit Product với Modal Popup
+
+## 1. Cấu trúc Modal
+```html
+<!-- Edit Product Modal -->
+<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProductModalLabel">Sửa thông tin sản phẩm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editProductForm">
+                    <input type="hidden" id="productId" name="productId" />
+                    <div class="mb-3">
+                        <label for="productName" class="form-label">Tên sản phẩm</label>
+                        <input type="text" class="form-control" id="productName" name="productName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoryName" class="form-label">Danh mục</label>
+                        <input type="text" class="form-control" id="categoryName" name="categoryName" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Giá</label>
+                        <input type="number" class="form-control" id="price" name="price" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="stock" class="form-label">Tồn kho</label>
+                        <input type="number" class="form-control" id="stock" name="stock" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="btnSaveChanges">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+## 2. Thiết lập nút Edit trong GridView
+```html
+<asp:TemplateField HeaderText="Thao tác">
+    <ItemTemplate>
+        <button type="button" class="btn btn-primary btn-sm btn-edit" 
+            data-id='<%# Eval("ProductID") %>'
+            data-name='<%# Eval("ProductName") %>'
+            data-category='<%# Eval("CategoryName") %>'
+            data-price='<%# Eval("Price") %>'
+            data-stock='<%# Eval("Stock") %>'>
+            <i class="fas fa-edit"></i> Sửa
+        </button>
+    </ItemTemplate>
+</asp:TemplateField>
+```
+
+## 3. Thêm thư viện cần thiết
+```html
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</asp:Content>
+```
+
+## 4. Xử lý JavaScript/jQuery
+```javascript
+$(document).ready(function () {
+    // Xử lý sự kiện click nút Edit
+    $(document).on('click', '.btn-edit', function () {
+        // Lấy dữ liệu từ data attributes
+        var productId = $(this).data('id');
+        var productName = $(this).data('name');
+        var categoryName = $(this).data('category');
+        var price = $(this).data('price');
+        var stock = $(this).data('stock');
+
+        // Điền dữ liệu vào form
+        $('#productId').val(productId);
+        $('#productName').val(productName);
+        $('#categoryName').val(categoryName);
+        $('#price').val(price);
+        $('#stock').val(stock);
+
+        // Hiển thị modal
+        var editModal = new bootstrap.Modal(document.getElementById('editProductModal'));
+        editModal.show();
+    });
+
+    // Xử lý sự kiện click nút Save Changes
+    $('#btnSaveChanges').click(function () {
+        if (confirm('Bạn có chắc chắn muốn lưu các thay đổi?')) {
+            // Tạo object chứa dữ liệu cần gửi
+            var productData = {
+                productId: $('#productId').val(),
+                productName: $('#productName').val(),
+                price: $('#price').val(),
+                stock: $('#stock').val()
+            };
+
+            // Gửi request Ajax
+            $.ajax({
+                type: "POST",
+                url: "ManageProducts.aspx/UpdateProduct",
+                data: JSON.stringify(productData),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if (response.d) {
+                        // Đóng modal và reload trang
+                        var editModal = bootstrap.Modal.getInstance(document.getElementById('editProductModal'));
+                        editModal.hide();
+                        location.reload();
+                        alert('Cập nhật sản phẩm thành công!');
+                    } else {
+                        alert('Có lỗi xảy ra khi cập nhật sản phẩm!');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert('Có lỗi xảy ra khi cập nhật sản phẩm!');
+                }
+            });
+        }
+    });
+});
+```
+
+## 5. Xử lý Code-behind (C#)
+```csharp
+[WebMethod]
+public static bool UpdateProduct(int productId, string productName, decimal price, int stock)
+{
+    try
+    {
+        using (SqlConnection conn = new SqlConnection(Connection.GetConnectionString()))
+        {
+            string query = @"UPDATE Products 
+                           SET ProductName = @ProductName,
+                               UnitPrice = @Price,
+                               UnitsInStock = @Stock
+                           WHERE ProductID = @ProductID";
+            
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@ProductID", productId);
+                cmd.Parameters.AddWithValue("@ProductName", productName);
+                cmd.Parameters.AddWithValue("@Price", price);
+                cmd.Parameters.AddWithValue("@Stock", stock);
+
+                conn.Open();
+                int result = cmd.ExecuteNonQuery();
+                return result > 0;
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        // Log error
+        return false;
+    }
+}
+```
+
+## 6. Các bước thực hiện
+1. **Thiết lập Modal**:
+   - Tạo cấu trúc HTML cho modal với các trường input cần thiết
+   - Sử dụng Bootstrap 5 classes để tạo giao diện
+   - Thêm các nút điều khiển (Đóng, Lưu thay đổi)
+
+2. **Thiết lập nút Edit**:
+   - Thêm button với class `btn-edit`
+   - Lưu trữ dữ liệu sản phẩm trong data attributes
+   - Sử dụng Font Awesome cho icon
+
+3. **Thêm thư viện**:
+   - jQuery cho xử lý DOM và Ajax
+   - Bootstrap 5 cho modal và styling
+   - Đặt trong HeadContent để đảm bảo load trước khi sử dụng
+
+4. **Xử lý JavaScript**:
+   - Bắt sự kiện click nút Edit
+   - Lấy dữ liệu từ data attributes
+   - Điền dữ liệu vào form
+   - Hiển thị modal
+   - Xử lý lưu thay đổi qua Ajax
+
+5. **Xử lý Server-side**:
+   - Tạo WebMethod để xử lý update
+   - Sử dụng parameterized query để tránh SQL injection
+   - Xử lý lỗi và trả về kết quả
+
+## 7. Lưu ý quan trọng
+- Đảm bảo thư viện jQuery và Bootstrap được load đúng thứ tự
+- Sử dụng parameterized queries để tránh SQL injection
+- Xử lý lỗi và hiển thị thông báo phù hợp
+- Kiểm tra dữ liệu trước khi gửi lên server
+- Sử dụng Bootstrap 5 modal API để quản lý modal
+- Reload trang sau khi cập nhật thành công để hiển thị dữ liệu mới

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessEntity.Entities;
+using DataAccessLayer.DataConnection;
 
 namespace DataAccessLayer
 {
@@ -65,6 +66,36 @@ namespace DataAccessLayer
             }
         }
 
+        public static bool UpdateProduct(int productId, string productName, decimal price, int stock)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Connection.GetConnectionString()))
+                {
+                    string query = @"UPDATE Products 
+                                   SET ProductName = @ProductName,
+                                       UnitPrice = @Price,
+                                       UnitsInStock = @Stock
+                                   WHERE ProductID = @ProductID";
+                    
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ProductID", productId);
+                        cmd.Parameters.AddWithValue("@ProductName", productName);
+                        cmd.Parameters.AddWithValue("@Price", price);
+                        cmd.Parameters.AddWithValue("@Stock", stock);
 
+                        conn.Open();
+                        int result = cmd.ExecuteNonQuery();
+                        return result > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log error
+                return false;
+            }
+        }
     }
 }

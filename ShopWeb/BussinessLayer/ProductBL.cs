@@ -15,5 +15,19 @@ namespace BusinessLogic
         {
             ProductDAL.DeleteProduct(productId);
         }
+
+        public static bool UpdateProduct(int productId, string productName, decimal price, int stock)
+        {
+            // Validate input
+            if (string.IsNullOrEmpty(productName))
+                return false;
+            if (price < 0)
+                return false;
+            if (stock < 0)
+                return false;
+
+            // Call DAL to update product
+            return ProductDAL.UpdateProduct(productId, productName, price, stock);
+        }
     }
 }

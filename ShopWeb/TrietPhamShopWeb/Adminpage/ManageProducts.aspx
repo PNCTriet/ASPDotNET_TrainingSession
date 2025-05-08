@@ -1,5 +1,12 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManageProducts.aspx.cs" Inherits="TrietPhamShopWeb.Adminpage.ManageProducts" MasterPageFile="~/Adminpage/Adminsite.Master" %>
 
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</asp:Content>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
 
@@ -31,10 +38,14 @@
                             <asp:BoundField DataField="Stock" HeaderText="Tồn kho" />
                             <asp:TemplateField HeaderText="Thao tác">
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-primary btn-sm"
-                                        CommandName="EditProduct" CommandArgument='<%# Eval("ProductID") %>'>
+                                    <button type="button" class="btn btn-primary btn-sm btn-edit" 
+                                        data-id='<%# Eval("ProductID") %>'
+                                        data-name='<%# Eval("ProductName") %>'
+                                        data-category='<%# Eval("CategoryName") %>'
+                                        data-price='<%# Eval("Price") %>'
+                                        data-stock='<%# Eval("Stock") %>'>
                                         <i class="fas fa-edit"></i> Sửa
-                                    </asp:LinkButton>
+                                    </button>
                                     <asp:LinkButton ID="btnDelete" runat="server" CssClass="btn btn-danger btn-sm"
                                         CommandName="DeleteProduct" CommandArgument='<%# Eval("ProductID") %>'
                                         OnClientClick='<%# "return confirm(\"Bạn có chắc chắn muốn xóa sản phẩm " + Eval("ProductName") + "?\");" %>'>
@@ -49,6 +60,43 @@
         </div>
     </div>
 
+    <!-- Edit Product Modal -->
+    <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProductModalLabel">Sửa thông tin sản phẩm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProductForm">
+                        <input type="hidden" id="productId" name="productId" />
+                        <div class="mb-3">
+                            <label for="productName" class="form-label">Tên sản phẩm</label>
+                            <input type="text" class="form-control" id="productName" name="productName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoryName" class="form-label">Danh mục</label>
+                            <input type="text" class="form-control" id="categoryName" name="categoryName" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Giá</label>
+                            <input type="number" class="form-control" id="price" name="price" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="stock" class="form-label">Tồn kho</label>
+                            <input type="number" class="form-control" id="stock" name="stock" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="btnSaveChanges">Lưu thay đổi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Page level plugins -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
@@ -56,7 +104,86 @@
 
     <!-- Page level custom scripts -->
     <script type="text/javascript">
+        // Kiểm tra jQuery đã load chưa
+        if (typeof jQuery != 'undefined') {
+            console.log('jQuery version:', $.fn.jquery);
+        } else {
+            console.error('jQuery is not loaded!');
+        }
+
+        // Kiểm tra Bootstrap
+        if (typeof bootstrap != 'undefined') {
+            console.log('Bootstrap version:', bootstrap.Modal.VERSION);
+        } else {
+            console.error('Bootstrap is not loaded!');
+        }
+
+        // Thêm sự kiện click trực tiếp vào nút
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded');
+            
+            // Thử bắt sự kiện click bằng JavaScript thuần
+            document.querySelectorAll('.btn-edit').forEach(function(button) {
+                button.addEventListener('click', function(e) {
+                    console.log('Button clicked (vanilla JS)');
+                    e.preventDefault();
+                });
+            });
+
+            // Thêm sự kiện click cho nút Save Changes
+            var saveButton = document.getElementById('btnSaveChanges');
+            if (saveButton) {
+                console.log('Save button found');
+                saveButton.addEventListener('click', function(e) {
+                    console.log('Save button clicked (vanilla JS)');
+                });
+            } else {
+                console.error('Save button not found!');
+            }
+        });
+
         $(document).ready(function () {
+            console.log('jQuery ready');
+            
+            // Kiểm tra có bao nhiêu nút edit
+            console.log('Number of edit buttons:', $('.btn-edit').length);
+
+            // Thử bắt sự kiện click bằng jQuery
+            $('.btn-edit').on('click', function(e) {
+                console.log('Button clicked (jQuery)');
+                e.preventDefault();
+            });
+
+            // Xử lý sự kiện click nút Edit
+            $(document).on('click', '.btn-edit', function () {
+                console.log('Edit button clicked');
+                // Lấy dữ liệu từ data attributes
+                var productId = $(this).data('id');
+                var productName = $(this).data('name');
+                var categoryName = $(this).data('category');
+                var price = $(this).data('price');
+                var stock = $(this).data('stock');
+
+                console.log('Product data:', {
+                    id: productId,
+                    name: productName,
+                    category: categoryName,
+                    price: price,
+                    stock: stock
+                });
+
+                // Điền dữ liệu vào form
+                $('#productId').val(productId);
+                $('#productName').val(productName);
+                $('#categoryName').val(categoryName);
+                $('#price').val(price);
+                $('#stock').val(stock);
+
+                // Hiển thị modal
+                var editModal = new bootstrap.Modal(document.getElementById('editProductModal'));
+                editModal.show();
+            });
+
             var dataTable = $('#<%= gvProducts.ClientID %>').DataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
@@ -72,16 +199,113 @@
                 "dom": '<"top"lf>rt<"bottom"ip><"clear">',
                 "pagingType": "full_numbers",
                 "initComplete": function () {
-                    // Thêm class Bootstrap cho các nút phân trang
                     $('.paginate_button').addClass('btn btn-sm btn-outline-primary');
                     $('.paginate_button.current').addClass('btn-primary');
                 }
             });
 
-            // Hàm để refresh DataTable
-            window.refreshDataTable = function() {
-                dataTable.ajax.reload();
-            };
+            // Xử lý sự kiện click nút Save Changes
+            $('#btnSaveChanges').on('click', function (e) {
+                console.log('Save button clicked (jQuery)');
+                e.preventDefault(); // Prevent form submission
+                
+                // Validate form
+                var form = $('#editProductForm')[0];
+                if (!form.checkValidity()) {
+                    console.log('Form validation failed');
+                    form.reportValidity();
+                    return;
+                }
+                console.log('Form validation passed');
+
+                if (confirm('Bạn có chắc chắn muốn lưu các thay đổi?')) {
+                    // Tạo object chứa dữ liệu cần gửi
+                    var productData = {
+                        productId: parseInt($('#productId').val()),
+                        productName: $('#productName').val(),
+                        price: parseFloat($('#price').val()),
+                        stock: parseInt($('#stock').val())
+                    };
+
+                    console.log('Preparing to send data:', productData);
+
+                    // Gửi request Ajax
+                    console.log('Sending Ajax request...');
+                    $.ajax({
+                        type: "POST",
+                        url: "ManageProducts.aspx/UpdateProduct",
+                        data: JSON.stringify(productData),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        beforeSend: function() {
+                            console.log('Request is being sent...');
+                        },
+                        success: function (response) {
+                            console.log('Received server response:', response);
+                            if (response.d) {
+                                console.log('Update successful');
+                                // Đóng modal
+                                var editModal = bootstrap.Modal.getInstance(document.getElementById('editProductModal'));
+                                editModal.hide();
+
+                                // Hiển thị thông báo thành công
+                                alert('Cập nhật sản phẩm thành công!');
+
+                                // Cập nhật dữ liệu trong DataTable
+                                console.log('Refreshing DataTable...');
+                                var table = $('#<%= gvProducts.ClientID %>').DataTable();
+                                table.destroy(); // Hủy DataTable hiện tại
+                                
+                                // Gọi WebMethod để lấy dữ liệu mới
+                                $.ajax({
+                                    type: "POST",
+                                    url: "ManageProducts.aspx/GetAllProducts",
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    success: function (response) {
+                                        console.log('Products loaded successfully');
+                                        // Khởi tạo lại DataTable
+                                        table = $('#<%= gvProducts.ClientID %>').DataTable({
+                                            "language": {
+                                                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+                                            },
+                                            "pageLength": 10,
+                                            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Tất cả"]],
+                                            "ordering": true,
+                                            "searching": true,
+                                            "responsive": true,
+                                            "processing": true,
+                                            "serverSide": false,
+                                            "deferRender": true,
+                                            "dom": '<"top"lf>rt<"bottom"ip><"clear">',
+                                            "pagingType": "full_numbers"
+                                        });
+                                        console.log('DataTable reinitialized');
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.error('Error loading products:', error);
+                                        alert('Có lỗi xảy ra khi tải dữ liệu!');
+                                    }
+                                });
+                            } else {
+                                console.log('Update failed');
+                                alert('Có lỗi xảy ra khi cập nhật sản phẩm!');
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Ajax error details:', {
+                                status: status,
+                                error: error,
+                                responseText: xhr.responseText,
+                                statusText: xhr.statusText
+                            });
+                            alert('Có lỗi xảy ra khi cập nhật sản phẩm!');
+                        }
+                    });
+                } else {
+                    console.log('User cancelled the update');
+                }
+            });
         });
     </script>
 

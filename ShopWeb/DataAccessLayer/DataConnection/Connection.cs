@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace DataAccessLayer
+namespace DataAccessLayer.DataConnection
 {
     public class Connection
     {

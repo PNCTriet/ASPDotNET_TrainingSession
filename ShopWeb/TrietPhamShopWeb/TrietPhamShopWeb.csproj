@@ -318,7 +318,6 @@
     <Compile Include="login2.aspx.designer.cs">
       <DependentUpon>login2.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Connection.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -343,6 +342,10 @@
     <ProjectReference Include="..\BussinessLayer\BusinessLogic.csproj">
       <Project>{56e03005-c6ee-4bf4-932e-1ca49c5c841f}</Project>
       <Name>BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
+      <Project>{06EFD2F5-B8DF-4FFB-91F3-FE70A8CC8455}</Project>
+      <Name>DataAccessLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
