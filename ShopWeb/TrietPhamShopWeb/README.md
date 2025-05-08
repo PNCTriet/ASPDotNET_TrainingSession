@@ -463,7 +463,7 @@ private void DeleteProduct(int productId)
             cmd.ExecuteNonQuery();
         }
     }
-    LoadProducts(); // Reload data
+    LoadProducts(); // Reload lại danh sách
 }
 ```
 
@@ -509,3 +509,58 @@ private void DeleteProduct(int productId)
    - Hiển thị thông báo xác nhận khi xóa
    - Định dạng tiền tệ cho cột giá
    - Responsive design với Bootstrap
+
+## 5. Hướng dẫn setup chức năng xóa sản phẩm (theo mô hình 3 lớp, code gộp trong file .cs)
+
+### Bước 1: Cập nhật tầng Data Access (DAL)
+- Trong file code-behind (ManageProducts.aspx.cs), thêm hàm xóa sản phẩm:
+  ```csharp
+  private void DeleteProduct(int productId)
+  {
+      using (SqlConnection conn = new SqlConnection(Connection.GetConnectionString()))
+      {
+          string query = "DELETE FROM Products WHERE ProductID = @ProductID";
+          using (SqlCommand cmd = new SqlCommand(query, conn))
+          {
+              cmd.Parameters.AddWithValue("@ProductID", productId);
+              conn.Open();
+              cmd.ExecuteNonQuery();
+          }
+      }
+      LoadProducts(); // Reload lại danh sách
+  }
+  ```
+
+### Bước 2: Cập nhật tầng Business Logic (BLL)
+- Nếu muốn tách riêng, có thể tạo hàm DeleteProduct ở lớp BLL và gọi từ code-behind. Tuy nhiên, ví dụ này gộp luôn vào file .cs.
+
+### Bước 3: Cập nhật tầng Presentation (UI)
+- Trong GridView, đã có sẵn nút xóa với CommandName="DeleteProduct".
+- Trong sự kiện `gvProducts_RowCommand`, xử lý như sau:
+  ```csharp
+  protected void gvProducts_RowCommand(object sender, GridViewCommandEventArgs e)
+  {
+      if (e.CommandName == "EditProduct")
+      {
+          Response.Redirect($"EditProduct.aspx?id={e.CommandArgument}");
+      }
+      else if (e.CommandName == "DeleteProduct")
+      {
+          DeleteProduct(Convert.ToInt32(e.CommandArgument));
+      }
+  }
+  ```
+
+### Bước 4: Cập nhật giao diện xác nhận xóa
+- Đã có sẵn xác nhận xóa trong thuộc tính `OnClientClick` của nút xóa:
+  ```aspx
+  OnClientClick='<%# "return confirm(\"Bạn có chắc chắn muốn xóa sản phẩm " + Eval("ProductName") + "?\");" %>'
+  ```
+
+### Bước 5: Kiểm tra và hoàn thiện
+- Build lại project.
+- Truy cập trang quản lý sản phẩm, thử xóa một sản phẩm để kiểm tra.
+
+### Lưu ý:
+- Đảm bảo tài khoản đăng nhập có quyền xóa dữ liệu trong database.
+- Nếu muốn tách riêng các lớp DAL/BLL, hãy tạo các class tương ứng và gọi qua các lớp này thay vì code trực tiếp trong file .cs.
