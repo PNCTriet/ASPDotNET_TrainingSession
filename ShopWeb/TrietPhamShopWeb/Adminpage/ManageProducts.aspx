@@ -103,32 +103,11 @@
     <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script type="text/javascript">
-        // Kiểm tra jQuery đã load chưa
-        if (typeof jQuery != 'undefined') {
-            console.log('jQuery version:', $.fn.jquery);
-        } else {
-            console.error('jQuery is not loaded!');
-        }
-
-        // Kiểm tra Bootstrap
-        if (typeof bootstrap != 'undefined') {
-            console.log('Bootstrap version:', bootstrap.Modal.VERSION);
-        } else {
-            console.error('Bootstrap is not loaded!');
-        }
+    <script type="text/javascript"> }
 
         // Thêm sự kiện click trực tiếp vào nút
         document.addEventListener('DOMContentLoaded', function() {
             console.log('DOM loaded');
-            
-            // Thử bắt sự kiện click bằng JavaScript thuần
-            document.querySelectorAll('.btn-edit').forEach(function(button) {
-                button.addEventListener('click', function(e) {
-                    console.log('Button clicked (vanilla JS)');
-                    e.preventDefault();
-                });
-            });
 
             // Thêm sự kiện click cho nút Save Changes
             var saveButton = document.getElementById('btnSaveChanges');
@@ -145,14 +124,7 @@
         $(document).ready(function () {
             console.log('jQuery ready');
             
-            // Kiểm tra có bao nhiêu nút edit
-            console.log('Number of edit buttons:', $('.btn-edit').length);
-
-            // Thử bắt sự kiện click bằng jQuery
-            $('.btn-edit').on('click', function(e) {
-                console.log('Button clicked (jQuery)');
-                e.preventDefault();
-            });
+           
 
             // Xử lý sự kiện click nút Edit
             $(document).on('click', '.btn-edit', function () {
