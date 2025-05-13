@@ -472,7 +472,7 @@ private void DeleteProduct(int productId)
 1. **Khởi tạo trang**:
    - Page_Load được gọi
    - Kiểm tra IsPostBack
-   - Gọi LoadProducts() nếu là lần đầu load
+   - Gọi LoadProducts() nếu lần đầu load
 
 2. **Load dữ liệu**:
    - Tạo kết nối SQL
@@ -766,3 +766,168 @@ public static bool UpdateProduct(int productId, string productName, decimal pric
 - Kiểm tra dữ liệu trước khi gửi lên server
 - Sử dụng Bootstrap 5 modal API để quản lý modal
 - Reload trang sau khi cập nhật thành công để hiển thị dữ liệu mới
+
+# Hướng dẫn tích hợp tính năng đánh giá độ mạnh mật khẩu
+
+## 1. Giới thiệu
+Tính năng đánh giá độ mạnh mật khẩu giúp người dùng tạo mật khẩu an toàn hơn bằng cách:
+- Hiển thị thanh progress bar thể hiện độ mạnh
+- Cung cấp phản hồi trực quan về độ mạnh mật khẩu
+- Đưa ra gợi ý cải thiện mật khẩu
+
+## 2. Các bước thực hiện
+
+### 2.1. Thêm thư viện zxcvbn
+```html
+<!-- Thêm vào phần head của trang Register.aspx -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
+```
+- zxcvbn là thư viện đánh giá mật khẩu được phát triển bởi Dropbox
+- Cung cấp đánh giá chính xác về độ mạnh mật khẩu
+- Phát hiện các mật khẩu yếu và dễ đoán
+
+### 2.2. Thêm UI elements
+```html
+<!-- Thêm vào form đăng ký -->
+<div class="form-group mb-3">
+    <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" 
+        placeholder="Mật khẩu" TextMode="Password"></asp:TextBox>
+    <div class="progress mt-2" style="height: 5px;">
+        <div id="password-strength-bar" class="progress-bar" role="progressbar" 
+            style="width: 0%;"></div>
+    </div>
+    <small id="password-strength-text" class="form-text text-muted"></small>
+</div>
+```
+- Progress bar để hiển thị độ mạnh trực quan
+- Text hiển thị mô tả độ mạnh và gợi ý
+
+### 2.3. Tạo file JavaScript
+```javascript
+// Register.js
+document.addEventListener('DOMContentLoaded', function() {
+    const passwordInput = document.querySelector('input[type="password"]');
+    const strengthBar = document.getElementById('password-strength-bar');
+    const strengthText = document.getElementById('password-strength-text');
+
+    passwordInput.addEventListener('input', function() {
+        const password = this.value;
+        const result = zxcvbn(password);
+        
+        // Update progress bar
+        const strength = result.score;
+        const width = (strength + 1) * 25; // Convert 0-4 to 25-100%
+        strengthBar.style.width = width + '%';
+
+        // Update colors and text based on strength
+        switch(strength) {
+            case 0:
+                strengthBar.className = 'progress-bar bg-danger';
+                strengthText.textContent = 'Rất yếu';
+                break;
+            case 1:
+                strengthBar.className = 'progress-bar bg-warning';
+                strengthText.textContent = 'Yếu';
+                break;
+            case 2:
+                strengthBar.className = 'progress-bar bg-info';
+                strengthText.textContent = 'Trung bình';
+                break;
+            case 3:
+                strengthBar.className = 'progress-bar bg-primary';
+                strengthText.textContent = 'Mạnh';
+                break;
+            case 4:
+                strengthBar.className = 'progress-bar bg-success';
+                strengthText.textContent = 'Rất mạnh';
+                break;
+        }
+
+        // Show feedback if available
+        if (result.feedback.warning) {
+            strengthText.textContent += ' - ' + result.feedback.warning;
+        }
+    });
+});
+```
+
+### 2.4. Thêm file JavaScript vào trang
+```html
+<!-- Thêm vào cuối file Register.aspx -->
+<script src="Scripts/Register.js" type="text/javascript"></script>
+```
+
+## 3. Cách hoạt động
+
+### 3.1. Thư viện zxcvbn
+- Đánh giá mật khẩu dựa trên nhiều yếu tố:
+  - Độ dài mật khẩu
+  - Sự đa dạng của ký tự
+  - Không chứa thông tin cá nhân
+  - Không phải mật khẩu phổ biến
+  - Không có quy luật dễ đoán
+
+### 3.2. Luồng xử lý
+1. Người dùng nhập mật khẩu
+2. Event listener bắt sự kiện input
+3. Gọi zxcvbn để đánh giá mật khẩu
+4. Cập nhật UI dựa trên kết quả:
+   - Thay đổi độ rộng progress bar
+   - Thay đổi màu sắc
+   - Hiển thị text mô tả
+   - Hiển thị gợi ý cải thiện
+
+### 3.3. Kết quả đánh giá
+- Score 0: Rất yếu (đỏ)
+- Score 1: Yếu (vàng)
+- Score 2: Trung bình (xanh dương nhạt)
+- Score 3: Mạnh (xanh dương đậm)
+- Score 4: Rất mạnh (xanh lá)
+
+## 4. Lợi ích
+1. **Bảo mật**:
+   - Giúp người dùng tạo mật khẩu mạnh
+   - Phát hiện các mật khẩu yếu
+   - Cung cấp gợi ý cải thiện
+
+2. **UX/UI**:
+   - Phản hồi trực quan
+   - Tương tác real-time
+   - Giao diện thân thiện
+
+3. **Dễ tích hợp**:
+   - Chỉ cần thêm 1 file JavaScript
+   - Không cần backend
+   - Hoạt động client-side
+
+## 5. Lưu ý quan trọng
+1. **Bảo mật**:
+   - Đánh giá chỉ là tham khảo
+   - Vẫn cần validation server-side
+   - Không nên chỉ dựa vào client-side
+
+2. **Hiệu năng**:
+   - zxcvbn là thư viện nhẹ
+   - Không ảnh hưởng đến performance
+   - Có thể lazy load nếu cần
+
+3. **Browser Support**:
+   - Hoạt động trên mọi trình duyệt hiện đại
+   - Cần jQuery và Bootstrap
+   - Fallback cho trình duyệt cũ
+
+## 6. Mở rộng
+1. **Thêm yêu cầu mật khẩu**:
+   - Độ dài tối thiểu
+   - Yêu cầu ký tự đặc biệt
+   - Yêu cầu chữ hoa/thường
+
+2. **Tùy chỉnh UI**:
+   - Thay đổi màu sắc
+   - Thêm animation
+   - Tùy chỉnh text
+
+3. **Tích hợp với form validation**:
+   - Disable nút submit nếu mật khẩu yếu
+   - Hiển thị lỗi validation
+   - Tự động focus vào ô mật khẩu

@@ -39,9 +39,10 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Quản lý sản phẩm:</h6>
+                <h6 class="collapse-header">Quản lý :</h6>
                 <a class="collapse-item" href="../Adminpage/ManageProducts.aspx">Danh sách sản phẩm</a>
-                
+                 <a class="collapse-item" href="../Adminpage/ManageUser.aspx">Danh sách Users</a>
+
             </div>
         </div>
     </li>

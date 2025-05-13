@@ -3,7 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <%--<div class="col-md-6">
                 <div class="form-group">
                     <asp:Label ID="lblFirstName" runat="server" Text="First Name:"></asp:Label>
                     <asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control"></asp:TextBox>
@@ -20,7 +20,7 @@
                     <asp:Label ID="lblFullName" runat="server" Text="Full Name:"></asp:Label>
                     <asp:Label ID="blFullName" runat="server" CssClass="form-control"></asp:Label>
                 </div>
-            </div>
+            </div>--%>
         </div>
     </div>
 </asp:Content>

@@ -226,15 +226,15 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn đăng xuất?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-body">Chọn "Đăng xuất" nếu bạn muốn kết thúc phiên làm việc hiện tại.</div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                        <asp:Button ID="btnLogout" runat="server" Text="Đăng xuất" CssClass="btn btn-primary" OnClick="btnLogout_Click" />
                     </div>
                 </div>
             </div>
@@ -257,5 +257,18 @@
     <!-- Page level custom scripts -->
     <script src="~/Scripts/demo/chart-area-demo.js"></script>
     <script src="~/Scripts/demo/chart-pie-demo.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Xử lý sự kiện click nút đăng xuất
+            $('#<%= btnLogout.ClientID %>').click(function (e) {
+                e.preventDefault();
+                // Đóng modal
+                $('#logoutModal').modal('hide');
+                // Gọi server-side event
+                __doPostBack('<%= btnLogout.UniqueID %>', '');
+            });
+        });
+    </script>
 </body>
 </html>

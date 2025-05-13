@@ -14,6 +14,8 @@ namespace TrietPhamShopWeb.Adminpage
 {
     public partial class ManageProducts : AdminBasePage
     {
+       
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -30,7 +32,7 @@ namespace TrietPhamShopWeb.Adminpage
             }
             catch (Exception ex)
             {
-                Response.Write($"<script>alert('Lỗi tải dữ liệu: {ex.Message}');</script>");
+                ShowErrorMessage("Lỗi tải dữ liệu: " + ex.Message);
             }
         }
 
@@ -49,27 +51,63 @@ namespace TrietPhamShopWeb.Adminpage
                 switch (e.CommandName)
                 {
                     case "EditProduct":
-                        // Không cần xử lý ở đây nữa vì đã chuyển sang Ajax
+                        // Lấy dữ liệu từ DataKeys
+                        GridViewRow row = (GridViewRow)(((LinkButton)e.CommandSource).NamingContainer);
+                        txtProductName.Text = gvProducts.DataKeys[row.RowIndex]["ProductName"].ToString();
+                        txtPrice.Text = gvProducts.DataKeys[row.RowIndex]["Price"].ToString();
+                        txtStock.Text = gvProducts.DataKeys[row.RowIndex]["Stock"].ToString();
+                        // Hiển thị modal
+                        ScriptManager.RegisterStartupScript(this, GetType(), "ShowEditModal", "showEditModal();", true);
                         break;
 
                     case "DeleteProduct":
                         ProductBLL.DeleteProduct(productId);
-                        LoadProducts(); // Refresh lại dữ liệu
-                        // Thông báo thành công và refresh DataTables
-                        ScriptManager.RegisterStartupScript(this, GetType(), "DeleteSuccess", 
-                            "alert('Xóa sản phẩm thành công!'); " +
-                            "if (typeof $.fn.DataTable !== 'undefined') { " +
-                            "   var table = $('#" + gvProducts.ClientID + "').DataTable(); " +
-                            "   table.destroy(); " +
-                            "   table = $('#" + gvProducts.ClientID + "').DataTable(); " +
-                            "}", true);
+                        LoadProducts();
+                        ShowSuccessMessage("Xóa sản phẩm thành công!");
                         break;
                 }
             }
             catch (Exception ex)
             {
-                Response.Write($"<script>alert('Lỗi thao tác: {ex.Message}');</script>");
+                ShowErrorMessage("Lỗi thao tác: " + ex.Message);
             }
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int productId = Convert.ToInt32(hdnProductId.Value);
+                string productName = txtProductName.Text.Trim();
+                decimal price = Convert.ToDecimal(txtPrice.Text);
+                int stock = Convert.ToInt32(txtStock.Text);
+
+                if (ProductBLL.UpdateProduct(productId, productName, price, stock))
+                {
+                    LoadProducts();
+                    ShowSuccessMessage("Cập nhật sản phẩm thành công!");
+                }
+                else
+                {
+                    ShowErrorMessage("Cập nhật sản phẩm thất bại!");
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowErrorMessage("Lỗi cập nhật: " + ex.Message);
+            }
+        }
+
+        private void ShowSuccessMessage(string message)
+        {
+            ScriptManager.RegisterStartupScript(this, GetType(), "ShowSuccess", 
+                $"alert('{message}');", true);
+        }
+
+        private void ShowErrorMessage(string message)
+        {
+            ScriptManager.RegisterStartupScript(this, GetType(), "ShowError", 
+                $"alert('{message}');", true);
         }
 
         [WebMethod]
