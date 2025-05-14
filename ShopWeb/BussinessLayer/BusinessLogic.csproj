@@ -57,6 +57,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UserBL.cs" />
     <Compile Include="Common\CommonFunction.cs" />
     <Compile Include="ProductBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

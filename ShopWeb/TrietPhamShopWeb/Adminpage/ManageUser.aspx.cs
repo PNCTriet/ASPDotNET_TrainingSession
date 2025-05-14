@@ -1,85 +1,129 @@
 ﻿using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BussinessLayer;
+using BusinessEntity.Entities;
+using BusinessEntity;
 
 namespace TrietPhamShopWeb.Adminpage
 {
-    public partial class ManageUser : AdminBasePage
+    public partial class ManageUser : System.Web.UI.Page
     {
+        private readonly UserBL _userBL;
+
+        public ManageUser()
+        {
+            _userBL = new UserBL();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                LoadUsers();
+                try
+                {
+                    // Load danh sách vai trò
+                    LoadRoles();
+
+                    // Load danh sách người dùng
+                    DataTable dtUsers = _userBL.GetAllUsers();
+                    System.Diagnostics.Debug.WriteLine($"Page_Load: Number of users from BL: {dtUsers.Rows.Count}");
+                    
+                    gvUsers.DataSource = dtUsers;
+                    gvUsers.DataBind();
+
+                    System.Diagnostics.Debug.WriteLine($"Page_Load: GridView rows after binding: {gvUsers.Rows.Count}");
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Error in Page_Load: {ex.Message}");
+                    // Xử lý lỗi ở đây
+                }
             }
         }
 
-        private void LoadUsers()
+        private void LoadRoles()
         {
-            //using (SqlConnection conn = new SqlConnection(Connection.GetConnectionString()))
-            //{
-            //    string query = @"SELECT UserID, FirstName, LastName, Email, Phone 
-            //                   FROM Users 
-            //                   ORDER BY UserID DESC";
-
-            //    using (SqlCommand cmd = new SqlCommand(query, conn))
-            //    {
-            //        try
-            //        {
-            //            conn.Open();
-            //            using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
-            //            {
-            //                DataTable dt = new DataTable();
-            //                adapter.Fill(dt);
-            //                gvUsers.DataSource = dt;
-            //                gvUsers.DataBind();
-            //            }
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            // Log error
-            //            throw new Exception("Error loading users: " + ex.Message);
-            //        }
-            //    }
-            //}
+            try
+            {
+                DataTable dtRoles = _userBL.GetAllRoles();
+                ddlRole.DataSource = dtRoles;
+                ddlRole.DataTextField = "RoleName";
+                ddlRole.DataValueField = "RoleID";
+                ddlRole.DataBind();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error loading roles: {ex.Message}");
+                throw;
+            }
         }
 
         protected void gvUsers_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "EditUser")
             {
-                // Redirect to edit page
-                Response.Redirect($"EditUser.aspx?id={e.CommandArgument}");
+                int userId = Convert.ToInt32(e.CommandArgument);
+                // Xử lý sự kiện edit
             }
             else if (e.CommandName == "DeleteUser")
             {
-                DeleteUser(Convert.ToInt32(e.CommandArgument));
+                int userId = Convert.ToInt32(e.CommandArgument);
+                try
+                {
+                    if (_userBL.DeleteUser(userId))
+                    {
+                        // Refresh GridView
+                        DataTable dtUsers = _userBL.GetAllUsers();
+                        gvUsers.DataSource = dtUsers;
+                        gvUsers.DataBind();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Error deleting user: {ex.Message}");
+                    // Xử lý lỗi ở đây
+                }
             }
         }
 
-        private void DeleteUser(int userId)
+        protected void gvUsers_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            //using (SqlConnection conn = new SqlConnection(Connection.GetConnectionString()))
-            //{
-            //    string query = "DELETE FROM Users WHERE UserID = @UserID";
-            //    using (SqlCommand cmd = new SqlCommand(query, conn))
-            //    {
-            //        try
-            //        {
-            //            cmd.Parameters.AddWithValue("@UserID", userId);
-            //            conn.Open();
-            //            cmd.ExecuteNonQuery();
-            //            LoadUsers(); // Reload the grid
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            // Log error
-            //            throw new Exception("Error deleting user: " + ex.Message);
-            //        }
-            //    }
-            //}
+            gvUsers.PageIndex = e.NewPageIndex;
+            DataTable dtUsers = _userBL.GetAllUsers();
+            gvUsers.DataSource = dtUsers;
+            gvUsers.DataBind();
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int userId = Convert.ToInt32(hdnUserId.Value);
+                User user = _userBL.GetUserById(userId);
+                
+                if (user != null)
+                {
+                    user.Username = txtUsername.Text;
+                    user.Email = txtEmail.Text;
+                    user.IsActive = chkIsActive.Checked;
+                    user.RoleID = Convert.ToInt32(ddlRole.SelectedValue);
+
+                    if (_userBL.UpdateUser(user))
+                    {
+                        // Refresh GridView
+                        DataTable dtUsers = _userBL.GetAllUsers();
+                        gvUsers.DataSource = dtUsers;
+                        gvUsers.DataBind();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error saving user: {ex.Message}");
+                // Xử lý lỗi ở đây
+            }
         }
     }
 }

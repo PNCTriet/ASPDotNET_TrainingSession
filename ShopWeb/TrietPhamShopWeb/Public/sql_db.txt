@@ -1,0 +1,253 @@
+﻿USE Northwind2;
+GO
+
+-- Customers
+CREATE TABLE Customers (
+  CustomerID nvarchar(255) PRIMARY KEY,
+  CompanyName nvarchar(255),
+  ContactName nvarchar(255),
+  ContactTitle nvarchar(255),
+  Address nvarchar(255),
+  City nvarchar(255),
+  Region nvarchar(255),
+  PostalCode nvarchar(255),
+  Country nvarchar(255),
+  Phone nvarchar(255),
+  Fax nvarchar(255)
+);
+GO
+
+-- Employees
+CREATE TABLE Employees (
+  EmployeeID int PRIMARY KEY,
+  LastName nvarchar(255),
+  FirstName nvarchar(255),
+  Title nvarchar(255),
+  TitleOfCourtesy nvarchar(255),
+  BirthDate datetime,
+  HireDate datetime,
+  Address nvarchar(255),
+  City nvarchar(255),
+  Region nvarchar(255),
+  PostalCode nvarchar(255),
+  Country nvarchar(255),
+  HomePhone nvarchar(255),
+  Extension nvarchar(255),
+  ReportsTo int
+);
+GO
+
+-- Suppliers
+CREATE TABLE Suppliers (
+  SupplierID int PRIMARY KEY,
+  CompanyName nvarchar(255),
+  ContactName nvarchar(255),
+  ContactTitle nvarchar(255),
+  Address nvarchar(255),
+  City nvarchar(255),
+  Region nvarchar(255),
+  PostalCode nvarchar(255),
+  Country nvarchar(255),
+  Phone nvarchar(255),
+  Fax nvarchar(255),
+  HomePage nvarchar(max)
+);
+GO
+
+-- Categories
+CREATE TABLE Categories (
+  CategoryID int PRIMARY KEY,
+  CategoryName nvarchar(255),
+  Description nvarchar(max)
+);
+GO
+
+-- Products
+CREATE TABLE Products (
+  ProductID int PRIMARY KEY,
+  ProductName nvarchar(255),
+  SupplierID int,
+  CategoryID int,
+  QuantityPerUnit nvarchar(255),
+  UnitPrice decimal(18,2),
+  UnitsInStock int,
+  UnitsOnOrder int,
+  ReorderLevel int,
+  Discontinued bit
+);
+GO
+
+-- Orders
+CREATE TABLE Orders (
+  OrderID int PRIMARY KEY,
+  CustomerID nvarchar(255),
+  EmployeeID int,
+  OrderDate datetime,
+  RequiredDate datetime,
+  ShippedDate datetime,
+  ShipVia int,
+  Freight decimal(18,2),
+  ShipName nvarchar(255),
+  ShipAddress nvarchar(255),
+  ShipCity nvarchar(255),
+  ShipRegion nvarchar(255),
+  ShipPostalCode nvarchar(255),
+  ShipCountry nvarchar(255)
+);
+GO
+
+-- OrderDetails
+CREATE TABLE OrderDetails (
+  OrderID int,
+  ProductID int,
+  UnitPrice decimal(18,2),
+  Quantity int,
+  Discount float,
+  Note nvarchar(max),
+  PRIMARY KEY (OrderID, ProductID)
+);
+GO
+
+-- Shippers
+CREATE TABLE Shippers (
+  ShipperID int PRIMARY KEY,
+  CompanyName nvarchar(255),
+  Phone nvarchar(255)
+);
+GO
+
+-- Roles
+CREATE TABLE Roles (
+  RoleID int PRIMARY KEY,
+  RoleName nvarchar(255)
+);
+GO
+
+-- Users
+CREATE TABLE Users (
+  UserID int PRIMARY KEY,
+  RoleID int UNIQUE,
+  EmployeeID int UNIQUE,
+  Username nvarchar(255),
+  PasswordHash nvarchar(255),
+  Email nvarchar(255),
+  IsActive bit,
+  CreatedAt datetime,
+  UpdatedAt datetime
+);
+GO
+
+-- Permissions
+CREATE TABLE Permissions (
+  PermissionID int PRIMARY KEY,
+  Namepermission nvarchar(255)
+);
+GO
+
+-- RolePermissions
+CREATE TABLE RolePermissions (
+  RoleID INT,
+  PermissionID INT,
+  PRIMARY KEY (RoleID, PermissionID)
+);
+GO
+
+-- Foreign Keys
+ALTER TABLE RolePermissions ADD FOREIGN KEY (RoleID) REFERENCES Roles(RoleID);
+ALTER TABLE RolePermissions ADD FOREIGN KEY (PermissionID) REFERENCES Permissions(PermissionID);
+
+ALTER TABLE Products ADD FOREIGN KEY (SupplierID) REFERENCES Suppliers(SupplierID);
+ALTER TABLE Products ADD FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID);
+
+ALTER TABLE Orders ADD FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID);
+ALTER TABLE Orders ADD FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID);
+ALTER TABLE Orders ADD FOREIGN KEY (ShipVia) REFERENCES Shippers(ShipperID);
+
+ALTER TABLE OrderDetails ADD FOREIGN KEY (OrderID) REFERENCES Orders(OrderID);
+ALTER TABLE OrderDetails ADD FOREIGN KEY (ProductID) REFERENCES Products(ProductID);
+
+ALTER TABLE Employees ADD FOREIGN KEY (ReportsTo) REFERENCES Employees(EmployeeID);
+
+ALTER TABLE Users ADD FOREIGN KEY (RoleID) REFERENCES Roles(RoleID);
+ALTER TABLE Users ADD FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID);
+
+GO
+
+
+-- INSERT DB
+-- Insert into Customers
+INSERT INTO Customers (CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax) VALUES 
+('ALFKI', 'Alfreds Futterkiste', 'Maria Anders', 'Sales Representative', 'Obere Str. 57', 'Berlin', NULL, '12209', 'Germany', '030-0074321', '030-0076545'),
+('ANATR', 'Ana Trujillo Emparedados y helados', 'Ana Trujillo', 'Owner', 'Avda. de la Constitución 2222', 'México D.F.', NULL, '05021', 'Mexico', '(5) 555-4729', NULL);
+
+-- Insert into Employees
+INSERT INTO Employees (EmployeeID, LastName, FirstName, Title, TitleOfCourtesy, BirthDate, HireDate, Address, City, Region, PostalCode, Country, HomePhone, Extension, ReportsTo) VALUES
+(1, 'Davolio', 'Nancy', 'Sales Representative', 'Ms.', '1948-12-08', '1992-05-01', '507 - 20th Ave. E. Apt. 2A', 'Seattle', 'WA', '98122', 'USA', '206-555-9857', '5467', NULL),
+(2, 'Fuller', 'Andrew', 'Vice President, Sales', 'Dr.', '1952-03-19', '1991-06-10', '908 W. Capital Way', 'Tacoma', 'WA', '98401', 'USA', '206-555-5062', '7227', 1);
+
+-- Insert into Suppliers
+INSERT INTO Suppliers (SupplierID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax, HomePage) VALUES
+(1, 'Exotic Liquids', 'Charlotte Cooper', 'Purchasing Manager', '49 Gilbert St.', 'London', NULL, 'EC1 4SD', 'UK', '(171) 555-2222', NULL, NULL),
+(2, 'New Orleans Cajun Delights', 'Shelley Burke', 'Order Administrator', 'P.O. Box 78934', 'New Orleans', 'LA', '70117', 'USA', '(100) 555-4822', NULL, NULL);
+
+-- Insert into Categories
+INSERT INTO Categories (CategoryID, CategoryName, Description) VALUES
+(1, 'Beverages', 'Soft drinks, coffees, teas, beers, and ales'),
+(2, 'Condiments', 'Sweet and savory sauces, relishes, spreads, and seasonings');
+
+-- Insert into Products
+INSERT INTO Products (ProductID, ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued) VALUES
+(1, 'Chai', 1, 1, '10 boxes x 20 bags', 18.00, 39, 0, 10, 0),
+(2, 'Chang', 2, 1, '24 - 12 oz bottles', 19.00, 17, 40, 25, 1);
+
+-- Insert into Shippers
+INSERT INTO Shippers (ShipperID, CompanyName, Phone) VALUES
+(1, 'United Package', '1-800-555-1212'),
+(2, 'Federal Shipping', '1-800-555-1234');
+
+-- Insert into Orders
+INSERT INTO Orders (OrderID, CustomerID, EmployeeID, OrderDate, RequiredDate, ShippedDate, ShipVia, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry) VALUES
+(1, 'ALFKI', 1, '1997-08-15', '1997-09-12', '1997-08-18', 1, 32.38, 'Vins et alcools Chevalier', '59 rue de l','Abbaye', 'Reims', '51550', 'France'),
+(2, 'ANATR', 2, '1997-08-16', '1997-09-13', '1997-08-19', 2, 11.61, 'LUNA Distributors', '1234 Main St.', 'Las Vegas', 'NV', '89901', 'USA');
+
+-- Insert into OrderDetails
+INSERT INTO OrderDetails (OrderID, ProductID, UnitPrice, Quantity, Discount, Note) VALUES
+(1, 1, 18.00, 10, 0, 'N/A'),
+(2, 2, 19.00, 5, 0, 'N/A');
+
+-- Insert into Roles
+INSERT INTO Roles (RoleID, RoleName) VALUES
+(1, 'Admin'),
+(2, 'User');
+
+-- Insert into Users
+INSERT INTO Users (UserID, RoleID, EmployeeID, Username, PasswordHash, Email, IsActive, CreatedAt, UpdatedAt) VALUES
+(1, 1, 1, 'admin', 'hashed_password', 'admin@northwind.com', 1, '2025-05-14', '2025-05-14'),
+(2, 2, 2, 'john_doe', 'hashed_password', 'john_doe@northwind.com', 1, '2025-05-14', '2025-05-14');
+
+-- Insert into Permissions
+INSERT INTO Permissions (PermissionID, Namepermission) VALUES
+(1, 'View Products'),
+(2, 'Manage Orders'),
+(3, 'Admin Access');
+
+-- Insert into RolePermissions
+INSERT INTO RolePermissions (RoleID, PermissionID) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(2, 1),
+(2, 2);
+
+DELETE FROM RolePermissions;
+DELETE FROM Users;
+DELETE FROM Permissions;
+DELETE FROM Roles;
+DELETE FROM Orders;
+DELETE FROM Employees;
+DELETE FROM Shippers;
+DELETE FROM OrderDetails;
+DELETE FROM Products;
+DELETE FROM Categories;
+DELETE FROM Suppliers;
+DELETE FROM Customers;

@@ -6,7 +6,7 @@ namespace DataAccessLayer.DataConnection
 {
     public class Connection
     {
-        private static string connectionString = "Data Source=.;Initial Catalog=Northwind;Integrated Security=True";
+        private static string connectionString = "Data Source=.;Initial Catalog=Northwind3;Integrated Security=True";
 
         public static string GetConnectionString()
         {

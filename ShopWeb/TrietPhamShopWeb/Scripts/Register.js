@@ -63,6 +63,5 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Could not find required elements for password strength meter');
         console.error('Password Input found:', !!passwordInput);
         console.error('Strength Bar found:', !!strengthBar);
-        console.error('Strength Text found:', !!strengthText);
-    }
-});
+        console.error('Strength Text found:', !!strengthText;
+

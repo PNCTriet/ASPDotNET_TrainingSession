@@ -12,6 +12,11 @@ namespace TrietPhamShopWeb.Adminpage
     public partial class ManageUser
     {
         /// <summary>
+        /// HeadContent control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Content HeadContent;
+
+        /// <summary>
         /// Content1 control.
         /// </summary>
         protected global::System.Web.UI.WebControls.Content Content1;
@@ -20,5 +25,50 @@ namespace TrietPhamShopWeb.Adminpage
         /// gvUsers control.
         /// </summary>
         protected global::System.Web.UI.WebControls.GridView gvUsers;
+
+        /// <summary>
+        /// hdnUserId control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.HiddenField hdnUserId;
+
+        /// <summary>
+        /// txtUsername control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox txtUsername;
+
+        /// <summary>
+        /// txtFirstName control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox txtFirstName;
+
+        /// <summary>
+        /// txtLastName control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox txtLastName;
+
+        /// <summary>
+        /// txtEmail control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox txtEmail;
+
+        /// <summary>
+        /// txtPhone control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox txtPhone;
+
+        /// <summary>
+        /// ddlRole control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.DropDownList ddlRole;
+
+        /// <summary>
+        /// chkIsActive control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.CheckBox chkIsActive;
+
+        /// <summary>
+        /// btnSave control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Button btnSave;
     }
 }
