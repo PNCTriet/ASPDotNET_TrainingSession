@@ -28,16 +28,16 @@ namespace TrietPhamShopWeb.Adminpage
 
                     // Load danh sách người dùng
                     DataTable dtUsers = _userBL.GetAllUsers();
-                    System.Diagnostics.Debug.WriteLine($"Page_Load: Number of users from BL: {dtUsers.Rows.Count}");
+                    Console.WriteLine($"[UI] Page_Load: Number of users from BL: {dtUsers.Rows.Count}");
                     
                     gvUsers.DataSource = dtUsers;
                     gvUsers.DataBind();
 
-                    System.Diagnostics.Debug.WriteLine($"Page_Load: GridView rows after binding: {gvUsers.Rows.Count}");
+                    Console.WriteLine($"[UI] Page_Load: GridView rows after binding: {gvUsers.Rows.Count}");
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine($"Error in Page_Load: {ex.Message}");
+                    Console.WriteLine($"[UI] Error in Page_Load: {ex.Message}");
                     // Xử lý lỗi ở đây
                 }
             }
@@ -55,7 +55,7 @@ namespace TrietPhamShopWeb.Adminpage
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error loading roles: {ex.Message}");
+                Console.WriteLine($"[UI] Error loading roles: {ex.Message}");
                 throw;
             }
         }
@@ -82,7 +82,7 @@ namespace TrietPhamShopWeb.Adminpage
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine($"Error deleting user: {ex.Message}");
+                    Console.WriteLine($"[UI] Error deleting user: {ex.Message}");
                     // Xử lý lỗi ở đây
                 }
             }
@@ -121,7 +121,7 @@ namespace TrietPhamShopWeb.Adminpage
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error saving user: {ex.Message}");
+                Console.WriteLine($"[UI] Error saving user: {ex.Message}");
                 // Xử lý lỗi ở đây
             }
         }

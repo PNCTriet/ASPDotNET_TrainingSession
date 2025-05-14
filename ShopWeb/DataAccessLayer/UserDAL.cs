@@ -21,8 +21,7 @@ namespace DataAccessLayer
                            r.RoleID, r.RoleName
                     FROM Users u
                     LEFT JOIN Employees e ON u.EmployeeID = e.EmployeeID
-                    LEFT JOIN Roles r ON u.RoleID = r.RoleID
-                    ORDER BY u.UserID DESC", conn))
+                    LEFT JOIN Roles r ON u.RoleID = r.RoleID", conn))
                 {
                     try
                     {
@@ -33,10 +32,10 @@ namespace DataAccessLayer
                             adapter.Fill(dt);
                             
                             // Debug: Log số lượng records
-                            System.Diagnostics.Debug.WriteLine($"Number of users found: {dt.Rows.Count}");
+                            Console.WriteLine($"[DAL] Number of users found: {dt.Rows.Count}");
                             foreach (DataRow row in dt.Rows)
                             {
-                                System.Diagnostics.Debug.WriteLine($"User: {row["Username"]}, Role: {row["RoleName"]}, Active: {row["IsActive"]}");
+                                Console.WriteLine($"[DAL] User: {row["Username"]}, Role: {row["RoleName"]}, Active: {row["IsActive"]}");
                             }
                             
                             return dt;
@@ -44,7 +43,7 @@ namespace DataAccessLayer
                     }
                     catch (Exception ex)
                     {
-                        System.Diagnostics.Debug.WriteLine($"Error in GetAllUsers: {ex.Message}");
+                        Console.WriteLine($"[DAL] Error in GetAllUsers: {ex.Message}");
                         throw new Exception("Error getting users: " + ex.Message);
                     }
                 }

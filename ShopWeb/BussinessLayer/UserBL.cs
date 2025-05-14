@@ -19,12 +19,12 @@ namespace BussinessLayer
             try
             {
                 DataTable dt = _userDAL.GetAllUsers();
-                System.Diagnostics.Debug.WriteLine($"UserBL.GetAllUsers: Number of users from DAL: {dt.Rows.Count}");
+                Console.WriteLine($"[BL] Number of users from DAL: {dt.Rows.Count}");
                 return dt;
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error in business layer while getting users: {ex.Message}");
+                Console.WriteLine($"[BL] Error in business layer while getting users: {ex.Message}");
                 throw new Exception("Error in business layer while getting users: " + ex.Message);
             }
         }
@@ -44,7 +44,7 @@ namespace BussinessLayer
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error in business layer while updating user: {ex.Message}");
+                Console.WriteLine($"[BL] Error in business layer while updating user: {ex.Message}");
                 throw new Exception("Error in business layer while updating user: " + ex.Message);
             }
         }
@@ -60,7 +60,7 @@ namespace BussinessLayer
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error in business layer while deleting user: {ex.Message}");
+                Console.WriteLine($"[BL] Error in business layer while deleting user: {ex.Message}");
                 throw new Exception("Error in business layer while deleting user: " + ex.Message);
             }
         }
@@ -76,7 +76,7 @@ namespace BussinessLayer
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error in business layer while getting user: {ex.Message}");
+                Console.WriteLine($"[BL] Error in business layer while getting user: {ex.Message}");
                 throw new Exception("Error in business layer while getting user: " + ex.Message);
             }
         }
@@ -89,7 +89,7 @@ namespace BussinessLayer
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error in business layer while getting roles: {ex.Message}");
+                Console.WriteLine($"[BL] Error in business layer while getting roles: {ex.Message}");
                 throw new Exception("Error in business layer while getting roles: " + ex.Message);
             }
         }
