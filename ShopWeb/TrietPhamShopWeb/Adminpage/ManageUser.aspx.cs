@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Data;
+using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BussinessLayer;
-using BusinessEntity.Entities;
 using BusinessEntity;
 
 namespace TrietPhamShopWeb.Adminpage
@@ -17,29 +16,46 @@ namespace TrietPhamShopWeb.Adminpage
             _userBL = new UserBL();
         }
 
+        protected string GetStatusClass(object isActive)
+        {
+            if (isActive == null) return "status-blocked";
+            bool active = Convert.ToBoolean(isActive);
+            return active ? "status-active" : "status-inactive";
+        }
+
+        protected string GetStatusText(object isActive)
+        {
+            if (isActive == null) return "Blocked";
+            bool active = Convert.ToBoolean(isActive);
+            return active ? "Active" : "Inactive";
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                try
-                {
-                    // Load danh sách vai trò
-                    LoadRoles();
+                LoadUsers();
+                LoadRoles();
+            }
+        }
 
-                    // Load danh sách người dùng
-                    DataTable dtUsers = _userBL.GetAllUsers();
-                    Console.WriteLine($"[UI] Page_Load: Number of users from BL: {dtUsers.Rows.Count}");
-                    
-                    gvUsers.DataSource = dtUsers;
-                    gvUsers.DataBind();
-
-                    Console.WriteLine($"[UI] Page_Load: GridView rows after binding: {gvUsers.Rows.Count}");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"[UI] Error in Page_Load: {ex.Message}");
-                    // Xử lý lỗi ở đây
-                }
+        private void LoadUsers()
+        {
+            try
+            {
+                List<User> users = _userBL.GetAllUsers();
+                gvUsers.DataSource = users;
+                gvUsers.DataBind();
+                
+                // Add script to show logs in browser console
+                string script = $"console.log('[BL] Number of users loaded: {users.Count}');";
+                ScriptManager.RegisterStartupScript(this, GetType(), "LogMessage", script, true);
+            }
+            catch (Exception ex)
+            {
+                // Show error message
+                string script = $"console.error('{ex.Message.Replace("'", "\\'")}');";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ErrorMessage", script, true);
             }
         }
 
@@ -47,83 +63,74 @@ namespace TrietPhamShopWeb.Adminpage
         {
             try
             {
-                DataTable dtRoles = _userBL.GetAllRoles();
-                ddlRole.DataSource = dtRoles;
+                List<Role> roles = _userBL.GetAllRoles();
+                ddlRole.DataSource = roles;
                 ddlRole.DataTextField = "RoleName";
                 ddlRole.DataValueField = "RoleID";
                 ddlRole.DataBind();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[UI] Error loading roles: {ex.Message}");
-                throw;
+                string script = $"console.error('{ex.Message.Replace("'", "\\'")}');";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ErrorMessage", script, true);
             }
         }
 
         protected void gvUsers_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "EditUser")
+            if (e.CommandName == "DeleteUser")
             {
-                int userId = Convert.ToInt32(e.CommandArgument);
-                // Xử lý sự kiện edit
-            }
-            else if (e.CommandName == "DeleteUser")
-            {
-                int userId = Convert.ToInt32(e.CommandArgument);
                 try
                 {
+                    int userId = Convert.ToInt32(e.CommandArgument);
                     if (_userBL.DeleteUser(userId))
                     {
-                        // Refresh GridView
-                        DataTable dtUsers = _userBL.GetAllUsers();
-                        gvUsers.DataSource = dtUsers;
-                        gvUsers.DataBind();
+                        LoadUsers();
+                        string script = "console.log('[BL] User deleted successfully');";
+                        ScriptManager.RegisterStartupScript(this, GetType(), "LogMessage", script, true);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"[UI] Error deleting user: {ex.Message}");
-                    // Xử lý lỗi ở đây
+                    string script = $"console.error('{ex.Message.Replace("'", "\\'")}');";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "ErrorMessage", script, true);
                 }
             }
-        }
-
-        protected void gvUsers_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            gvUsers.PageIndex = e.NewPageIndex;
-            DataTable dtUsers = _userBL.GetAllUsers();
-            gvUsers.DataSource = dtUsers;
-            gvUsers.DataBind();
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                int userId = Convert.ToInt32(hdnUserId.Value);
-                User user = _userBL.GetUserById(userId);
-                
-                if (user != null)
+                User user = new User
                 {
-                    user.Username = txtUsername.Text;
-                    user.Email = txtEmail.Text;
-                    user.IsActive = chkIsActive.Checked;
-                    user.RoleID = Convert.ToInt32(ddlRole.SelectedValue);
+                    UserID = Convert.ToInt32(hdnUserId.Value),
+                    Username = txtUsername.Text,
+                    Email = txtEmail.Text,
+                    FirstName = txtFirstName.Text,
+                    LastName = txtLastName.Text,
+                    RoleID = Convert.ToInt32(ddlRole.SelectedValue),
+                    IsActive = chkIsActive.Checked
+                };
 
-                    if (_userBL.UpdateUser(user))
-                    {
-                        // Refresh GridView
-                        DataTable dtUsers = _userBL.GetAllUsers();
-                        gvUsers.DataSource = dtUsers;
-                        gvUsers.DataBind();
-                    }
+                if (_userBL.UpdateUser(user))
+                {
+                    LoadUsers();
+                    string script = "console.log('[BL] User updated successfully');";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "LogMessage", script, true);
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[UI] Error saving user: {ex.Message}");
-                // Xử lý lỗi ở đây
+                string script = $"console.error('{ex.Message.Replace("'", "\\'")}');";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ErrorMessage", script, true);
             }
+        }
+
+        protected void gvUsers_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvUsers.PageIndex = e.NewPageIndex;
+            LoadUsers();
         }
     }
 }

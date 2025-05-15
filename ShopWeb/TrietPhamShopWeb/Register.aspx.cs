@@ -1,20 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Text.RegularExpressions;
+using BussinessLayer;
+using BusinessEntity;
 
 namespace TrietPhamShopWeb
 {
     public partial class Register : System.Web.UI.Page
     {
+        private readonly UserBL _userBL;
+
+        public Register()
+        {
+            _userBL = new UserBL();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                // Initial page load logic here if needed
+                // Clear any existing messages
+                lblMessage.Visible = false;
             }
         }
 
@@ -22,41 +27,41 @@ namespace TrietPhamShopWeb
         {
             try
             {
-                // Validate if passwords match
+                // Validate password match
                 if (txtPassword.Text != txtConfirmPassword.Text)
                 {
-                    lblMessage.Text = "Mật khẩu xác nhận không khớp!";
-                    lblMessage.Visible = true;
+                    ShowError("Mật khẩu xác nhận không khớp");
                     return;
                 }
 
-                // TODO: Add your registration logic here
-                // For example:
-                // 1. Check if email already exists
-                // 2. Hash the password
-                // 3. Save user data to database
-                // 4. Send confirmation email
-                // 5. Redirect to login page
+                // Create new user
+                var user = new User
+                {
+                    Username = txtEmail.Text.Split('@')[0], // Tạo username từ email
+                    Email = txtEmail.Text,
+                    PasswordHash = txtPassword.Text,
+                    FirstName = txtFirstName.Text,
+                    LastName = txtLastName.Text,
+                    Phone = txtPhone.Text
+                };
 
-                // For now, just show a success message
-                lblMessage.Text = "Đăng ký thành công!";
-                lblMessage.CssClass = "alert alert-success";
-                lblMessage.Visible = true;
-
-                // Clear form
-                txtFirstName.Text = string.Empty;
-                txtLastName.Text = string.Empty;
-                txtEmail.Text = string.Empty;
-                txtPassword.Text = string.Empty;
-                txtConfirmPassword.Text = string.Empty;
-                txtPhone.Text = string.Empty;
+                // Try to create user
+                if (_userBL.CreateUser(user))
+                {
+                    // Redirect to login page on success
+                    Response.Redirect("~/login2.aspx");
+                }
             }
             catch (Exception ex)
             {
-                lblMessage.Text = "Có lỗi xảy ra: " + ex.Message;
-                lblMessage.CssClass = "alert alert-danger";
-                lblMessage.Visible = true;
+                ShowError(ex.Message);
             }
+        }
+
+        private void ShowError(string message)
+        {
+            lblMessage.Text = message;
+            lblMessage.Visible = true;
         }
     }
 }

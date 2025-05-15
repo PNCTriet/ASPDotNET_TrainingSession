@@ -23,6 +23,9 @@ namespace BusinessEntity
         // Thông tin từ bảng Roles
         public string RoleName { get; set; }
 
+        // Format hiển thị UserID
+        public string DisplayUserID { get; set; }
+
         public string FullName => $"{FirstName} {LastName}";
     }
 }

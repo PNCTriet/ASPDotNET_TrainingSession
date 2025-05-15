@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Data;
+using System.Collections.Generic;
+using System.Linq;
 using BusinessEntity;
 using DataAccessLayer;
 
@@ -7,24 +8,14 @@ namespace BussinessLayer
 {
     public class UserBL
     {
-        private readonly UserDAL _userDAL;
-
-        public UserBL()
-        {
-            _userDAL = new UserDAL();
-        }
-
-        public DataTable GetAllUsers()
+        public List<User> GetAllUsers()
         {
             try
             {
-                DataTable dt = _userDAL.GetAllUsers();
-                Console.WriteLine($"[BL] Number of users from DAL: {dt.Rows.Count}");
-                return dt;
+                return UserDAL.GetAllUsers();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[BL] Error in business layer while getting users: {ex.Message}");
                 throw new Exception("Error in business layer while getting users: " + ex.Message);
             }
         }
@@ -40,11 +31,10 @@ namespace BussinessLayer
                 if (string.IsNullOrEmpty(user.Email))
                     throw new Exception("Email is required.");
 
-                return _userDAL.UpdateUser(user);
+                return UserDAL.UpdateUser(user);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[BL] Error in business layer while updating user: {ex.Message}");
                 throw new Exception("Error in business layer while updating user: " + ex.Message);
             }
         }
@@ -56,11 +46,10 @@ namespace BussinessLayer
                 if (userId <= 0)
                     throw new Exception("Invalid user ID.");
 
-                return _userDAL.DeleteUser(userId);
+                return UserDAL.DeleteUser(userId);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[BL] Error in business layer while deleting user: {ex.Message}");
                 throw new Exception("Error in business layer while deleting user: " + ex.Message);
             }
         }
@@ -72,25 +61,61 @@ namespace BussinessLayer
                 if (userId <= 0)
                     throw new Exception("Invalid user ID.");
 
-                return _userDAL.GetUserById(userId);
+                return UserDAL.GetUserById(userId);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[BL] Error in business layer while getting user: {ex.Message}");
                 throw new Exception("Error in business layer while getting user: " + ex.Message);
             }
         }
 
-        public DataTable GetAllRoles()
+        public List<Role> GetAllRoles()
         {
             try
             {
-                return _userDAL.GetAllRoles();
+                return UserDAL.GetAllRoles();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[BL] Error in business layer while getting roles: {ex.Message}");
                 throw new Exception("Error in business layer while getting roles: " + ex.Message);
+            }
+        }
+
+        public bool CreateUser(User user)
+        {
+            try
+            {
+                // Kiểm tra username đã tồn tại chưa
+                var existingUser = GetAllUsers().FirstOrDefault(u => u.Username.ToLower() == user.Username.ToLower());
+                if (existingUser != null)
+                {
+                    throw new Exception("Username đã tồn tại");
+                }
+
+                // Kiểm tra email đã tồn tại chưa
+                existingUser = GetAllUsers().FirstOrDefault(u => u.Email.ToLower() == user.Email.ToLower());
+                if (existingUser != null)
+                {
+                    throw new Exception("Email đã tồn tại");
+                }
+
+                // Mã hóa mật khẩu
+                user.PasswordHash = HashPassword(user.PasswordHash);
+
+                return UserDAL.CreateUser(user);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error in business layer: " + ex.Message);
+            }
+        }
+
+        private string HashPassword(string password)
+        {
+            using (var sha256 = System.Security.Cryptography.SHA256.Create())
+            {
+                var hashedBytes = sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                return Convert.ToBase64String(hashedBytes);
             }
         }
     }

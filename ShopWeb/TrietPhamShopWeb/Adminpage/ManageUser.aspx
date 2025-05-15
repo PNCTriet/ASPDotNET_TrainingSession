@@ -36,9 +36,15 @@
                             <asp:BoundField DataField="FirstName" HeaderText="Họ" />
                             <asp:BoundField DataField="LastName" HeaderText="Tên" />
                             <asp:BoundField DataField="Email" HeaderText="Email" />
-                            <asp:BoundField DataField="Phone" HeaderText="Số điện thoại" />
                             <asp:BoundField DataField="RoleName" HeaderText="Vai trò" />
-                            <asp:CheckBoxField DataField="IsActive" HeaderText="Trạng thái" />
+                            <asp:TemplateField HeaderText="Trạng thái">
+                                <ItemTemplate>
+                                    <div class="d-flex align-items-center">
+                                        <span class="status-dot <%# GetStatusClass(Eval("IsActive")) %>"></span>
+                                        <span class="ms-2"><%# GetStatusText(Eval("IsActive")) %></span>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="Thao tác">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-primary btn-sm btn-edit"
@@ -48,7 +54,6 @@
                                         data-email='<%# Eval("Email") %>'
                                         data-firstname='<%# Eval("FirstName") %>'
                                         data-lastname='<%# Eval("LastName") %>'
-                                        data-phone='<%# Eval("Phone") %>'
                                         data-roleid='<%# Eval("RoleID") %>'
                                         data-isactive='<%# Eval("IsActive") %>'>
                                         <i class="fas fa-edit"></i> Sửa
@@ -94,10 +99,6 @@
                         <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" required="required"></asp:TextBox>
                     </div>
                     <div class="mb-3">
-                        <label for="txtPhone" class="form-label">Số điện thoại</label>
-                        <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control" required="required"></asp:TextBox>
-                    </div>
-                    <div class="mb-3">
                         <label for="ddlRole" class="form-label">Vai trò</label>
                         <asp:DropDownList ID="ddlRole" runat="server" CssClass="form-select">
                         </asp:DropDownList>
@@ -133,7 +134,6 @@
                 var email = $(this).data('email');
                 var firstName = $(this).data('firstname');
                 var lastName = $(this).data('lastname');
-                var phone = $(this).data('phone');
                 var roleId = $(this).data('roleid');
                 var isActive = $(this).data('isactive');
 
@@ -143,7 +143,6 @@
                 $('#<%= txtFirstName.ClientID %>').val(firstName);
                 $('#<%= txtLastName.ClientID %>').val(lastName);
                 $('#<%= txtEmail.ClientID %>').val(email);
-                $('#<%= txtPhone.ClientID %>').val(phone);
                 $('#<%= ddlRole.ClientID %>').val(roleId);
                 $('#<%= chkIsActive.ClientID %>').prop('checked', isActive);
 
@@ -311,6 +310,35 @@
         #<%= gvUsers.ClientID %> td:nth-child(9) {
             width: 15% !important;
             max-width: 15% !important;
+        }
+        /* Status dot styles */
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .status-active {
+            background-color: #28a745;
+            box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
+        }
+        .status-inactive {
+            background-color: #dc3545;
+            box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.2);
+        }
+        .status-blocked {
+            background-color: #ffc107;
+            box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.2);
+        }
+        /* Status text colors */
+        .status-active + span {
+            color: #28a745;
+        }
+        .status-inactive + span {
+            color: #dc3545;
+        }
+        .status-blocked + span {
+            color: #ffc107;
         }
     </style>
 </asp:Content>
