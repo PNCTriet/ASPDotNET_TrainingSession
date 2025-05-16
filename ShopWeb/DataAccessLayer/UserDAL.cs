@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using BusinessEntity;
 using DataAccessLayer.DataConnection;
+using BCrypt.Net;
 
 namespace DataAccessLayer
 {
@@ -314,6 +315,58 @@ namespace DataAccessLayer
             catch (Exception ex)
             {
                 throw new Exception("Error creating user: " + ex.Message);
+            }
+        }
+
+        public static User GetUserByUsername(string username)
+        {
+            using (SqlConnection conn = new SqlConnection(Connection.GetConnectionString()))
+            {
+                string query = @"
+                    SELECT u.UserID, u.Username, u.Email, u.PasswordHash, u.IsActive, u.CreatedAt, u.UpdatedAt,
+                           e.FirstName, e.LastName, e.Title,
+                           r.RoleID, r.RoleName
+                    FROM Users u
+                    LEFT JOIN Employees e ON u.EmployeeID = e.EmployeeID
+                    LEFT JOIN Roles r ON u.RoleID = r.RoleID
+                    WHERE u.Username = @Username or u.Email = @Username";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    try
+                    {
+                        cmd.Parameters.AddWithValue("@Username", username);
+                        conn.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int userId = Convert.ToInt32(reader["UserID"]);
+                                return new User
+                                {
+                                    UserID = userId,
+                                    DisplayUserID = FormatDisplayUserID(userId),
+                                    Username = reader["Username"].ToString(),
+                                    Email = reader["Email"].ToString(),
+                                    PasswordHash = reader["PasswordHash"].ToString(),
+                                    IsActive = Convert.ToBoolean(reader["IsActive"]),
+                                    CreatedAt = Convert.ToDateTime(reader["CreatedAt"]),
+                                    UpdatedAt = Convert.ToDateTime(reader["UpdatedAt"]),
+                                    FirstName = reader["FirstName"].ToString(),
+                                    LastName = reader["LastName"].ToString(),
+                                    Title = reader["Title"].ToString(),
+                                    RoleName = reader["RoleName"].ToString(),
+                                    RoleID = Convert.ToInt32(reader["RoleID"])
+                                };
+                            }
+                            return null;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("Error getting user by username: " + ex.Message);
+                    }
+                }
             }
         }
     }

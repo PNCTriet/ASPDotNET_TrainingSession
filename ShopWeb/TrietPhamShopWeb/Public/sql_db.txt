@@ -126,7 +126,7 @@ GO
 -- Users
 CREATE TABLE Users (
   UserID int PRIMARY KEY,
-  RoleID int UNIQUE,
+  RoleID int,
   EmployeeID int UNIQUE,
   Username nvarchar(255),
   PasswordHash nvarchar(255),
@@ -218,12 +218,21 @@ INSERT INTO OrderDetails (OrderID, ProductID, UnitPrice, Quantity, Discount, Not
 -- Insert into Roles
 INSERT INTO Roles (RoleID, RoleName) VALUES
 (1, 'Admin'),
-(2, 'User');
+(2, 'User'),
+(3, 'Super Admin');
 
 -- Insert into Users
 INSERT INTO Users (UserID, RoleID, EmployeeID, Username, PasswordHash, Email, IsActive, CreatedAt, UpdatedAt) VALUES
 (1, 1, 1, 'admin', 'hashed_password', 'admin@northwind.com', 1, '2025-05-14', '2025-05-14'),
 (2, 2, 2, 'john_doe', 'hashed_password', 'john_doe@northwind.com', 1, '2025-05-14', '2025-05-14');
+
+INSERT INTO Employees (EmployeeID, LastName, FirstName, Title, TitleOfCourtesy, BirthDate, HireDate, Address, City, Region, PostalCode, Country, HomePhone, Extension, ReportsTo) VALUES
+(3, 'Davolio', 'Nancy', 'Sales Representative', 'Ms.', '1948-12-08', '1992-05-01', '507 - 20th Ave. E. Apt. 2A', 'Seattle', 'WA', '98122', 'USA', '206-555-9857', '5467', NULL),
+(4, 'Fuller', 'Andrew', 'Vice President, Sales', 'Dr.', '1952-03-19', '1991-06-10', '908 W. Capital Way', 'Tacoma', 'WA', '98401', 'USA', '206-555-5062', '7227', 1);
+
+INSERT INTO Users (UserID, RoleID, EmployeeID, Username, PasswordHash, Email, IsActive, CreatedAt, UpdatedAt) VALUES
+(3, 2, 3, 'admin1', 'hashed_password', 'admin@northwind.com', 1, '2025-05-14', '2025-05-14'),
+(4, 2, 4, 'john_doe1', 'hashed_password', 'john_doe@northwind.com', 1, '2025-05-14', '2025-05-14');
 
 -- Insert into Permissions
 INSERT INTO Permissions (PermissionID, Namepermission) VALUES
@@ -251,3 +260,16 @@ DELETE FROM Products;
 DELETE FROM Categories;
 DELETE FROM Suppliers;
 DELETE FROM Customers;
+
+DROP TABLE IF EXISTS RolePermissions;
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Permissions;
+DROP TABLE IF EXISTS Roles;
+DROP TABLE IF EXISTS OrderDetails;
+DROP TABLE IF EXISTS Orders;
+DROP TABLE IF EXISTS Employees;
+DROP TABLE IF EXISTS Shippers;
+DROP TABLE IF EXISTS Products;
+DROP TABLE IF EXISTS Categories;
+DROP TABLE IF EXISTS Suppliers;
+DROP TABLE IF EXISTS Customers;

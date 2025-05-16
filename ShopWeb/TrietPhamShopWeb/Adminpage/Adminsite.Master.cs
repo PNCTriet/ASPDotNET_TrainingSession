@@ -10,23 +10,30 @@ namespace TrietPhamShopWeb.Adminpage
 {
     public partial class Adminsite : System.Web.UI.MasterPage
     {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // Check if user is logged in and has admin rights
+            if (Session["IsAdmin"] == null || !(bool)Session["IsAdmin"])
+            {
+                Response.Redirect("~/login2.aspx");
+                return;
+            }
+
+            // Display username if available
+            if (Session["Username"] != null)
+            {
+                lblUsername.Text = Session["Username"].ToString();
+            }
+        }
+
         protected void btnLogout_Click(object sender, EventArgs e)
         {
-            // Xóa session
+            // Clear all session variables
             Session.Clear();
             Session.Abandon();
 
-            // Xóa authentication cookie
-            if (Request.Cookies["ASP.NET_SessionId"] != null)
-            {
-                Response.Cookies["ASP.NET_SessionId"].Expires = DateTime.Now.AddDays(-1);
-            }
-
-            // Xóa Forms Authentication cookie
-            FormsAuthentication.SignOut();
-
-            // Chuyển hướng về trang login
-            Response.Redirect("~/Login2.aspx");
+            // Redirect to login page
+            Response.Redirect("~/login2.aspx");
         }
     }
 }

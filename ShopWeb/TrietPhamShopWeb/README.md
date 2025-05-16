@@ -355,6 +355,103 @@ public class AdminBasePage : Page
    - SQLServer: Lưu trong database
    - Custom: Lưu tùy chỉnh
 
+# Phân tích luồng xác thực mật khẩu và bảo mật
+
+## 1. Quá trình Hash mật khẩu
+
+### 1.1. Phương thức HashPassword
+```csharp
+private string HashPassword(string password)
+{
+    // Tạo salt ngẫu nhiên và hash mật khẩu sử dụng BCrypt
+    return BCrypt.Net.BCrypt.HashPassword(password, BCrypt.Net.BCrypt.GenerateSalt(12));
+}
+```
+- `GenerateSalt(12)`: Tạo một chuỗi salt ngẫu nhiên với độ khó là 12 (work factor)
+- `HashPassword()`: Kết hợp mật khẩu với salt và tạo ra chuỗi hash
+- Kết quả trả về có dạng: `$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBAQHt0JhQJpHy`
+  - `$2a$`: Phiên bản của BCrypt
+  - `12`: Work factor
+  - Phần còn lại: Salt và hash được kết hợp
+
+### 1.2. Phương thức VerifyPassword
+```csharp
+private bool VerifyPassword(string password, string hashedPassword)
+{
+    // Xác thực mật khẩu người dùng nhập với hash đã lưu
+    return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
+}
+```
+
+## 2. Quá trình xác thực mật khẩu
+
+### 2.1. Luồng xử lý
+1. Khi user đăng nhập, hệ thống nhận username và password
+2. Tìm user trong database dựa trên username
+3. Nếu tìm thấy user, lấy password hash đã lưu
+4. Sử dụng `BCrypt.Verify()` để so sánh:
+   - Password người dùng nhập
+   - Password hash đã lưu trong database
+5. BCrypt sẽ:
+   - Trích xuất salt từ hash đã lưu
+   - Hash password người dùng nhập với salt đó
+   - So sánh kết quả với hash đã lưu
+6. Trả về true nếu khớp, false nếu không khớp
+
+### 2.2. Ví dụ minh họa
+```csharp
+// Khi tạo user mới
+string password = "123456";
+string hashedPassword = HashPassword(password);
+// Kết quả: $2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBAQHt0JhQJpHy
+
+// Khi đăng nhập
+string inputPassword = "123456";
+bool isValid = VerifyPassword(inputPassword, hashedPassword);
+// Kết quả: true
+
+string wrongPassword = "1234567";
+bool isValid = VerifyPassword(wrongPassword, hashedPassword);
+// Kết quả: false
+```
+
+## 3. Ưu điểm của phương pháp này
+
+### 3.1. Bảo mật
+- Mật khẩu không bao giờ được lưu dưới dạng plain text
+- Mỗi mật khẩu có một salt riêng
+- Có thể điều chỉnh độ khó của thuật toán
+- Không thể đảo ngược từ hash về mật khẩu gốc
+- Chống brute force attack
+
+### 3.2. Hiệu năng
+- BCrypt được thiết kế để chậm một cách có chủ đích
+- Work factor có thể điều chỉnh để cân bằng giữa bảo mật và hiệu năng
+- Salt ngẫu nhiên ngăn chặn rainbow table attacks
+
+### 3.3. Dễ triển khai
+- Sử dụng thư viện BCrypt.Net-Next
+- API đơn giản, dễ sử dụng
+- Tích hợp tốt với ASP.NET
+
+## 4. Lưu ý quan trọng
+
+### 4.1. Bảo mật
+- Luôn sử dụng HTTPS để bảo vệ thông tin đăng nhập
+- Không lưu trữ mật khẩu gốc trong bất kỳ trường hợp nào
+- Thường xuyên cập nhật work factor khi phần cứng phát triển
+- Xử lý lỗi một cách an toàn, không tiết lộ thông tin nhạy cảm
+
+### 4.2. Hiệu năng
+- Work factor 12 là một giá trị cân bằng tốt
+- Có thể tăng work factor cho các hệ thống có yêu cầu bảo mật cao
+- Nên cache kết quả hash để tăng hiệu năng
+
+### 4.3. Tích hợp
+- Cần cài đặt package BCrypt.Net-Next
+- Đảm bảo tất cả mật khẩu mới đều được hash
+- Có kế hoạch migrate cho các mật khẩu cũ
+
 # Phân tích luồng kết nối và hiển thị dữ liệu trong ManageProducts.aspx
 
 ## 1. Cấu hình kết nối Database

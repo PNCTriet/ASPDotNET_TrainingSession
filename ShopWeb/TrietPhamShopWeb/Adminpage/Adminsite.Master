@@ -167,7 +167,9 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                        <asp:Label ID="lblUsername" runat="server" Text="Admin"></asp:Label>
+                                    </span>
                                     <img class="img-profile rounded-circle" src="../Content/img/undraw_profile.svg">
                                 </a>
                                 <!-- Dropdown - User Information -->
@@ -182,10 +184,11 @@
                                         Settings
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
-                                    </a>
+                                    <asp:Button ID="btnLogout" runat="server" 
+                                        Text="Logout" 
+                                        CssClass="dropdown-item" 
+                                        OnClick="btnLogout_Click" 
+                                        CausesValidation="false" />
                                 </div>
                             </li>
                         </ul>
@@ -234,7 +237,7 @@
                     <div class="modal-body">Chọn "Đăng xuất" nếu bạn muốn kết thúc phiên làm việc hiện tại.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
-                        <asp:Button ID="btnLogout" runat="server" Text="Đăng xuất" CssClass="btn btn-primary" OnClick="btnLogout_Click" />
+                        <asp:Button ID="btnModalLogout" runat="server" Text="Đăng xuất" CssClass="btn btn-primary" OnClick="btnLogout_Click" />
                     </div>
                 </div>
             </div>
@@ -260,13 +263,20 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            // Xử lý sự kiện click nút đăng xuất
+            // Xử lý sự kiện click nút đăng xuất trong dropdown
             $('#<%= btnLogout.ClientID %>').click(function (e) {
+                e.preventDefault();
+                // Hiển thị modal
+                $('#logoutModal').modal('show');
+            });
+
+            // Xử lý sự kiện click nút đăng xuất trong modal
+            $('#<%= btnModalLogout.ClientID %>').click(function (e) {
                 e.preventDefault();
                 // Đóng modal
                 $('#logoutModal').modal('hide');
                 // Gọi server-side event
-                __doPostBack('<%= btnLogout.UniqueID %>', '');
+                __doPostBack('<%= btnModalLogout.UniqueID %>', '');
             });
         });
     </script>
