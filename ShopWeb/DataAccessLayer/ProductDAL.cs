@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using Oracle.ManagedDataAccess.Client;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,16 +14,16 @@ namespace DataAccessLayer
         public static List<Product> GetAllProducts()
         {
             var list = new List<Product>();
-            using (SqlConnection conn = new SqlConnection(Connection.GetConnectionString()))
+            using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
             {
                 string query = @"SELECT p.ProductID, p.ProductName, c.CategoryName,
                              p.UnitPrice as Price, p.UnitsInStock as Stock
                              FROM Products p
                              LEFT JOIN Categories c ON p.CategoryID = c.CategoryID";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (OracleCommand cmd = new OracleCommand(query, conn))
                 {
                     conn.Open();
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using (OracleDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -44,23 +44,23 @@ namespace DataAccessLayer
 
         public static void DeleteProduct(int id)
         {
-            using (SqlConnection conn = new SqlConnection(Connection.GetConnectionString()))
+            using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
             {
                 conn.Open();
 
                 // Xóa trong Order Details trước
-                string deleteOrderDetails = "DELETE FROM [Order Details] WHERE ProductID = @ProductID";
-                using (SqlCommand cmdOrderDetails = new SqlCommand(deleteOrderDetails, conn))
+                string deleteOrderDetails = "DELETE FROM Order_Details WHERE ProductID = :ProductID";
+                using (OracleCommand cmdOrderDetails = new OracleCommand(deleteOrderDetails, conn))
                 {
-                    cmdOrderDetails.Parameters.AddWithValue("@ProductID", id);
+                    cmdOrderDetails.Parameters.Add(":ProductID", OracleDbType.Int32).Value = id;
                     cmdOrderDetails.ExecuteNonQuery();
                 }
 
                 // Sau đó xóa trong Products
-                string deleteProduct = "DELETE FROM Products WHERE ProductID = @ProductID";
-                using (SqlCommand cmdProduct = new SqlCommand(deleteProduct, conn))
+                string deleteProduct = "DELETE FROM Products WHERE ProductID = :ProductID";
+                using (OracleCommand cmdProduct = new OracleCommand(deleteProduct, conn))
                 {
-                    cmdProduct.Parameters.AddWithValue("@ProductID", id);
+                    cmdProduct.Parameters.Add(":ProductID", OracleDbType.Int32).Value = id;
                     cmdProduct.ExecuteNonQuery();
                 }
             }
@@ -70,20 +70,20 @@ namespace DataAccessLayer
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(Connection.GetConnectionString()))
+                using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
                 {
                     string query = @"UPDATE Products 
-                                   SET ProductName = @ProductName,
-                                       UnitPrice = @Price,
-                                       UnitsInStock = @Stock
-                                   WHERE ProductID = @ProductID";
+                                   SET ProductName = :ProductName,
+                                       UnitPrice = :Price,
+                                       UnitsInStock = :Stock
+                                   WHERE ProductID = :ProductID";
                     
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    using (OracleCommand cmd = new OracleCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@ProductID", productId);
-                        cmd.Parameters.AddWithValue("@ProductName", productName);
-                        cmd.Parameters.AddWithValue("@Price", price);
-                        cmd.Parameters.AddWithValue("@Stock", stock);
+                        cmd.Parameters.Add(":ProductID", OracleDbType.Int32).Value = productId;
+                        cmd.Parameters.Add(":ProductName", OracleDbType.Varchar2).Value = productName;
+                        cmd.Parameters.Add(":Price", OracleDbType.Decimal).Value = price;
+                        cmd.Parameters.Add(":Stock", OracleDbType.Int32).Value = stock;
 
                         conn.Open();
                         int result = cmd.ExecuteNonQuery();

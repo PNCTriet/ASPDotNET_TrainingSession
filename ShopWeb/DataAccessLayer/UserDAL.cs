@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using Oracle.ManagedDataAccess.Client;
 using BusinessEntity;
 using DataAccessLayer.DataConnection;
 using BCrypt.Net;
@@ -17,7 +17,7 @@ namespace DataAccessLayer
         public static List<User> GetAllUsers()
         {
             var list = new List<User>();
-            using (SqlConnection conn = new SqlConnection(Connection.GetConnectionString()))
+            using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
             {
                 string query = @"
                     SELECT u.UserID, u.Username, u.Email, u.IsActive, u.CreatedAt, u.UpdatedAt,
@@ -27,12 +27,12 @@ namespace DataAccessLayer
                     LEFT JOIN Employees e ON u.EmployeeID = e.EmployeeID
                     LEFT JOIN Roles r ON u.RoleID = r.RoleID";
 
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (OracleCommand cmd = new OracleCommand(query, conn))
                 {
                     try
                     {
                         conn.Open();
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {
@@ -69,22 +69,22 @@ namespace DataAccessLayer
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(Connection.GetConnectionString()))
+                using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
                 {
                     string query = @"
                         UPDATE Users 
-                        SET Username = @Username,
-                            Email = @Email,
-                            IsActive = @IsActive,
-                            UpdatedAt = GETDATE()
-                        WHERE UserID = @UserID";
+                        SET Username = :Username,
+                            Email = :Email,
+                            IsActive = :IsActive,
+                            UpdatedAt = SYSDATE
+                        WHERE UserID = :UserID";
 
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    using (OracleCommand cmd = new OracleCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@UserID", user.UserID);
-                        cmd.Parameters.AddWithValue("@Username", user.Username);
-                        cmd.Parameters.AddWithValue("@Email", user.Email);
-                        cmd.Parameters.AddWithValue("@IsActive", user.IsActive);
+                        cmd.Parameters.Add(":UserID", OracleDbType.Int32).Value = user.UserID;
+                        cmd.Parameters.Add(":Username", OracleDbType.Varchar2).Value = user.Username;
+                        cmd.Parameters.Add(":Email", OracleDbType.Varchar2).Value = user.Email;
+                        cmd.Parameters.Add(":IsActive", OracleDbType.Int32).Value = user.IsActive ? 1 : 0;
 
                         conn.Open();
                         int result = cmd.ExecuteNonQuery();
@@ -102,14 +102,14 @@ namespace DataAccessLayer
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(Connection.GetConnectionString()))
+                using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
                 {
                     conn.Open();
-                    string query = "DELETE FROM Users WHERE UserID = @UserID";
+                    string query = "DELETE FROM Users WHERE UserID = :UserID";
                     
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    using (OracleCommand cmd = new OracleCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@UserID", userId);
+                        cmd.Parameters.Add(":UserID", OracleDbType.Int32).Value = userId;
                         int result = cmd.ExecuteNonQuery();
                         return result > 0;
                     }
@@ -123,7 +123,7 @@ namespace DataAccessLayer
 
         public static User GetUserById(int userId)
         {
-            using (SqlConnection conn = new SqlConnection(Connection.GetConnectionString()))
+            using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
             {
                 string query = @"
                     SELECT u.UserID, u.Username, u.Email, u.IsActive, u.CreatedAt, u.UpdatedAt,
@@ -132,15 +132,15 @@ namespace DataAccessLayer
                     FROM Users u
                     LEFT JOIN Employees e ON u.EmployeeID = e.EmployeeID
                     LEFT JOIN Roles r ON u.RoleID = r.RoleID
-                    WHERE u.UserID = @UserID";
+                    WHERE u.UserID = :UserID";
 
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (OracleCommand cmd = new OracleCommand(query, conn))
                 {
                     try
                     {
-                        cmd.Parameters.AddWithValue("@UserID", userId);
+                        cmd.Parameters.Add(":UserID", OracleDbType.Int32).Value = userId;
                         conn.Open();
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             if (reader.Read())
                             {
@@ -175,16 +175,16 @@ namespace DataAccessLayer
         public static List<Role> GetAllRoles()
         {
             var list = new List<Role>();
-            using (SqlConnection conn = new SqlConnection(Connection.GetConnectionString()))
+            using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
             {
                 string query = "SELECT RoleID, RoleName FROM Roles";
                 
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (OracleCommand cmd = new OracleCommand(query, conn))
                 {
                     try
                     {
                         conn.Open();
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {
@@ -209,26 +209,25 @@ namespace DataAccessLayer
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(Connection.GetConnectionString()))
+                using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
                 {
                     string query = @"
-                        SELECT TOP 1 UserID 
+                        SELECT UserID 
                         FROM Users 
+                        WHERE ROWNUM = 1
                         ORDER BY UserID DESC";
 
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    using (OracleCommand cmd = new OracleCommand(query, conn))
                     {
                         conn.Open();
                         object result = cmd.ExecuteScalar();
                         
                         if (result == null || result == DBNull.Value)
                         {
-                            // Nếu chưa có UserID nào
                             return $"USR{DateTime.Now:yy}0001";
                         }
                         else
                         {
-                            // Lấy số thứ tự từ UserID hiện tại
                             int currentId = Convert.ToInt32(result);
                             int sequence = currentId + 1;
                             return $"USR{DateTime.Now:yy}{sequence:D4}";
@@ -246,63 +245,57 @@ namespace DataAccessLayer
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(Connection.GetConnectionString()))
+                using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
                 {
                     // Tạo UserID mới
                     string newUserID = GenerateNextUserID();
-                    user.UserID = int.Parse(newUserID.Substring(5)); // Lấy phần số từ USRyyxxxx
+                    user.UserID = int.Parse(newUserID.Substring(5));
 
                     // Tạo Employee trước
                     string employeeQuery = @"
-                        DECLARE @NewEmployeeID INT;
-                        SELECT @NewEmployeeID = ISNULL(MAX(EmployeeID), 0) + 1 FROM Employees;
-                        
-                        INSERT INTO Employees (EmployeeID, FirstName, LastName)
-                        VALUES (@NewEmployeeID, @FirstName, @LastName);
-                        
-                        SELECT @NewEmployeeID;";
+                        DECLARE
+                            v_NewEmployeeID NUMBER;
+                        BEGIN
+                            SELECT NVL(MAX(EmployeeID), 0) + 1 INTO v_NewEmployeeID FROM Employees;
+                            
+                            INSERT INTO Employees (EmployeeID, FirstName, LastName)
+                            VALUES (v_NewEmployeeID, :FirstName, :LastName);
+                            
+                            :NewEmployeeID := v_NewEmployeeID;
+                        END;";
 
                     int employeeId;
-                    using (SqlCommand empCmd = new SqlCommand(employeeQuery, conn))
+                    using (OracleCommand empCmd = new OracleCommand(employeeQuery, conn))
                     {
-                        empCmd.Parameters.AddWithValue("@FirstName", user.FirstName);
-                        empCmd.Parameters.AddWithValue("@LastName", user.LastName);
+                        empCmd.Parameters.Add(":FirstName", OracleDbType.Varchar2).Value = user.FirstName;
+                        empCmd.Parameters.Add(":LastName", OracleDbType.Varchar2).Value = user.LastName;
+                        empCmd.Parameters.Add(":NewEmployeeID", OracleDbType.Int32).Direction = System.Data.ParameterDirection.Output;
 
                         conn.Open();
-                        object result = empCmd.ExecuteScalar();
-                        if (result != null && result != DBNull.Value)
-                        {
-                            employeeId = Convert.ToInt32(result);
-                            System.Diagnostics.Debug.WriteLine($"Created Employee with ID: {employeeId}");
-                        }
-                        else
-                        {
-                            throw new Exception("Failed to create Employee - no ID returned");
-                        }
+                        empCmd.ExecuteNonQuery();
+                        employeeId = Convert.ToInt32(empCmd.Parameters[":NewEmployeeID"].Value.ToString());
                     }
 
                     if (employeeId > 0)
                     {
-                        System.Diagnostics.Debug.WriteLine($"Proceeding to create User with EmployeeID: {employeeId}");
                         // Tạo User với EmployeeID đã có
                         string userQuery = @"
                             INSERT INTO Users (UserID, RoleID, EmployeeID, Username, PasswordHash, Email, IsActive, CreatedAt, UpdatedAt)
-                            VALUES (@UserID, @RoleID, @EmployeeID, @Username, @PasswordHash, @Email, @IsActive, GETDATE(), GETDATE())";
+                            VALUES (:UserID, :RoleID, :EmployeeID, :Username, :PasswordHash, :Email, :IsActive, SYSDATE, SYSDATE)";
 
-                        using (SqlCommand cmd = new SqlCommand(userQuery, conn))
+                        using (OracleCommand cmd = new OracleCommand(userQuery, conn))
                         {
-                            cmd.Parameters.AddWithValue("@UserID", user.UserID);
-                            cmd.Parameters.AddWithValue("@RoleID", 2); // Mặc định là role Admin (2)
-                            cmd.Parameters.AddWithValue("@EmployeeID", employeeId);
-                            cmd.Parameters.AddWithValue("@Username", user.Username);
-                            cmd.Parameters.AddWithValue("@PasswordHash", user.PasswordHash);
-                            cmd.Parameters.AddWithValue("@Email", user.Email);
-                            cmd.Parameters.AddWithValue("@IsActive", true);
+                            cmd.Parameters.Add(":UserID", OracleDbType.Int32).Value = user.UserID;
+                            cmd.Parameters.Add(":RoleID", OracleDbType.Int32).Value = 2; // Mặc định là role Admin (2)
+                            cmd.Parameters.Add(":EmployeeID", OracleDbType.Int32).Value = employeeId;
+                            cmd.Parameters.Add(":Username", OracleDbType.Varchar2).Value = user.Username;
+                            cmd.Parameters.Add(":PasswordHash", OracleDbType.Varchar2).Value = user.PasswordHash;
+                            cmd.Parameters.Add(":Email", OracleDbType.Varchar2).Value = user.Email;
+                            cmd.Parameters.Add(":IsActive", OracleDbType.Int32).Value = 1;
 
                             int result = cmd.ExecuteNonQuery();
                             if (result > 0)
                             {
-                                // Cập nhật DisplayUserID cho user object
                                 user.DisplayUserID = newUserID;
                                 user.EmployeeID = employeeId;
                                 return true;
@@ -320,7 +313,7 @@ namespace DataAccessLayer
 
         public static User GetUserByUsername(string username)
         {
-            using (SqlConnection conn = new SqlConnection(Connection.GetConnectionString()))
+            using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
             {
                 string query = @"
                     SELECT u.UserID, u.Username, u.Email, u.PasswordHash, u.IsActive, u.CreatedAt, u.UpdatedAt,
@@ -329,15 +322,15 @@ namespace DataAccessLayer
                     FROM Users u
                     LEFT JOIN Employees e ON u.EmployeeID = e.EmployeeID
                     LEFT JOIN Roles r ON u.RoleID = r.RoleID
-                    WHERE u.Username = @Username or u.Email = @Username";
+                    WHERE u.Username = :Username OR u.Email = :Username";
 
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (OracleCommand cmd = new OracleCommand(query, conn))
                 {
                     try
                     {
-                        cmd.Parameters.AddWithValue("@Username", username);
+                        cmd.Parameters.Add(":Username", OracleDbType.Varchar2).Value = username;
                         conn.Open();
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             if (reader.Read())
                             {

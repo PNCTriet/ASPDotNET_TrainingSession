@@ -1,37 +1,57 @@
 ﻿using System;
 using System.Data;
-using System.Data.SqlClient;
+using Oracle.ManagedDataAccess.Client; 
 
 namespace DataAccessLayer.DataConnection
 {
     public class Connection
     {
-        private static string connectionString = "Data Source=.;Initial Catalog=Northwind3;Integrated Security=True";
+        private static string connectionString = "User Id=banhcuon;Password=123123;Data Source=localhost:1521/XEPDB1;";
+
+
+
 
         public static string GetConnectionString()
         {
             return connectionString;
         }
 
-        public static SqlConnection GetConnection()
+        public static OracleConnection GetConnection()
         {
-            return new SqlConnection(connectionString);
+            return new OracleConnection(connectionString);
         }
 
-        public static void OpenConnection(SqlConnection connection)
+        public static void OpenConnection(OracleConnection connection)
         {
-            if (connection.State == ConnectionState.Closed)
+            try
             {
-                connection.Open();
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
+            }
+            catch (OracleException ex)
+            {
+                // Log error hoặc throw ra tầng trên xử lý
+                throw new Exception("Failed to open Oracle connection: " + ex.Message);
             }
         }
 
-        public static void CloseConnection(SqlConnection connection)
+        public static void CloseConnection(OracleConnection connection)
         {
-            if (connection.State == ConnectionState.Open)
+            try
             {
-                connection.Close();
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+            catch (OracleException ex)
+            {
+                // Log error hoặc throw ra tầng trên xử lý
+                throw new Exception("Failed to close Oracle connection: " + ex.Message);
             }
         }
+
     }
 }

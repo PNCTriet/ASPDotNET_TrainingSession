@@ -231,8 +231,8 @@ INSERT INTO Employees (EmployeeID, LastName, FirstName, Title, TitleOfCourtesy, 
 (4, 'Fuller', 'Andrew', 'Vice President, Sales', 'Dr.', '1952-03-19', '1991-06-10', '908 W. Capital Way', 'Tacoma', 'WA', '98401', 'USA', '206-555-5062', '7227', 1);
 
 INSERT INTO Users (UserID, RoleID, EmployeeID, Username, PasswordHash, Email, IsActive, CreatedAt, UpdatedAt) VALUES
-(3, 2, 3, 'admin1', 'hashed_password', 'admin@northwind.com', 1, '2025-05-14', '2025-05-14'),
-(4, 2, 4, 'john_doe1', 'hashed_password', 'john_doe@northwind.com', 1, '2025-05-14', '2025-05-14');
+(3, 2, 3, 'admin1', '$2a$12$i/aFQt5x5q16oCGJyxj88OMW/LqvQc37.0NBgbqla53BGkkpzzw4q', 'admin@northwind.com', 1, '2025-05-14', '2025-05-14'),
+(4, 2, 4, 'john_doe1', '$2a$12$i/aFQt5x5q16oCGJyxj88OMW/LqvQc37.0NBgbqla53BGkkpzzw4q', 'john_doe@northwind.com', 1, '2025-05-14', '2025-05-14');
 
 -- Insert into Permissions
 INSERT INTO Permissions (PermissionID, Namepermission) VALUES
