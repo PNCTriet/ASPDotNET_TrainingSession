@@ -49,7 +49,7 @@ namespace DataAccessLayer
                 conn.Open();
 
                 // Xóa trong Order Details trước
-                string deleteOrderDetails = "DELETE FROM Order_Details WHERE ProductID = :ProductID";
+                string deleteOrderDetails = "DELETE FROM OrderDetails WHERE ProductID = :ProductID";
                 using (OracleCommand cmdOrderDetails = new OracleCommand(deleteOrderDetails, conn))
                 {
                     cmdOrderDetails.Parameters.Add(":ProductID", OracleDbType.Int32).Value = id;
@@ -80,10 +80,10 @@ namespace DataAccessLayer
                     
                     using (OracleCommand cmd = new OracleCommand(query, conn))
                     {
-                        cmd.Parameters.Add(":ProductID", OracleDbType.Int32).Value = productId;
                         cmd.Parameters.Add(":ProductName", OracleDbType.Varchar2).Value = productName;
                         cmd.Parameters.Add(":Price", OracleDbType.Decimal).Value = price;
                         cmd.Parameters.Add(":Stock", OracleDbType.Int32).Value = stock;
+                        cmd.Parameters.Add(":ProductID", OracleDbType.Int32).Value = productId;
 
                         conn.Open();
                         int result = cmd.ExecuteNonQuery();

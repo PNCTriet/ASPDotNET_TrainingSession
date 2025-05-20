@@ -28,7 +28,7 @@
         <hr class="my-4" />
         <div class="row">
             <div class="col-md-12 text-center">
-                <p class="mb-0">&copy; <%= DateTime.Now.Year %> Triet Pham Shop. All rights reserved.</p>
+                <p class="mb-0" >&copy; <%= DateTime.Now.Year %> Triet Pham Shop. All rights reserved.</p>
             </div>
         </div>
     </div>

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Data;
-using Oracle.ManagedDataAccess.Client; 
+using System.Configuration;
+using Oracle.ManagedDataAccess.Client;
 
 namespace DataAccessLayer.DataConnection
 {
     public class Connection
     {
-        private static string connectionString = "User Id=banhcuon;Password=123123;Data Source=localhost:1521/XEPDB1;";
-
-
-
+        private static string connectionString = ConfigurationManager
+            .ConnectionStrings["OracleConn"]
+            .ConnectionString;
 
         public static string GetConnectionString()
         {
@@ -18,22 +18,33 @@ namespace DataAccessLayer.DataConnection
 
         public static OracleConnection GetConnection()
         {
-            return new OracleConnection(connectionString);
+            try
+            {
+                return new OracleConnection(connectionString);
+            }
+            catch (OracleException ex)
+            {
+                throw new Exception("Failed to create Oracle connection: " + ex.Message);
+            }
         }
 
         public static void OpenConnection(OracleConnection connection)
         {
             try
             {
+                if (connection == null)
+                    throw new ArgumentNullException(nameof(connection), "Connection object cannot be null");
+
                 if (connection.State == ConnectionState.Closed)
-                {
                     connection.Open();
-                }
             }
             catch (OracleException ex)
             {
-                // Log error hoặc throw ra tầng trên xử lý
-                throw new Exception("Failed to open Oracle connection: " + ex.Message);
+                throw new Exception($"Failed to open Oracle connection: {ex.Message}. Error Code: {ex.Number}");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unexpected error while opening connection: " + ex.Message);
             }
         }
 
@@ -41,17 +52,19 @@ namespace DataAccessLayer.DataConnection
         {
             try
             {
+                if (connection == null) return;
+
                 if (connection.State == ConnectionState.Open)
-                {
                     connection.Close();
-                }
             }
             catch (OracleException ex)
             {
-                // Log error hoặc throw ra tầng trên xử lý
-                throw new Exception("Failed to close Oracle connection: " + ex.Message);
+                throw new Exception($"Failed to close Oracle connection: {ex.Message}. Error Code: {ex.Number}");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unexpected error while closing connection: " + ex.Message);
             }
         }
-
     }
 }

@@ -81,10 +81,11 @@ namespace DataAccessLayer
 
                     using (OracleCommand cmd = new OracleCommand(query, conn))
                     {
-                        cmd.Parameters.Add(":UserID", OracleDbType.Int32).Value = user.UserID;
+                        // Add parameters in the same order as they appear in the SQL
                         cmd.Parameters.Add(":Username", OracleDbType.Varchar2).Value = user.Username;
                         cmd.Parameters.Add(":Email", OracleDbType.Varchar2).Value = user.Email;
                         cmd.Parameters.Add(":IsActive", OracleDbType.Int32).Value = user.IsActive ? 1 : 0;
+                        cmd.Parameters.Add(":UserID", OracleDbType.Int32).Value = user.UserID;
 
                         conn.Open();
                         int result = cmd.ExecuteNonQuery();
