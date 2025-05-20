@@ -73,5 +73,35 @@ namespace TrietPhamShopWeb.Adminpage
         /// lblMessage control.
         /// </summary>
         protected global::System.Web.UI.WebControls.Label lblMessage;
+
+        /// <summary>
+        /// FileUpload1 control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
+
+        /// <summary>
+        /// preview1 control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Image preview1;
+
+        /// <summary>
+        /// FileUpload2 control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload2;
+
+        /// <summary>
+        /// preview2 control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Image preview2;
+
+        /// <summary>
+        /// FileUpload3 control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload3;
+
+        /// <summary>
+        /// preview3 control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Image preview3;
     }
 }

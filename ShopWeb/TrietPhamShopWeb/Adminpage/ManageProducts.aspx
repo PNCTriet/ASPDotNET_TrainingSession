@@ -66,25 +66,71 @@
 
     <!-- Edit Product Modal -->
     <div class="modal fade" id="editProductModal" tabindex="-1">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Sửa thông tin sản phẩm</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <asp:HiddenField ID="hdnProductId" runat="server" />
-                    <div class="mb-3">
-                        <label for="txtProductName" class="form-label">Tên sản phẩm</label>
-                        <asp:TextBox ID="txtProductName" runat="server" CssClass="form-control" required="required"></asp:TextBox>
-                    </div>
-                    <div class="mb-3">
-                        <label for="txtPrice" class="form-label">Giá</label>
-                        <asp:TextBox ID="txtPrice" runat="server" CssClass="form-control" TextMode="Number" required="required"></asp:TextBox>
-                    </div>
-                    <div class="mb-3">
-                        <label for="txtStock" class="form-label">Tồn kho</label>
-                        <asp:TextBox ID="txtStock" runat="server" CssClass="form-control" TextMode="Number" required="required"></asp:TextBox>
+                    <ul class="nav nav-tabs" id="productTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab">Thông tin</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="images-tab" data-bs-toggle="tab" data-bs-target="#images" type="button" role="tab">Hình ảnh</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-3" id="productTabsContent">
+                        <div class="tab-pane fade show active" id="info" role="tabpanel">
+                            <asp:HiddenField ID="hdnProductId" runat="server" />
+                            <div class="mb-3">
+                                <label for="txtProductName" class="form-label">Tên sản phẩm</label>
+                                <asp:TextBox ID="txtProductName" runat="server" CssClass="form-control" required="required"></asp:TextBox>
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtPrice" class="form-label">Giá</label>
+                                <asp:TextBox ID="txtPrice" runat="server" CssClass="form-control" TextMode="Number" required="required"></asp:TextBox>
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtStock" class="form-label">Tồn kho</label>
+                                <asp:TextBox ID="txtStock" runat="server" CssClass="form-control" TextMode="Number" required="required"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="images" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <asp:Image ID="preview1" runat="server" ImageUrl="~/images/no-image.png" CssClass="img-fluid mb-2" />
+                                            <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control mb-2" accept="image/*" />
+                                            <asp:Button ID="btnUpload1" runat="server" Text="Upload ảnh 1" CssClass="btn btn-primary btn-sm" 
+                                                CommandArgument="1" OnClick="btnUploadImage_Click" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <asp:Image ID="preview2" runat="server" ImageUrl="~/images/no-image.png" CssClass="img-fluid mb-2" />
+                                            <asp:FileUpload ID="FileUpload2" runat="server" CssClass="form-control mb-2" accept="image/*" />
+                                            <asp:Button ID="btnUpload2" runat="server" Text="Upload ảnh 2" CssClass="btn btn-primary btn-sm"
+                                                CommandArgument="2" OnClick="btnUploadImage_Click" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <asp:Image ID="preview3" runat="server" ImageUrl="~/images/no-image.png" CssClass="img-fluid mb-2" />
+                                            <asp:FileUpload ID="FileUpload3" runat="server" CssClass="form-control mb-2" accept="image/*" />
+                                            <asp:Button ID="btnUpload3" runat="server" Text="Upload ảnh 3" CssClass="btn btn-primary btn-sm"
+                                                CommandArgument="3" OnClick="btnUploadImage_Click" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -137,6 +183,21 @@
                 editModal.show();
             });
 
+            // Xử lý preview ảnh trước khi upload
+            $('input[type="file"]').change(function(e) {
+                var file = e.target.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    var preview = $(this).closest('.card-body').find('img');
+                    
+                    reader.onload = function(e) {
+                        preview.attr('src', e.target.result);
+                    }
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
+
             var dataTable = $('#<%= gvProducts.ClientID %>').DataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
@@ -160,36 +221,6 @@
                     $('.paginate_button').addClass('btn btn-sm');
                     $('.paginate_button.current').addClass('btn-primary');
                     $('.paginate_button:not(.current)').addClass('btn-outline-primary');
-                }
-            });
-
-            // Xử lý sự kiện click nút Save Changes
-            $('#btnSaveChanges').on('click', function (e) {
-                console.log('Save button clicked (jQuery)');
-                e.preventDefault(); // Prevent form submission
-                
-                // Validate form
-                var form = $('#editProductForm')[0];
-                if (!form.checkValidity()) {
-                    console.log('Form validation failed');
-                    form.reportValidity();
-                    return;
-                }
-                console.log('Form validation passed');
-
-                if (confirm('Bạn có chắc chắn muốn lưu các thay đổi?')) {
-                    // Tạo object chứa dữ liệu cần gửi
-                    var productData = {
-                        productId: parseInt($('#productId').val()),
-                        productName: $('#productName').val(),
-                        price: parseFloat($('#price').val()),
-                        stock: parseInt($('#stock').val())
-                    };
-
-                    console.log('Preparing to send data:', productData);
-
-                } else {
-                    console.log('User cancelled the update');
                 }
             });
         });
@@ -310,6 +341,26 @@
         #<%= gvProducts.ClientID %> td:nth-child(6) {
             width: 20% !important;
             max-width: 20% !important;
+        }
+        /* Styles for image upload */
+        .card {
+            border: 1px solid #e3e6f0;
+            border-radius: 0.35rem;
+        }
+        .card-body {
+            padding: 1rem;
+        }
+        .img-fluid {
+            border: 1px solid #e3e6f0;
+            border-radius: 0.35rem;
+            object-fit: cover;
+        }
+        .nav-tabs .nav-link {
+            color: #4e73df;
+        }
+        .nav-tabs .nav-link.active {
+            color: #4e73df;
+            font-weight: bold;
         }
     </style>
 </asp:Content>

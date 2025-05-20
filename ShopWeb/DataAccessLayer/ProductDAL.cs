@@ -97,5 +97,123 @@ namespace DataAccessLayer
                 return false;
             }
         }
+
+        public static int InsertProductImage(int productId, string imagePath, string altText, string mainImage)
+        {
+            using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
+            {
+                string query = @"INSERT INTO ProductImages (ProductID, ImagePath, AltText, MainImage, CreatedAt)
+                               VALUES (:ProductID, :ImagePath, :AltText, :MainImage, SYSDATE)
+                               RETURNING ImageID INTO :ImageID";
+
+                using (OracleCommand cmd = new OracleCommand(query, conn))
+                {
+                    cmd.Parameters.Add(":ProductID", OracleDbType.Int32).Value = productId;
+                    cmd.Parameters.Add(":ImagePath", OracleDbType.Varchar2).Value = imagePath;
+                    cmd.Parameters.Add(":AltText", OracleDbType.Varchar2).Value = altText;
+                    cmd.Parameters.Add(":MainImage", OracleDbType.Char, 1).Value = mainImage;
+                    
+                    var imageIdParam = new OracleParameter(":ImageID", OracleDbType.Int32);
+                    imageIdParam.Direction = System.Data.ParameterDirection.Output;
+                    cmd.Parameters.Add(imageIdParam);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    return Convert.ToInt32(imageIdParam.Value.ToString());
+                }
+            }
+        }
+
+        public static List<ProductImage> GetProductImages(int productId)
+        {
+            var list = new List<ProductImage>();
+            using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
+            {
+                string query = @"SELECT ImageID, ProductID, ImagePath, AltText, MainImage, CreatedAt
+                               FROM ProductImages
+                               WHERE ProductID = :ProductID
+                               ORDER BY CreatedAt DESC";
+
+                using (OracleCommand cmd = new OracleCommand(query, conn))
+                {
+                    cmd.Parameters.Add(":ProductID", OracleDbType.Int32).Value = productId;
+                    conn.Open();
+                    using (OracleDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            list.Add(new ProductImage
+                            {
+                                ImageID = Convert.ToInt32(reader["ImageID"]),
+                                ProductID = Convert.ToInt32(reader["ProductID"]),
+                                ImagePath = reader["ImagePath"].ToString(),
+                                AltText = reader["AltText"].ToString(),
+                                MainImage = reader["MainImage"].ToString(),
+                                CreatedAt = Convert.ToDateTime(reader["CreatedAt"])
+                            });
+                        }
+                    }
+                }
+            }
+            return list;
+        }
+
+        public static bool DeleteProductImage(int imageId)
+        {
+            using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
+            {
+                string query = "DELETE FROM ProductImages WHERE ImageID = :ImageID";
+                using (OracleCommand cmd = new OracleCommand(query, conn))
+                {
+                    cmd.Parameters.Add(":ImageID", OracleDbType.Int32).Value = imageId;
+                    conn.Open();
+                    int result = cmd.ExecuteNonQuery();
+                    return result > 0;
+                }
+            }
+        }
+
+        public static bool UpdateMainImage(int productId, int imageId)
+        {
+            using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
+            {
+                conn.Open();
+                using (OracleTransaction transaction = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        // Reset tất cả ảnh của sản phẩm về 'N'
+                        string resetQuery = @"UPDATE ProductImages 
+                                           SET MainImage = 'N'
+                                           WHERE ProductID = :ProductID";
+                        using (OracleCommand resetCmd = new OracleCommand(resetQuery, conn))
+                        {
+                            resetCmd.Transaction = transaction;
+                            resetCmd.Parameters.Add(":ProductID", OracleDbType.Int32).Value = productId;
+                            resetCmd.ExecuteNonQuery();
+                        }
+
+                        // Set ảnh được chọn thành ảnh chính
+                        string updateQuery = @"UPDATE ProductImages 
+                                            SET MainImage = 'Y'
+                                            WHERE ImageID = :ImageID";
+                        using (OracleCommand updateCmd = new OracleCommand(updateQuery, conn))
+                        {
+                            updateCmd.Transaction = transaction;
+                            updateCmd.Parameters.Add(":ImageID", OracleDbType.Int32).Value = imageId;
+                            updateCmd.ExecuteNonQuery();
+                        }
+
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        return false;
+                    }
+                }
+            }
+        }
     }
 }
