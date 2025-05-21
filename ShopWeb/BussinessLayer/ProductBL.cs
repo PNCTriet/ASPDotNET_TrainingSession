@@ -56,5 +56,10 @@ namespace BusinessLogic
         {
             return ProductDAL.UpdateMainImage(productId, imageId);
         }
+
+        public static List<Category> GetAllCategories()
+        {
+            return ProductDAL.GetAllCategories();
+        }
     }
 }

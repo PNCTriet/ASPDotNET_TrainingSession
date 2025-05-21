@@ -77,7 +77,7 @@ namespace DataAccessLayer
                                        UnitPrice = :Price,
                                        UnitsInStock = :Stock
                                    WHERE ProductID = :ProductID";
-                    
+
                     using (OracleCommand cmd = new OracleCommand(query, conn))
                     {
                         cmd.Parameters.Add(":ProductName", OracleDbType.Varchar2).Value = productName;
@@ -102,9 +102,9 @@ namespace DataAccessLayer
         {
             using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
             {
-                string query = @"INSERT INTO ProductImages (ProductID, ImagePath, AltText, MainImage, CreatedAt)
-                               VALUES (:ProductID, :ImagePath, :AltText, :MainImage, SYSDATE)
-                               RETURNING ImageID INTO :ImageID";
+                string query = @"INSERT INTO ProductImages (ImageID,ProductID, ImagePath, AltText, MainImage, CreatedAt)
+                                VALUES (productimages_seq.nextval,:ProductID, :ImagePath, :AltText, :MainImage, SYSDATE)
+                                RETURNING ImageID INTO :ImageI";
 
                 using (OracleCommand cmd = new OracleCommand(query, conn))
                 {
@@ -112,7 +112,7 @@ namespace DataAccessLayer
                     cmd.Parameters.Add(":ImagePath", OracleDbType.Varchar2).Value = imagePath;
                     cmd.Parameters.Add(":AltText", OracleDbType.Varchar2).Value = altText;
                     cmd.Parameters.Add(":MainImage", OracleDbType.Char, 1).Value = mainImage;
-                    
+
                     var imageIdParam = new OracleParameter(":ImageID", OracleDbType.Int32);
                     imageIdParam.Direction = System.Data.ParameterDirection.Output;
                     cmd.Parameters.Add(imageIdParam);
@@ -214,6 +214,95 @@ namespace DataAccessLayer
                     }
                 }
             }
+        }
+
+        public static int InsertProduct(string productName, int categoryId, decimal price, int stock, string description = null)
+        {
+            using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
+            {
+                string query = @"INSERT INTO Products (ProductID, ProductName, CategoryID, UnitPrice, UnitsInStock, Description)
+                               VALUES (products_seq.nextval, :ProductName, :CategoryID, :Price, :Stock, :Description)
+                               RETURNING ProductID INTO :ProductID";
+
+                using (OracleCommand cmd = new OracleCommand(query, conn))
+                {
+                    cmd.Parameters.Add(":ProductName", OracleDbType.Varchar2).Value = productName;
+                    cmd.Parameters.Add(":CategoryID", OracleDbType.Int32).Value = categoryId;
+                    cmd.Parameters.Add(":Price", OracleDbType.Decimal).Value = price;
+                    cmd.Parameters.Add(":Stock", OracleDbType.Int32).Value = stock;
+                    cmd.Parameters.Add(":Description", OracleDbType.Varchar2).Value = (object)description ?? DBNull.Value;
+
+                    var productIdParam = new OracleParameter(":ProductID", OracleDbType.Int32);
+                    productIdParam.Direction = System.Data.ParameterDirection.Output;
+                    cmd.Parameters.Add(productIdParam);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    return Convert.ToInt32(productIdParam.Value.ToString());
+                }
+            }
+        }
+
+        public static Product GetProductById(int productId)
+        {
+            using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
+            {
+                string query = @"SELECT p.ProductID, p.ProductName, p.CategoryID, c.CategoryName,
+                             p.UnitPrice as Price, p.UnitsInStock as Stock, p.Description
+                             FROM Products p
+                             LEFT JOIN Categories c ON p.CategoryID = c.CategoryID
+                             WHERE p.ProductID = :ProductID";
+
+                using (OracleCommand cmd = new OracleCommand(query, conn))
+                {
+                    cmd.Parameters.Add(":ProductID", OracleDbType.Int32).Value = productId;
+                    conn.Open();
+                    using (OracleDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Product
+                            {
+                                ProductID = Convert.ToInt32(reader["ProductID"]),
+                                ProductName = reader["ProductName"].ToString(),
+                                CategoryID = Convert.ToInt32(reader["CategoryID"]),
+                                CategoryName = reader["CategoryName"].ToString(),
+                                Price = Convert.ToDecimal(reader["Price"]),
+                                Stock = Convert.ToInt32(reader["Stock"]),
+                                Description = reader["Description"] == DBNull.Value ? null : reader["Description"].ToString()
+                            };
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        public static List<Category> GetAllCategories()
+        {
+            var list = new List<Category>();
+            using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
+            {
+                string query = @"SELECT CategoryID, CategoryName 
+                               FROM Categories 
+                               ORDER BY CategoryName";
+                using (OracleCommand cmd = new OracleCommand(query, conn))
+                {
+                    conn.Open();
+                    using (OracleDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            list.Add(new Category
+                            {
+                                CategoryID = Convert.ToInt32(reader["CategoryID"]),
+                                CategoryName = reader["CategoryName"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            return list;
         }
     }
 }

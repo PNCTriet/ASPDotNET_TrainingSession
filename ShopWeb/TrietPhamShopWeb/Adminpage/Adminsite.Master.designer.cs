@@ -9,41 +9,72 @@
 
 namespace TrietPhamShopWeb.Adminpage
 {
+
+
     public partial class Adminsite
     {
+
         /// <summary>
         /// HeadContent control.
         /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadContent;
 
         /// <summary>
         /// form1 control.
         /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-
-        /// <summary>
-        /// ScriptManager1 control.
-        /// </summary>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
         /// SidebarAdmin1 control.
         /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::TrietPhamShopWeb.Controls.SidebarAdmin SidebarAdmin1;
 
         /// <summary>
         /// lblUsername control.
         /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblUsername;
 
         /// <summary>
         /// btnLogout control.
         /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnLogout;
 
         /// <summary>
         /// MainContent control.
         /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+
+        /// <summary>
+        /// btnModalLogout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModalLogout;
     }
 }
