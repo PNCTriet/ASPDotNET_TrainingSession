@@ -88,20 +88,68 @@
                         <div class="tab-pane fade show active" id="create-info" role="tabpanel">
                             <div class="mb-3">
                                 <label for="txtNewProductName" class="form-label">Tên sản phẩm</label>
-                                <asp:TextBox ID="txtNewProductName" runat="server" CssClass="form-control" required="required"></asp:TextBox>
+                                <asp:TextBox ID="txtNewProductName" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvProductName" runat="server" 
+                                    ControlToValidate="txtNewProductName"
+                                    ErrorMessage="Vui lòng nhập tên sản phẩm"
+                                    CssClass="text-danger"
+                                    Display="Dynamic"
+                                    ValidationGroup="CreateProduct">
+                                </asp:RequiredFieldValidator>
                             </div>
                             <div class="mb-3">
                                 <label for="ddlCategory" class="form-label">Danh mục</label>
-                                <asp:DropDownList ID="ddlCategory" runat="server" CssClass="form-select" required="required">
+                                <asp:DropDownList ID="ddlCategory" runat="server" CssClass="form-select">
                                 </asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="rfvCategory" runat="server" 
+                                    ControlToValidate="ddlCategory"
+                                    ErrorMessage="Vui lòng chọn danh mục"
+                                    CssClass="text-danger"
+                                    Display="Dynamic"
+                                    ValidationGroup="CreateProduct">
+                                </asp:RequiredFieldValidator>
                             </div>
                             <div class="mb-3">
                                 <label for="txtNewPrice" class="form-label">Giá</label>
-                                <asp:TextBox ID="txtNewPrice" runat="server" CssClass="form-control" TextMode="Number" required="required"></asp:TextBox>
+                                <asp:TextBox ID="txtNewPrice" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvPrice" runat="server" 
+                                    ControlToValidate="txtNewPrice"
+                                    ErrorMessage="Vui lòng nhập giá"
+                                    CssClass="text-danger"
+                                    Display="Dynamic"
+                                    ValidationGroup="CreateProduct">
+                                </asp:RequiredFieldValidator>
+                                <asp:RangeValidator ID="rvPrice" runat="server"
+                                    ControlToValidate="txtNewPrice"
+                                    Type="Double"
+                                    MinimumValue="0"
+                                    MaximumValue="999999999"
+                                    ErrorMessage="Giá phải lớn hơn 0"
+                                    CssClass="text-danger"
+                                    Display="Dynamic"
+                                    ValidationGroup="CreateProduct">
+                                </asp:RangeValidator>
                             </div>
                             <div class="mb-3">
                                 <label for="txtNewStock" class="form-label">Tồn kho</label>
-                                <asp:TextBox ID="txtNewStock" runat="server" CssClass="form-control" TextMode="Number" required="required"></asp:TextBox>
+                                <asp:TextBox ID="txtNewStock" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvStock" runat="server" 
+                                    ControlToValidate="txtNewStock"
+                                    ErrorMessage="Vui lòng nhập số lượng tồn kho"
+                                    CssClass="text-danger"
+                                    Display="Dynamic"
+                                    ValidationGroup="CreateProduct">
+                                </asp:RequiredFieldValidator>
+                                <asp:RangeValidator ID="rvStock" runat="server"
+                                    ControlToValidate="txtNewStock"
+                                    Type="Integer"
+                                    MinimumValue="0"
+                                    MaximumValue="999999"
+                                    ErrorMessage="Số lượng tồn kho phải lớn hơn 0"
+                                    CssClass="text-danger"
+                                    Display="Dynamic"
+                                    ValidationGroup="CreateProduct">
+                                </asp:RangeValidator>
                             </div>
                             <div class="mb-3">
                                 <label for="txtNewDescription" class="form-label">Mô tả</label>
@@ -116,7 +164,7 @@
                                             <asp:Image ID="newPreview1" runat="server" ImageUrl="~/images/no-image.png" CssClass="img-fluid mb-2" />
                                             <asp:FileUpload ID="newFileUpload1" runat="server" CssClass="form-control mb-2" accept="image/*" />
                                             <asp:Button ID="btnNewUpload1" runat="server" Text="Upload ảnh 1" CssClass="btn btn-primary btn-sm" 
-                                                CommandArgument="1" OnClick="btnNewUploadImage_Click" />
+                                                CommandArgument="1" OnClick="btnUploadImage_Click" />
                                         </div>
                                     </div>
                                 </div>
@@ -126,7 +174,7 @@
                                             <asp:Image ID="newPreview2" runat="server" ImageUrl="~/images/no-image.png" CssClass="img-fluid mb-2" />
                                             <asp:FileUpload ID="newFileUpload2" runat="server" CssClass="form-control mb-2" accept="image/*" />
                                             <asp:Button ID="btnNewUpload2" runat="server" Text="Upload ảnh 2" CssClass="btn btn-primary btn-sm"
-                                                CommandArgument="2" OnClick="btnNewUploadImage_Click" />
+                                                CommandArgument="2" OnClick="btnUploadImage_Click" />
                                         </div>
                                     </div>
                                 </div>
@@ -136,7 +184,7 @@
                                             <asp:Image ID="newPreview3" runat="server" ImageUrl="~/images/no-image.png" CssClass="img-fluid mb-2" />
                                             <asp:FileUpload ID="newFileUpload3" runat="server" CssClass="form-control mb-2" accept="image/*" />
                                             <asp:Button ID="btnNewUpload3" runat="server" Text="Upload ảnh 3" CssClass="btn btn-primary btn-sm"
-                                                CommandArgument="3" OnClick="btnNewUploadImage_Click" />
+                                                CommandArgument="3" OnClick="btnUploadImage_Click" />
                                         </div>
                                     </div>
                                 </div>
@@ -146,7 +194,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <asp:Button ID="btnCreate" runat="server" Text="Tạo sản phẩm" CssClass="btn btn-primary" OnClick="btnCreate_Click" />
+                    <asp:Button ID="btnCreate" runat="server" Text="Tạo sản phẩm" CssClass="btn btn-primary" 
+                        OnClick="btnCreate_Click" ValidationGroup="CreateProduct" CausesValidation="true" />
                 </div>
             </div>
         </div>
@@ -174,15 +223,56 @@
                             <asp:HiddenField ID="hdnProductId" runat="server" />
                             <div class="mb-3">
                                 <label for="txtProductName" class="form-label">Tên sản phẩm</label>
-                                <asp:TextBox ID="txtProductName" runat="server" CssClass="form-control" required="required"></asp:TextBox>
+                                <asp:TextBox ID="txtProductName" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvEditProductName" runat="server" 
+                                    ControlToValidate="txtProductName"
+                                    ErrorMessage="Vui lòng nhập tên sản phẩm"
+                                    CssClass="text-danger"
+                                    Display="Dynamic"
+                                    ValidationGroup="EditProduct">
+                                </asp:RequiredFieldValidator>
                             </div>
                             <div class="mb-3">
                                 <label for="txtPrice" class="form-label">Giá</label>
-                                <asp:TextBox ID="txtPrice" runat="server" CssClass="form-control" TextMode="Number" required="required"></asp:TextBox>
+                                <asp:TextBox ID="txtPrice" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvEditPrice" runat="server" 
+                                    ControlToValidate="txtPrice"
+                                    ErrorMessage="Vui lòng nhập giá"
+                                    CssClass="text-danger"
+                                    Display="Dynamic"
+                                    ValidationGroup="EditProduct">
+                                </asp:RequiredFieldValidator>
+                                <asp:RangeValidator ID="rvEditPrice" runat="server"
+                                    ControlToValidate="txtPrice"
+                                    Type="Double"
+                                    MinimumValue="0"
+                                    MaximumValue="999999999"
+                                    ErrorMessage="Giá phải lớn hơn 0"
+                                    CssClass="text-danger"
+                                    Display="Dynamic"
+                                    ValidationGroup="EditProduct">
+                                </asp:RangeValidator>
                             </div>
                             <div class="mb-3">
                                 <label for="txtStock" class="form-label">Tồn kho</label>
-                                <asp:TextBox ID="txtStock" runat="server" CssClass="form-control" TextMode="Number" required="required"></asp:TextBox>
+                                <asp:TextBox ID="txtStock" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvEditStock" runat="server" 
+                                    ControlToValidate="txtStock"
+                                    ErrorMessage="Vui lòng nhập số lượng tồn kho"
+                                    CssClass="text-danger"
+                                    Display="Dynamic"
+                                    ValidationGroup="EditProduct">
+                                </asp:RequiredFieldValidator>
+                                <asp:RangeValidator ID="rvEditStock" runat="server"
+                                    ControlToValidate="txtStock"
+                                    Type="Integer"
+                                    MinimumValue="0"
+                                    MaximumValue="999999"
+                                    ErrorMessage="Số lượng tồn kho phải lớn hơn 0"
+                                    CssClass="text-danger"
+                                    Display="Dynamic"
+                                    ValidationGroup="EditProduct">
+                                </asp:RangeValidator>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="images" role="tabpanel">
@@ -223,8 +313,21 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <asp:Button ID="btnSave" runat="server" Text="Lưu thay đổi" CssClass="btn btn-primary" OnClick="btnSave_Click" />
+                    <asp:Button ID="btnSave" runat="server" Text="Lưu thay đổi" CssClass="btn btn-primary" 
+                        OnClick="btnSave_Click" ValidationGroup="EditProduct" CausesValidation="true" />
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="toastNotification" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto" id="toastTitle">Thông báo</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="toastMessage">
             </div>
         </div>
     </div>
@@ -338,6 +441,29 @@
                 $('input[type="file"]').val('');
             });
         });
+
+        // Function to show toast notification
+        function showToast(title, message, type) {
+            var toast = document.getElementById('toastNotification');
+            var toastTitle = document.getElementById('toastTitle');
+            var toastMessage = document.getElementById('toastMessage');
+            
+            // Set content
+            toastTitle.textContent = title;
+            toastMessage.textContent = message;
+            
+            // Set style based on type
+            toast.className = 'toast';
+            if (type === 'success') {
+                toast.classList.add('bg-success', 'text-white');
+            } else if (type === 'error') {
+                toast.classList.add('bg-danger', 'text-white');
+            }
+            
+            // Show toast
+            var bsToast = new bootstrap.Toast(toast);
+            bsToast.show();
+        }
     </script>
 
     <style type="text/css">
@@ -499,6 +625,19 @@
             background-color: #fff;
             border: 1px solid #d1d3e2;
             border-radius: 0.35rem;
+        }
+        /* Toast styles */
+        .toast {
+            min-width: 300px;
+        }
+        .toast.bg-success .toast-header,
+        .toast.bg-danger .toast-header {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        .toast.bg-success .btn-close,
+        .toast.bg-danger .btn-close {
+            filter: brightness(0) invert(1);
         }
     </style>
 </asp:Content>

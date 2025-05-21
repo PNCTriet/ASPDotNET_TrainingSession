@@ -61,5 +61,21 @@ namespace BusinessLogic
         {
             return ProductDAL.GetAllCategories();
         }
+
+        public static int InsertProduct(string productName, int categoryId, decimal price, int stock, string description = null)
+        {
+            // Validate input
+            if (string.IsNullOrEmpty(productName))
+                return -1;
+            if (categoryId <= 0)
+                return -1;
+            if (price < 0)
+                return -1;
+            if (stock < 0)
+                return -1;
+
+            // Call DAL to insert product
+            return ProductDAL.InsertProduct(productName, categoryId, price, stock, description);
+        }
     }
 }

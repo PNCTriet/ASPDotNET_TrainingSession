@@ -22,6 +22,7 @@ namespace TrietPhamShopWeb.Adminpage
 {
     public partial class ManageProducts : AdminBasePage
     {
+        public LinkButton CommandSource { get; private set; }
         #region Page Events
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -113,6 +114,11 @@ namespace TrietPhamShopWeb.Adminpage
             ScriptManager.RegisterStartupScript(this, GetType(), "ShowEditModal", "showEditModal();", true);
         }
 
+        private void LoadProductImages(int productId)
+        {
+            throw new NotImplementedException();
+        }
+
         protected void btnSave_Click(object sender, EventArgs e)
         {
             try
@@ -122,9 +128,38 @@ namespace TrietPhamShopWeb.Adminpage
                 decimal price = Convert.ToDecimal(txtPrice.Text);
                 int stock = Convert.ToInt32(txtStock.Text);
 
+                // Cập nhật thông tin sản phẩm
                 if (ProductBLL.UpdateProduct(productId, productName, price, stock))
                 {
+                    // Xử lý upload ảnh nếu có
+                    if (FileUpload1.HasFile)
+                    {
+                        string imagePath = SaveNewProductImage(FileUpload1, productId, 1);
+                        if (!string.IsNullOrEmpty(imagePath))
+                        {
+                            ProductBLL.AddProductImage(productId, imagePath, productName, "Y");
+                        }
+                    }
+                    if (FileUpload2.HasFile)
+                    {
+                        string imagePath = SaveNewProductImage(FileUpload2, productId, 2);
+                        if (!string.IsNullOrEmpty(imagePath))
+                        {
+                            ProductBLL.AddProductImage(productId, imagePath, productName, "N");
+                        }
+                    }
+                    if (FileUpload3.HasFile)
+                    {
+                        string imagePath = SaveNewProductImage(FileUpload3, productId, 3);
+                        if (!string.IsNullOrEmpty(imagePath))
+                        {
+                            ProductBLL.AddProductImage(productId, imagePath, productName, "N");
+                        }
+                    }
+
                     LoadProducts();
+                    ScriptManager.RegisterStartupScript(this, GetType(), "CloseModal", 
+                        "$('#editProductModal').modal('hide');", true);
                     ShowSuccessMessage("Cập nhật sản phẩm thành công!");
                 }
                 else
@@ -157,7 +192,32 @@ namespace TrietPhamShopWeb.Adminpage
 
                 if (productId > 0)
                 {
-                    ProcessNewProductImages(productId);
+                    // Xử lý ảnh sản phẩm
+                    if (newFileUpload1.HasFile)
+                    {
+                        string imagePath = SaveNewProductImage(newFileUpload1, productId, 1);
+                        if (!string.IsNullOrEmpty(imagePath))
+                        {
+                            ProductBLL.AddProductImage(productId, imagePath, productName, "Y");
+                        }
+                    }
+                    if (newFileUpload2.HasFile)
+                    {
+                        string imagePath = SaveNewProductImage(newFileUpload2, productId, 2);
+                        if (!string.IsNullOrEmpty(imagePath))
+                        {
+                            ProductBLL.AddProductImage(productId, imagePath, productName, "N");
+                        }
+                    }
+                    if (newFileUpload3.HasFile)
+                    {
+                        string imagePath = SaveNewProductImage(newFileUpload3, productId, 3);
+                        if (!string.IsNullOrEmpty(imagePath))
+                        {
+                            ProductBLL.AddProductImage(productId, imagePath, productName, "N");
+                        }
+                    }
+
                     LoadProducts();
                     ScriptManager.RegisterStartupScript(this, GetType(), "CloseModal", 
                         "$('#createProductModal').modal('hide');", true);
@@ -176,60 +236,8 @@ namespace TrietPhamShopWeb.Adminpage
 
         private bool ValidateNewProductInput()
         {
-            if (string.IsNullOrEmpty(txtNewProductName.Text.Trim()))
-            {
-                ShowErrorMessage("Vui lòng nhập tên sản phẩm");
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(ddlCategory.SelectedValue))
-            {
-                ShowErrorMessage("Vui lòng chọn danh mục");
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(txtNewPrice.Text) || !decimal.TryParse(txtNewPrice.Text, out decimal price) || price < 0)
-            {
-                ShowErrorMessage("Vui lòng nhập giá hợp lệ");
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(txtNewStock.Text) || !int.TryParse(txtNewStock.Text, out int stock) || stock < 0)
-            {
-                ShowErrorMessage("Vui lòng nhập số lượng tồn kho hợp lệ");
-                return false;
-            }
-
+            // Validation is now handled by ASP.NET Validators
             return true;
-        }
-
-        // <================================>
-        // IMAGE HANDLING
-        // <================================>
-        private void ProcessNewProductImages(int productId)
-        {
-            try
-            {
-                ProcessImageUpload(newFileUpload1, productId, 1, true);
-                ProcessImageUpload(newFileUpload2, productId, 2, false);
-                ProcessImageUpload(newFileUpload3, productId, 3, false);
-            }
-            catch (Exception ex)
-            {
-                ShowErrorMessage("Lỗi xử lý ảnh sản phẩm: " + ex.Message);
-            }
-        }
-
-        private void ProcessImageUpload(FileUpload fileUpload, int productId, int imageNumber, bool isMainImage)
-        {
-            if (fileUpload.HasFile)
-            {
-                string imagePath = SaveNewProductImage(fileUpload, productId, imageNumber);
-                if (!string.IsNullOrEmpty(imagePath))
-                {
-                    ProductBLL.AddProductImage(productId, imagePath, txtNewProductName.Text, isMainImage ? "Y" : "N");
-                }
-            }
         }
 
         private string SaveNewProductImage(FileUpload fileUpload, int productId, int imageNumber)
@@ -357,18 +365,186 @@ namespace TrietPhamShopWeb.Adminpage
         }
 
         // <================================>
+        // IMAGE HANDLING
+        // <================================>
+        protected void btnUploadImage_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Button btn = (Button)sender;
+                int imageNumber = Convert.ToInt32(btn.CommandArgument);
+                bool isNewProduct = btn.ID.StartsWith("btnNewUpload");
+                
+                FileUpload fileUpload = null;
+                WebImage preview = null;
+
+                // Xác định FileUpload và Image control tương ứng
+                if (isNewProduct)
+                {
+                    switch (imageNumber)
+                    {
+                        case 1:
+                            fileUpload = newFileUpload1;
+                            preview = newPreview1;
+                            break;
+                        case 2:
+                            fileUpload = newFileUpload2;
+                            preview = newPreview2;
+                            break;
+                        case 3:
+                            fileUpload = newFileUpload3;
+                            preview = newPreview3;
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (imageNumber)
+                    {
+                        case 1:
+                            fileUpload = FileUpload1;
+                            preview = preview1;
+                            break;
+                        case 2:
+                            fileUpload = FileUpload2;
+                            preview = preview2;
+                            break;
+                        case 3:
+                            fileUpload = FileUpload3;
+                            preview = preview3;
+                            break;
+                    }
+                }
+
+                if (fileUpload.HasFile)
+                {
+                    // Kiểm tra kích thước file (5MB)
+                    if (fileUpload.FileBytes.Length > 5 * 1024 * 1024)
+                    {
+                        ShowErrorMessage("Kích thước file không được vượt quá 5MB");
+                        return;
+                    }
+
+                    // Kiểm tra định dạng file
+                    string extension = Path.GetExtension(fileUpload.FileName).ToLower();
+                    if (extension != ".jpg" && extension != ".jpeg" && extension != ".png")
+                    {
+                        ShowErrorMessage("Chỉ chấp nhận file ảnh định dạng JPG, JPEG hoặc PNG");
+                        return;
+                    }
+
+                    // Tạo thư mục nếu chưa tồn tại
+                    string uploadDir = Server.MapPath("~/uploads/products/");
+                    if (!Directory.Exists(uploadDir))
+                    {
+                        Directory.CreateDirectory(uploadDir);
+                    }
+
+                    // Tạo tên file ngẫu nhiên
+                    string fileName = Guid.NewGuid().ToString() + extension;
+                    string filePath = Path.Combine(uploadDir, fileName);
+
+                    // Lưu file tạm thời
+                    fileUpload.SaveAs(filePath);
+
+                    try
+                    {
+                        // Resize ảnh nếu cần
+                        using (DrawingImage originalImage = DrawingImage.FromFile(filePath))
+                        {
+                            if (originalImage.Width > 800 || originalImage.Height > 800)
+                            {
+                                int newWidth = originalImage.Width;
+                                int newHeight = originalImage.Height;
+
+                                if (newWidth > newHeight)
+                                {
+                                    if (newWidth > 800)
+                                    {
+                                        newHeight = (int)((float)newHeight * 800 / newWidth);
+                                        newWidth = 800;
+                                    }
+                                }
+                                else
+                                {
+                                    if (newHeight > 800)
+                                    {
+                                        newWidth = (int)((float)newWidth * 800 / newHeight);
+                                        newHeight = 800;
+                                    }
+                                }
+
+                                using (Bitmap resizedImage = new Bitmap(newWidth, newHeight))
+                                {
+                                    using (Graphics g = Graphics.FromImage(resizedImage))
+                                    {
+                                        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                                        g.DrawImage(originalImage, 0, 0, newWidth, newHeight);
+                                    }
+
+                                    // Lưu ảnh đã resize
+                                    if (extension == ".jpg" || extension == ".jpeg")
+                                    {
+                                        ImageCodecInfo jpgEncoder = GetEncoder(ImageFormat.Jpeg);
+                                        EncoderParameters encoderParams = new EncoderParameters(1);
+                                        encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, 90L);
+                                        resizedImage.Save(filePath, jpgEncoder, encoderParams);
+                                    }
+                                    else
+                                    {
+                                        resizedImage.Save(filePath, originalImage.RawFormat);
+                                    }
+                                }
+                            }
+                        }
+
+                        // Cập nhật preview
+                        preview.ImageUrl = "~/uploads/products/" + fileName;
+                        ShowSuccessMessage("Upload ảnh thành công");
+
+                        // Nếu là edit mode và có productId, lưu vào database
+                        if (!isNewProduct && !string.IsNullOrEmpty(hdnProductId.Value))
+                        {
+                            int productId = Convert.ToInt32(hdnProductId.Value);
+                            string imagePath = "~/uploads/products/" + fileName;
+                            string altText = txtProductName.Text;
+                            string mainImage = imageNumber == 1 ? "Y" : "N";
+                            ProductBLL.AddProductImage(productId, imagePath, altText, mainImage);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowErrorMessage("Lỗi xử lý ảnh: " + ex.Message);
+                        if (File.Exists(filePath))
+                        {
+                            File.Delete(filePath);
+                        }
+                    }
+                }
+                else
+                {
+                    ShowErrorMessage("Vui lòng chọn file ảnh");
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowErrorMessage("Lỗi upload ảnh: " + ex.Message);
+            }
+        }
+
+        // <================================>
         // UTILITY METHODS
         // <================================>
         private void ShowSuccessMessage(string message)
         {
             ScriptManager.RegisterStartupScript(this, GetType(), "ShowSuccess", 
-                $"alert('{message}');", true);
+                $"showToast('Thành công', '{message}', 'success');", true);
         }
 
         private void ShowErrorMessage(string message)
         {
             ScriptManager.RegisterStartupScript(this, GetType(), "ShowError", 
-                $"alert('{message}');", true);
+                $"showToast('Lỗi', '{message}', 'error');", true);
         }
         #endregion
     }
