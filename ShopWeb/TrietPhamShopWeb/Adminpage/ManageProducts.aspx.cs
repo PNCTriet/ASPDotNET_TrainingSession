@@ -434,7 +434,7 @@ namespace TrietPhamShopWeb.Adminpage
                     }
 
                     // Tạo thư mục nếu chưa tồn tại
-                    string uploadDir = Server.MapPath("~/uploads/products/");
+                    string uploadDir = Server.MapPath("/images/products/");
                     if (!Directory.Exists(uploadDir))
                     {
                         Directory.CreateDirectory(uploadDir);
@@ -499,14 +499,14 @@ namespace TrietPhamShopWeb.Adminpage
                         }
 
                         // Cập nhật preview
-                        preview.ImageUrl = "~/uploads/products/" + fileName;
+                        preview.ImageUrl = "/images/products/" + fileName;
                         ShowSuccessMessage("Upload ảnh thành công");
 
                         // Nếu là edit mode và có productId, lưu vào database
                         if (!isNewProduct && !string.IsNullOrEmpty(hdnProductId.Value))
                         {
                             int productId = Convert.ToInt32(hdnProductId.Value);
-                            string imagePath = "~/uploads/products/" + fileName;
+                            string imagePath = "/images/products/" + fileName;
                             string altText = txtProductName.Text;
                             string mainImage = imageNumber == 1 ? "Y" : "N";
                             ProductBLL.AddProductImage(productId, imagePath, altText, mainImage);

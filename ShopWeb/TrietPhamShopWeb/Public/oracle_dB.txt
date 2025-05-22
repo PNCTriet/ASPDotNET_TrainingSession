@@ -143,8 +143,9 @@ CREATE TABLE productimages (
     productid     NUMBER NOT NULL,
     imagepath     VARCHAR2(255) NOT NULL,
     alttext       VARCHAR2(255),
-    mainimage  CHAR(1) DEFAULT 'N',
-    created_at     DATE DEFAULT SYSDATE
+    mainimage     CHAR(1) DEFAULT 'N',
+    imageblob     BLOB,
+    created_at    DATE DEFAULT SYSDATE
 );
 
 
