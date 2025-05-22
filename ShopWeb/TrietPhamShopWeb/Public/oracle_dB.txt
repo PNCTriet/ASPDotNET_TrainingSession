@@ -137,6 +137,18 @@ CREATE TABLE RolePermissions (
   PRIMARY KEY (RoleID, PermissionID)
 );
 
+-- Productimages
+CREATE TABLE productimages (
+    imageid       NUMBER PRIMARY KEY,
+    productid     NUMBER NOT NULL,
+    imagepath     VARCHAR2(255) NOT NULL,
+    alttext       VARCHAR2(255),
+    mainimage     CHAR(1) DEFAULT 'N',
+    imageblob     BLOB,
+    created_at    DATE DEFAULT SYSDATE
+);
+
+
 -- Foreign Keys
 ALTER TABLE RolePermissions ADD CONSTRAINT fk_roleperm_role FOREIGN KEY (RoleID) REFERENCES Roles(RoleID);
 ALTER TABLE RolePermissions ADD CONSTRAINT fk_roleperm_perm FOREIGN KEY (PermissionID) REFERENCES Permissions(PermissionID);
@@ -156,6 +168,10 @@ ALTER TABLE Employees ADD CONSTRAINT fk_employee_manager FOREIGN KEY (ReportsTo)
 ALTER TABLE Users ADD CONSTRAINT fk_user_role FOREIGN KEY (RoleID) REFERENCES Roles(RoleID);
 ALTER TABLE Users ADD CONSTRAINT fk_user_employee FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID);
 
+ALTER TABLE productimages ADD CONSTRAINT fk_productimages_product FOREIGN KEY (product_id) REFERENCES products(productid) ON DELETE CASCADE;
+
+
+
 -- Customers
 INSERT INTO Customers (CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax)
 VALUES ('ALFKI', 'Alfreds Futterkiste', 'Maria Anders', 'Sales Representative', 'Obere Str. 57', 'Berlin', NULL, '12209', 'Germany', '030-0074321', '030-0076545');
@@ -163,6 +179,16 @@ VALUES ('ALFKI', 'Alfreds Futterkiste', 'Maria Anders', 'Sales Representative', 
 INSERT INTO Customers (CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax)
 VALUES ('ANATR', 'Ana Trujillo Emparedados y helados', 'Ana Trujillo', 'Owner', 'Avda. de la Constitución 2222', 'México D.F.', NULL, '05021', 'Mexico', '(5) 555-4729', NULL);
 
+
+-- productimages
+INSERT INTO productimages (ImageID, ProductID, ImagePath, AltText, MainImage, CreatedAt) 
+VALUES (1, 1, '/images/products/1_1.jpg', 'Image 1 of product 1', 'Y', SYSDATE);
+
+INSERT INTO productimages (ImageID, ProductID, ImagePath, AltText, MainImage, CreatedAt) 
+VALUES (2, 1, '/images/products/1_2.jpg', 'Image 2 of product 1', 'N', SYSDATE);
+
+INSERT INTO productimages (ImageID, ProductID, ImagePath, AltText, MainImage, CreatedAt) 
+VALUES (3, 1, '/images/products/1_3.jpg', 'Image 3 of product 1', 'N', SYSDATE);
 
 -- Employees
 INSERT INTO Employees (EmployeeID, LastName, FirstName, Title, TitleOfCourtesy, BirthDate, HireDate, Address, City, Region, PostalCode, Country, HomePhone, Extension, ReportsTo)
@@ -337,3 +363,9 @@ GRANT CONNECT, RESOURCE TO myapp;
 
 -- Nếu cần, cấp quyền tạo bảng, sequence, view...
 GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE, CREATE VIEW, CREATE PROCEDURE TO myapp;
+
+CREATE SEQUENCE products_seq
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE
+    NOCYCLE;

@@ -264,7 +264,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             // Xử lý sự kiện click nút đăng xuất trong dropdown
-            $('#<%= btnLogout.ClientID %>').click(function (e) {
+                $('#<%= btnLogout.ClientID %>').click(function (e) {
                 e.preventDefault();
                 // Hiển thị modal
                 $('#logoutModal').modal('show');
