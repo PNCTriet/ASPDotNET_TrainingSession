@@ -321,8 +321,8 @@
     </div>
 
     <!-- Toast Notification -->
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-        <div id="toastNotification" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <strong class="me-auto" id="toastTitle">Thông báo</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -444,9 +444,21 @@
 
         // Function to show toast notification
         function showToast(title, message, type) {
-            var toast = document.getElementById('toastNotification');
-            var toastTitle = document.getElementById('toastTitle');
-            var toastMessage = document.getElementById('toastMessage');
+            console.log('showToast called with:', { title, message, type });
+            
+            const toast = document.getElementById('toast');
+            if (!toast) {
+                console.error('Toast element not found!');
+                return;
+            }
+            
+            const toastTitle = document.getElementById('toastTitle');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            if (!toastTitle || !toastMessage) {
+                console.error('Toast title or message elements not found!');
+                return;
+            }
             
             // Set content
             toastTitle.textContent = title;
@@ -461,8 +473,17 @@
             }
             
             // Show toast
-            var bsToast = new bootstrap.Toast(toast);
-            bsToast.show();
+            try {
+                const bsToast = new bootstrap.Toast(toast, {
+                    animation: true,
+                    autohide: true,
+                    delay: 3000
+                });
+                bsToast.show();
+                console.log('Toast shown successfully');
+            } catch (error) {
+                console.error('Error showing toast:', error);
+            }
         }
     </script>
 
@@ -627,6 +648,9 @@
             border-radius: 0.35rem;
         }
         /* Toast styles */
+        .toast-container {
+            z-index: 1050;
+        }
         .toast {
             min-width: 300px;
         }
