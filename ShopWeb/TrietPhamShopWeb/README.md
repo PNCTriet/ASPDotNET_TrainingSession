@@ -1028,3 +1028,401 @@ document.addEventListener('DOMContentLoaded', function() {
    - Disable nút submit nếu mật khẩu yếu
    - Hiển thị lỗi validation
    - Tự động focus vào ô mật khẩu
+
+# Phân tích luồng xử lý Upload ảnh sản phẩm
+
+## 1. Tổng quan luồng xử lý
+
+### 1.1. Sơ đồ luồng
+```
+[UI Layer] -> [BLL Layer] -> [DAL Layer] -> [Database]
+ManageProducts.aspx.cs -> ProductBL.cs -> ProductDAL.cs -> Oracle DB
+```
+
+### 1.2. Các bước chính
+1. Upload file từ client
+2. Validate file (kích thước, định dạng)
+3. Resize ảnh nếu cần
+4. Lưu file vào filesystem
+5. Đọc file thành byte array
+6. Lưu thông tin ảnh vào database
+7. Hiển thị thông báo kết quả
+
+## 2. Chi tiết từng layer
+
+### 2.1. UI Layer (ManageProducts.aspx.cs)
+
+#### 2.1.1. Xử lý upload ảnh
+```csharp
+protected void btnUploadImage_Click(object sender, EventArgs e)
+{
+    try
+    {
+        // 1. Xác định FileUpload control và Image preview
+        Button btn = (Button)sender;
+        int imageNumber = Convert.ToInt32(btn.CommandArgument);
+        bool isNewProduct = btn.ID.StartsWith("btnNewUpload");
+        
+        FileUpload fileUpload = null;
+        WebImage preview = null;
+        
+        // 2. Validate file
+        if (!ValidateImageFile(fileUpload))
+            return;
+            
+        // 3. Lưu file và resize
+        string imagePath = SaveNewProductImage(fileUpload, productId, imageNumber);
+        
+        // 4. Đọc file thành byte array
+        byte[] imageBytes = File.ReadAllBytes(Server.MapPath(imagePath));
+        
+        // 5. Lưu vào database
+        ProductBLL.AddProductImage(productId, imagePath, productName, mainImage, imageBytes);
+        
+        // 6. Hiển thị thông báo
+        ShowSuccessMessage("Upload ảnh thành công");
+    }
+    catch (Exception ex)
+    {
+        ShowErrorMessage("Lỗi upload ảnh: " + ex.Message);
+    }
+}
+```
+
+#### 2.1.2. Validate file
+```csharp
+private bool ValidateImageFile(FileUpload fileUpload)
+{
+    // Kiểm tra kích thước (5MB)
+    if (fileUpload.FileBytes.Length > 5 * 1024 * 1024)
+    {
+        ShowErrorMessage("Kích thước file không được vượt quá 5MB");
+        return false;
+    }
+
+    // Kiểm tra định dạng
+    string extension = Path.GetExtension(fileUpload.FileName).ToLower();
+    if (extension != ".jpg" && extension != ".jpeg" && extension != ".png")
+    {
+        ShowErrorMessage("Chỉ chấp nhận file ảnh định dạng JPG, JPEG hoặc PNG");
+        return false;
+    }
+
+    return true;
+}
+```
+
+#### 2.1.3. Xử lý resize ảnh
+```csharp
+private void ProcessImageResize(string sourcePath, string targetPath, string extension)
+{
+    using (DrawingImage originalImage = DrawingImage.FromFile(sourcePath))
+    {
+        // Resize nếu ảnh lớn hơn 800px
+        if (originalImage.Width > 800 || originalImage.Height > 800)
+        {
+            // Tính toán kích thước mới
+            int newWidth = originalImage.Width;
+            int newHeight = originalImage.Height;
+            
+            // Resize theo tỷ lệ
+            if (newWidth > newHeight)
+            {
+                if (newWidth > 800)
+                {
+                    newHeight = (int)((float)newHeight * 800 / newWidth);
+                    newWidth = 800;
+                }
+            }
+            else
+            {
+                if (newHeight > 800)
+                {
+                    newWidth = (int)((float)newWidth * 800 / newHeight);
+                    newHeight = 800;
+                }
+            }
+
+            // Tạo ảnh mới với kích thước đã resize
+            using (Bitmap resizedImage = new Bitmap(newWidth, newHeight))
+            {
+                using (Graphics g = Graphics.FromImage(resizedImage))
+                {
+                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                    g.DrawImage(originalImage, 0, 0, newWidth, newHeight);
+                }
+
+                // Lưu ảnh với chất lượng phù hợp
+                if (extension == ".jpg" || extension == ".jpeg")
+                {
+                    ImageCodecInfo jpgEncoder = GetEncoder(ImageFormat.Jpeg);
+                    EncoderParameters encoderParams = new EncoderParameters(1);
+                    encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, 90L);
+                    resizedImage.Save(targetPath, jpgEncoder, encoderParams);
+                }
+                else
+                {
+                    resizedImage.Save(targetPath, originalImage.RawFormat);
+                }
+            }
+        }
+        else
+        {
+            // Copy ảnh gốc nếu không cần resize
+            File.Copy(sourcePath, targetPath, true);
+        }
+    }
+}
+```
+
+### 2.2. Business Logic Layer (ProductBL.cs)
+
+#### 2.2.1. Xử lý thêm ảnh
+```csharp
+public static bool AddProductImage(int productId, string imagePath, string altText, string mainImage, byte[] imageBlob)
+{
+    try
+    {
+        // Validate input
+        if (string.IsNullOrEmpty(imagePath))
+            return false;
+        if (string.IsNullOrEmpty(mainImage))
+            mainImage = "N";
+
+        // Call DAL to insert image with BLOB
+        return ProductDAL.InsertProductImage(productId, imagePath, altText, mainImage, imageBlob) > 0;
+    }
+    catch (Exception)
+    {
+        return false;
+    }
+}
+```
+
+### 2.3. Data Access Layer (ProductDAL.cs)
+
+#### 2.3.1. Insert ảnh vào database
+```csharp
+public static int InsertProductImage(int productId, string imagePath, string altText, string mainImage, byte[] imageBlob)
+{
+    using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
+    {
+        string query = @"INSERT INTO ProductImages (ImageID, ProductID, ImagePath, AltText, MainImage, ImageBlob, CreatedAt)
+                        VALUES (productimages_seq.nextval, :ProductID, :ImagePath, :AltText, :MainImage, :ImageBlob, SYSDATE)
+                        RETURNING ImageID INTO :ImageID";
+
+        using (OracleCommand cmd = new OracleCommand(query, conn))
+        {
+            // Add parameters
+            cmd.Parameters.Add(":ProductID", OracleDbType.Int32).Value = productId;
+            cmd.Parameters.Add(":ImagePath", OracleDbType.Varchar2).Value = imagePath;
+            cmd.Parameters.Add(":AltText", OracleDbType.Varchar2).Value = altText;
+            cmd.Parameters.Add(":MainImage", OracleDbType.Char, 1).Value = mainImage;
+            
+            // Handle BLOB parameter
+            var imageBlobParam = new OracleParameter(":ImageBlob", OracleDbType.Blob);
+            imageBlobParam.Value = imageBlob ?? DBNull.Value;
+            cmd.Parameters.Add(imageBlobParam);
+
+            // Add output parameter for ImageID
+            var imageIdParam = new OracleParameter(":ImageID", OracleDbType.Int32);
+            imageIdParam.Direction = System.Data.ParameterDirection.Output;
+            cmd.Parameters.Add(imageIdParam);
+
+            // Execute query
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            return Convert.ToInt32(imageIdParam.Value.ToString());
+        }
+    }
+}
+```
+
+## 3. Cấu trúc Database
+
+### 3.1. Bảng ProductImages
+```sql
+CREATE TABLE ProductImages (
+    ImageID NUMBER PRIMARY KEY,
+    ProductID NUMBER NOT NULL,
+    ImagePath VARCHAR2(255) NOT NULL,
+    AltText VARCHAR2(255),
+    MainImage CHAR(1) DEFAULT 'N',
+    ImageBlob BLOB,
+    CreatedAt DATE DEFAULT SYSDATE,
+    CONSTRAINT fk_product_images FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+);
+
+CREATE SEQUENCE productimages_seq
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE
+    NOCYCLE;
+```
+
+## 4. Xử lý lỗi và validation
+
+### 4.1. Validation
+1. **Kích thước file**:
+   - Tối đa 5MB
+   - Kiểm tra trước khi upload
+
+2. **Định dạng file**:
+   - Chỉ chấp nhận .jpg, .jpeg, .png
+   - Kiểm tra extension
+
+3. **Kích thước ảnh**:
+   - Resize nếu > 800px
+   - Giữ tỷ lệ khung hình
+
+### 4.2. Xử lý lỗi
+1. **File system errors**:
+   - Kiểm tra quyền ghi
+   - Xử lý lỗi disk space
+   - Cleanup temp files
+
+2. **Database errors**:
+   - Transaction rollback
+   - Log lỗi
+   - Thông báo user
+
+3. **Memory errors**:
+   - Dispose resources
+   - Using statements
+   - Garbage collection
+
+## 5. Tối ưu hóa
+
+### 5.1. Performance
+1. **Image processing**:
+   - Resize trước khi lưu
+   - Nén ảnh JPG
+   - Sử dụng temp files
+
+2. **Database**:
+   - Sử dụng BLOB hiệu quả
+   - Index cho queries
+   - Batch operations
+
+3. **Memory**:
+   - Dispose resources
+   - Using statements
+   - Garbage collection
+
+### 5.2. Security
+1. **File validation**:
+   - Kiểm tra MIME type
+   - Scan malware
+   - Validate content
+
+2. **Access control**:
+   - Kiểm tra quyền
+   - Validate user input
+   - Sanitize filenames
+
+3. **Data protection**:
+   - Encrypt sensitive data
+   - Secure connections
+   - Audit logging
+
+## 6. Best Practices
+
+### 6.1. Code Organization
+1. **Separation of concerns**:
+   - UI logic trong .aspx.cs
+   - Business logic trong BLL
+   - Data access trong DAL
+
+2. **Error handling**:
+   - Try-catch blocks
+   - Logging
+   - User feedback
+
+3. **Resource management**:
+   - Using statements
+   - Dispose patterns
+   - Cleanup routines
+
+### 6.2. UI/UX
+1. **User feedback**:
+   - Progress indicators
+   - Success/error messages
+   - Preview images
+
+2. **Validation**:
+   - Client-side checks
+   - Server-side validation
+   - Clear error messages
+
+3. **Performance**:
+   - Async operations
+   - Progress updates
+   - Responsive UI
+
+## 7. Testing
+
+### 7.1. Unit Tests
+1. **File validation**:
+   - Size limits
+   - Format checks
+   - Content validation
+
+2. **Image processing**:
+   - Resize logic
+   - Quality settings
+   - Format conversion
+
+3. **Database operations**:
+   - Insert/update
+   - BLOB handling
+   - Transaction management
+
+### 7.2. Integration Tests
+1. **End-to-end flow**:
+   - Upload process
+   - Database storage
+   - File system operations
+
+2. **Error scenarios**:
+   - Invalid files
+   - Database errors
+   - System failures
+
+3. **Performance testing**:
+   - Load testing
+   - Stress testing
+   - Memory profiling
+
+## 8. Maintenance
+
+### 8.1. Monitoring
+1. **Performance metrics**:
+   - Upload times
+   - Processing times
+   - Storage usage
+
+2. **Error tracking**:
+   - Exception logging
+   - Error rates
+   - User feedback
+
+3. **Resource usage**:
+   - Disk space
+   - Memory usage
+   - Database growth
+
+### 8.2. Backup
+1. **File system**:
+   - Regular backups
+   - Version control
+   - Disaster recovery
+
+2. **Database**:
+   - BLOB storage
+   - Transaction logs
+   - Point-in-time recovery
+
+3. **Configuration**:
+   - Settings backup
+   - Environment configs
+   - Security settings

@@ -31,6 +31,20 @@ namespace TrietPhamShopWeb.Adminpage
                 LoadProducts();
                 LoadCategories();
             }
+            else
+            {
+                // Kiểm tra và hiển thị thông báo từ Session nếu có
+                if (Session["SuccessMessage"] != null)
+                {
+                    ShowSuccessMessage(Session["SuccessMessage"].ToString());
+                    Session.Remove("SuccessMessage");
+                }
+                if (Session["ErrorMessage"] != null)
+                {
+                    ShowErrorMessage(Session["ErrorMessage"].ToString());
+                    Session.Remove("ErrorMessage");
+                }
+            }
         }
 
         protected void gvProducts_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -160,10 +174,13 @@ namespace TrietPhamShopWeb.Adminpage
                         }
                     }
 
+                    // Hiển thị thông báo trước
+                    ShowSuccessMessage("Cập nhật sản phẩm thành công!");
+                    
+                    // Sau đó mới load lại dữ liệu và đóng modal
                     LoadProducts();
                     ScriptManager.RegisterStartupScript(this, GetType(), "CloseModal", 
                         "$('#editProductModal').modal('hide');", true);
-                    ShowSuccessMessage("Cập nhật sản phẩm thành công!");
                 }
                 else
                 {
@@ -223,11 +240,12 @@ namespace TrietPhamShopWeb.Adminpage
                             ProductBLL.AddProductImage(productId, imagePath, productName, "N", imageBytes);
                         }
                     }
-
+                    
+                    ShowSuccessMessage("Tạo sản phẩm thành công!");
                     LoadProducts();
                     ScriptManager.RegisterStartupScript(this, GetType(), "CloseModal", 
                         "$('#createProductModal').modal('hide');", true);
-                    ShowSuccessMessage("Tạo sản phẩm thành công!");
+                    
                 }
                 else
                 {
@@ -237,6 +255,10 @@ namespace TrietPhamShopWeb.Adminpage
             catch (Exception ex)
             {
                 ShowErrorMessage("Lỗi tạo sản phẩm: " + ex.Message);
+                //ShowErrorMessage("Lỗi tạo sản phẩm: ");
+                LoadProducts();
+                ScriptManager.RegisterStartupScript(this, GetType(), "CloseModal",
+                    "$('#createProductModal').modal('hide');", true);
             }
         }
 
@@ -522,11 +544,11 @@ namespace TrietPhamShopWeb.Adminpage
                             // Save image path and BLOB to database
                             if (ProductBLL.AddProductImage(productId, imagePath, altText, mainImage, imageBytes))
                             {
-                                ShowSuccessMessage("Thành công", "Đã lưu ảnh sản phẩm thành công!");
+                                ShowSuccessMessage("Đã lưu ảnh sản phẩm thành công!");
                             }
                             else
                             {
-                                ShowErrorMessage("Lỗi", "Không thể lưu ảnh sản phẩm!");
+                                ShowErrorMessage("Không thể lưu ảnh sản phẩm!");
                             }
                         }
                     }
@@ -556,19 +578,31 @@ namespace TrietPhamShopWeb.Adminpage
         private void ShowSuccessMessage(string title, string message)
         {
             string script = $@"
-                console.log('Showing success message: {message}');
-                showToast('Thành công', '{message.Replace("'", "\\'")}', 'success');
+                showToast('{title}', '{message.Replace("'", "\\'")}', 'success');
             ";
             ScriptManager.RegisterStartupScript(this, GetType(), "ShowSuccess", script, true);
         }
 
-        private void ShowErrorMessage(string message)
+        private void ShowSuccessMessage(string message)
+        {
+            // Lưu thông báo vào Session thay vì hiển thị ngay
+            Session["SuccessMessage"] = message;
+            ShowSuccessMessage("Thành công", message);
+        }
+
+        private void ShowErrorMessage(string title, string message)
         {
             string script = $@"
-                console.log('Showing error message: {message}');
-                showToast('Lỗi', '{message.Replace("'", "\\'")}', 'error');
+                showToast('{title}', '{message.Replace("'", "\\'")}', 'error');
             ";
             ScriptManager.RegisterStartupScript(this, GetType(), "ShowError", script, true);
+        }
+
+        private void ShowErrorMessage(string message)
+        {
+            // Lưu thông báo vào Session thay vì hiển thị ngay
+            Session["ErrorMessage"] = message;
+            ShowErrorMessage("Lỗi", message);
         }
         #endregion
     }
