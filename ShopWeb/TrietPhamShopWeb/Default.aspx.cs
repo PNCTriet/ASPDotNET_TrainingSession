@@ -13,10 +13,5 @@ namespace TrietPhamShopWeb
         {
 
         }
-
-        protected void btnGenFullname_Click(object sender, EventArgs e)
-        {
-           
-        }
     }
 }

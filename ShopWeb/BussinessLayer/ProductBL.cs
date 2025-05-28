@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BusinessEntity.Entities;
 using DataAccessLayer;
 
@@ -30,16 +31,23 @@ namespace BusinessLogic
             return ProductDAL.UpdateProduct(productId, productName, price, stock);
         }
 
-        public static int AddProductImage(int productId, string imagePath, string altText, string mainImage)
+        public static bool AddProductImage(int productId, string imagePath, string altText, string mainImage, byte[] imageBlob)
         {
-            // Validate input
-            if (string.IsNullOrEmpty(imagePath))
-                return -1;
-            if (string.IsNullOrEmpty(mainImage))
-                mainImage = "N";
+            try
+            {
+                // Validate input
+                if (string.IsNullOrEmpty(imagePath))
+                    return false;
+                if (string.IsNullOrEmpty(mainImage))
+                    mainImage = "N";
 
-            // Call DAL to insert image
-            return ProductDAL.InsertProductImage(productId, imagePath, altText, mainImage);
+                // Call DAL to insert image with BLOB
+                return ProductDAL.InsertProductImage(productId, imagePath, altText, mainImage, imageBlob) > 0;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public static List<ProductImage> GetProductImages(int productId)

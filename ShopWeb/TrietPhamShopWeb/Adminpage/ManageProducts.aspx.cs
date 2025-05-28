@@ -137,7 +137,8 @@ namespace TrietPhamShopWeb.Adminpage
                         string imagePath = SaveNewProductImage(FileUpload1, productId, 1);
                         if (!string.IsNullOrEmpty(imagePath))
                         {
-                            ProductBLL.AddProductImage(productId, imagePath, productName, "Y");
+                            byte[] imageBytes = File.ReadAllBytes(Server.MapPath(imagePath));
+                            ProductBLL.AddProductImage(productId, imagePath, productName, "Y", imageBytes);
                         }
                     }
                     if (FileUpload2.HasFile)
@@ -145,7 +146,8 @@ namespace TrietPhamShopWeb.Adminpage
                         string imagePath = SaveNewProductImage(FileUpload2, productId, 2);
                         if (!string.IsNullOrEmpty(imagePath))
                         {
-                            ProductBLL.AddProductImage(productId, imagePath, productName, "N");
+                            byte[] imageBytes = File.ReadAllBytes(Server.MapPath(imagePath));
+                            ProductBLL.AddProductImage(productId, imagePath, productName, "N", imageBytes);
                         }
                     }
                     if (FileUpload3.HasFile)
@@ -153,7 +155,8 @@ namespace TrietPhamShopWeb.Adminpage
                         string imagePath = SaveNewProductImage(FileUpload3, productId, 3);
                         if (!string.IsNullOrEmpty(imagePath))
                         {
-                            ProductBLL.AddProductImage(productId, imagePath, productName, "N");
+                            byte[] imageBytes = File.ReadAllBytes(Server.MapPath(imagePath));
+                            ProductBLL.AddProductImage(productId, imagePath, productName, "N", imageBytes);
                         }
                     }
 
@@ -198,7 +201,8 @@ namespace TrietPhamShopWeb.Adminpage
                         string imagePath = SaveNewProductImage(newFileUpload1, productId, 1);
                         if (!string.IsNullOrEmpty(imagePath))
                         {
-                            ProductBLL.AddProductImage(productId, imagePath, productName, "Y");
+                            byte[] imageBytes = File.ReadAllBytes(Server.MapPath(imagePath));
+                            ProductBLL.AddProductImage(productId, imagePath, productName, "Y", imageBytes);
                         }
                     }
                     if (newFileUpload2.HasFile)
@@ -206,7 +210,8 @@ namespace TrietPhamShopWeb.Adminpage
                         string imagePath = SaveNewProductImage(newFileUpload2, productId, 2);
                         if (!string.IsNullOrEmpty(imagePath))
                         {
-                            ProductBLL.AddProductImage(productId, imagePath, productName, "N");
+                            byte[] imageBytes = File.ReadAllBytes(Server.MapPath(imagePath));
+                            ProductBLL.AddProductImage(productId, imagePath, productName, "N", imageBytes);
                         }
                     }
                     if (newFileUpload3.HasFile)
@@ -214,7 +219,8 @@ namespace TrietPhamShopWeb.Adminpage
                         string imagePath = SaveNewProductImage(newFileUpload3, productId, 3);
                         if (!string.IsNullOrEmpty(imagePath))
                         {
-                            ProductBLL.AddProductImage(productId, imagePath, productName, "N");
+                            byte[] imageBytes = File.ReadAllBytes(Server.MapPath(imagePath));
+                            ProductBLL.AddProductImage(productId, imagePath, productName, "N", imageBytes);
                         }
                     }
 
@@ -509,7 +515,19 @@ namespace TrietPhamShopWeb.Adminpage
                             string imagePath = "/images/products/" + fileName;
                             string altText = txtProductName.Text;
                             string mainImage = imageNumber == 1 ? "Y" : "N";
-                            ProductBLL.AddProductImage(productId, imagePath, altText, mainImage);
+                            
+                            // Đọc file ảnh thành byte array
+                            byte[] imageBytes = File.ReadAllBytes(filePath);
+                            
+                            // Save image path and BLOB to database
+                            if (ProductBLL.AddProductImage(productId, imagePath, altText, mainImage, imageBytes))
+                            {
+                                ShowSuccessMessage("Thành công", "Đã lưu ảnh sản phẩm thành công!");
+                            }
+                            else
+                            {
+                                ShowErrorMessage("Lỗi", "Không thể lưu ảnh sản phẩm!");
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -535,16 +553,26 @@ namespace TrietPhamShopWeb.Adminpage
         // <================================>
         // UTILITY METHODS
         // <================================>
-        private void ShowSuccessMessage(string message)
+        private void ShowSuccessMessage(string title, string message)
         {
             ScriptManager.RegisterStartupScript(this, GetType(), "ShowSuccess", 
-                $"showToast('Thành công', '{message}', 'success');", true);
+                $"showToast('{title}', '{message}', 'success');", true);
+        }
+
+        private void ShowSuccessMessage(string message)
+        {
+            ShowSuccessMessage("Thành công", message);
+        }
+
+        private void ShowErrorMessage(string title, string message)
+        {
+            ScriptManager.RegisterStartupScript(this, GetType(), "ShowError", 
+                $"showToast('{title}', '{message}', 'error');", true);
         }
 
         private void ShowErrorMessage(string message)
         {
-            ScriptManager.RegisterStartupScript(this, GetType(), "ShowError", 
-                $"showToast('Lỗi', '{message}', 'error');", true);
+            ShowErrorMessage("Lỗi", message);
         }
         #endregion
     }

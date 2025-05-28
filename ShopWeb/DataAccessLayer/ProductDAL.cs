@@ -98,13 +98,13 @@ namespace DataAccessLayer
             }
         }
 
-        public static int InsertProductImage(int productId, string imagePath, string altText, string mainImage)
+        public static int InsertProductImage(int productId, string imagePath, string altText, string mainImage, byte[] imageBlob)
         {
             using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
             {
-                string query = @"INSERT INTO ProductImages (ImageID,ProductID, ImagePath, AltText, MainImage, CreatedAt)
-                                VALUES (productimages_seq.nextval,:ProductID, :ImagePath, :AltText, :MainImage, SYSDATE)
-                                RETURNING ImageID INTO :ImageI";
+                string query = @"INSERT INTO ProductImages (ImageID, ProductID, ImagePath, AltText, MainImage, ImageBlob, CreatedAt)
+                                VALUES (productimages_seq.nextval, :ProductID, :ImagePath, :AltText, :MainImage, :ImageBlob, SYSDATE)
+                                RETURNING ImageID INTO :ImageID";
 
                 using (OracleCommand cmd = new OracleCommand(query, conn))
                 {
@@ -112,6 +112,18 @@ namespace DataAccessLayer
                     cmd.Parameters.Add(":ImagePath", OracleDbType.Varchar2).Value = imagePath;
                     cmd.Parameters.Add(":AltText", OracleDbType.Varchar2).Value = altText;
                     cmd.Parameters.Add(":MainImage", OracleDbType.Char, 1).Value = mainImage;
+                    
+                    // Xử lý imageBlob parameter
+                    var imageBlobParam = new OracleParameter(":ImageBlob", OracleDbType.Blob);
+                    if (imageBlob == null)
+                    {
+                        imageBlobParam.Value = DBNull.Value;
+                    }
+                    else
+                    {
+                        imageBlobParam.Value = imageBlob;
+                    }
+                    cmd.Parameters.Add(imageBlobParam);
 
                     var imageIdParam = new OracleParameter(":ImageID", OracleDbType.Int32);
                     imageIdParam.Direction = System.Data.ParameterDirection.Output;
