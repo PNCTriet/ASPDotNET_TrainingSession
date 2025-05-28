@@ -555,24 +555,20 @@ namespace TrietPhamShopWeb.Adminpage
         // <================================>
         private void ShowSuccessMessage(string title, string message)
         {
-            ScriptManager.RegisterStartupScript(this, GetType(), "ShowSuccess", 
-                $"showToast('{title}', '{message}', 'success');", true);
-        }
-
-        private void ShowSuccessMessage(string message)
-        {
-            ShowSuccessMessage("Thành công", message);
-        }
-
-        private void ShowErrorMessage(string title, string message)
-        {
-            ScriptManager.RegisterStartupScript(this, GetType(), "ShowError", 
-                $"showToast('{title}', '{message}', 'error');", true);
+            string script = $@"
+                console.log('Showing success message: {message}');
+                showToast('Thành công', '{message.Replace("'", "\\'")}', 'success');
+            ";
+            ScriptManager.RegisterStartupScript(this, GetType(), "ShowSuccess", script, true);
         }
 
         private void ShowErrorMessage(string message)
         {
-            ShowErrorMessage("Lỗi", message);
+            string script = $@"
+                console.log('Showing error message: {message}');
+                showToast('Lỗi', '{message.Replace("'", "\\'")}', 'error');
+            ";
+            ScriptManager.RegisterStartupScript(this, GetType(), "ShowError", script, true);
         }
         #endregion
     }
