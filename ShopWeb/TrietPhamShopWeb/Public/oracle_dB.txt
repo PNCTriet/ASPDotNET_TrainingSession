@@ -137,17 +137,6 @@ CREATE TABLE RolePermissions (
   PRIMARY KEY (RoleID, PermissionID)
 );
 
--- Productimages
-CREATE TABLE productimages (
-    imageid       NUMBER PRIMARY KEY,
-    productid     NUMBER NOT NULL,
-    imagepath     VARCHAR2(255) NOT NULL,
-    alttext       VARCHAR2(255),
-    mainimage     CHAR(1) DEFAULT 'N',
-    imageblob     BLOB,
-    created_at    DATE DEFAULT SYSDATE
-);
-
 
 -- Foreign Keys
 ALTER TABLE RolePermissions ADD CONSTRAINT fk_roleperm_role FOREIGN KEY (RoleID) REFERENCES Roles(RoleID);

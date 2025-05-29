@@ -115,7 +115,7 @@ namespace BussinessLayer
                     throw new Exception("Email đã tồn tại");
                 }
 
-                // Hash the password before storing
+                // Hash the password before storing 
                 user.PasswordHash = HashPassword(user.PasswordHash);
 
                 return UserDAL.CreateUser(user);

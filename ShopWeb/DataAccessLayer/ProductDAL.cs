@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Oracle.ManagedDataAccess.Client;
+using Oracle.ManagedDataAccess.Types;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -100,41 +101,66 @@ namespace DataAccessLayer
 
         public static int InsertProductImage(int productId, string imagePath, string altText, string mainImage, byte[] imageBlob)
         {
-            using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
+            using (var conn = new OracleConnection(Connection.GetConnectionString()))
             {
-                string query = @"INSERT INTO ProductImages (ImageID, ProductID, ImagePath, AltText, MainImage, ImageBlob, CreatedAt)
-                                VALUES (productimages_seq.nextval, :ProductID, :ImagePath, :AltText, :MainImage, :ImageBlob, SYSDATE)
-                                RETURNING ImageID INTO :ImageID";
-
-                using (OracleCommand cmd = new OracleCommand(query, conn))
+                conn.Open();
+                using (var transaction = conn.BeginTransaction())
                 {
-                    cmd.Parameters.Add(":ProductID", OracleDbType.Int32).Value = productId;
-                    cmd.Parameters.Add(":ImagePath", OracleDbType.Varchar2).Value = imagePath;
-                    cmd.Parameters.Add(":AltText", OracleDbType.Varchar2).Value = altText;
-                    cmd.Parameters.Add(":MainImage", OracleDbType.Char, 1).Value = mainImage;
-                    
-                    // Xử lý imageBlob parameter
-                    var imageBlobParam = new OracleParameter(":ImageBlob", OracleDbType.Blob);
-                    if (imageBlob == null)
+                    try
                     {
-                        imageBlobParam.Value = DBNull.Value;
+                        string query = @"
+                            INSERT INTO ProductImages (
+                                ImageID, ProductID, ImagePath, AltText, MainImage, CreatedAt, ImageBlob
+                            ) VALUES (
+                                productimages_seq.nextval, :ProductID, :ImagePath, :AltText, :MainImage, SYSDATE, :ImageBlob
+                            )
+                            RETURNING ImageID INTO :ImageID";
+
+                        using (var cmd = new OracleCommand(query, conn))
+                        {
+                            cmd.Transaction = transaction;
+                            cmd.CommandTimeout = 300;
+
+                            cmd.Parameters.Add(":ProductID", OracleDbType.Int32).Value = productId;
+                            cmd.Parameters.Add(":ImagePath", OracleDbType.Varchar2).Value = imagePath;
+                            cmd.Parameters.Add(":AltText", OracleDbType.Varchar2).Value = altText;
+                            cmd.Parameters.Add(":MainImage", OracleDbType.Varchar2, 1).Value = mainImage;
+
+                            // Handle BLOB parameter
+                            var imageBlobParam = new OracleParameter(":ImageBlob", OracleDbType.Blob);
+                            if (imageBlob == null)
+                            {
+                                imageBlobParam.Value = DBNull.Value;
+                            }
+                            else
+                            {
+                                imageBlobParam.Value = imageBlob;
+                            }
+                            cmd.Parameters.Add(imageBlobParam);
+
+                            var imageIdParam = new OracleParameter(":ImageID", OracleDbType.Int32)
+                            {
+                                Direction = System.Data.ParameterDirection.Output
+                            };
+                            cmd.Parameters.Add(imageIdParam);
+
+                            cmd.ExecuteNonQuery();
+                            int imageId = Convert.ToInt32(imageIdParam.Value.ToString());
+
+                            transaction.Commit();
+                            return imageId;
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        imageBlobParam.Value = imageBlob;
+                        transaction.Rollback();
+                        Console.WriteLine($"[InsertProductImage] Error: {ex.Message}");
+                        throw;
                     }
-                    cmd.Parameters.Add(imageBlobParam);
-
-                    var imageIdParam = new OracleParameter(":ImageID", OracleDbType.Int32);
-                    imageIdParam.Direction = System.Data.ParameterDirection.Output;
-                    cmd.Parameters.Add(imageIdParam);
-
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                    return Convert.ToInt32(imageIdParam.Value.ToString());
                 }
             }
         }
+
 
         public static List<ProductImage> GetProductImages(int productId)
         {
@@ -223,6 +249,60 @@ namespace DataAccessLayer
                     {
                         transaction.Rollback();
                         return false;
+                    }
+                }
+            }
+        }
+
+        public static bool UpdateProductImage(int imageId, string imagePath, string altText, string mainImage, byte[] imageBlob)
+        {
+            using (var conn = new OracleConnection(Connection.GetConnectionString()))
+            {
+                conn.Open();
+                using (var transaction = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        string query = @"
+                            UPDATE ProductImages 
+                            SET ImagePath = :ImagePath,
+                                AltText = :AltText,
+                                MainImage = :MainImage,
+                                ImageBlob = :ImageBlob
+                            WHERE ImageID = :ImageID";
+
+                        using (var cmd = new OracleCommand(query, conn))
+                        {
+                            cmd.Transaction = transaction;
+                            cmd.CommandTimeout = 300;
+
+                            cmd.Parameters.Add(":ImageID", OracleDbType.Int32).Value = imageId;
+                            cmd.Parameters.Add(":ImagePath", OracleDbType.Varchar2).Value = imagePath;
+                            cmd.Parameters.Add(":AltText", OracleDbType.Varchar2).Value = altText;
+                            cmd.Parameters.Add(":MainImage", OracleDbType.Varchar2, 1).Value = mainImage;
+
+                            // Handle BLOB parameter
+                            var imageBlobParam = new OracleParameter(":ImageBlob", OracleDbType.Blob);
+                            if (imageBlob == null)
+                            {
+                                imageBlobParam.Value = DBNull.Value;
+                            }
+                            else
+                            {
+                                imageBlobParam.Value = imageBlob;
+                            }
+                            cmd.Parameters.Add(imageBlobParam);
+
+                            int result = cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                            return result > 0;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        Console.WriteLine($"[UpdateProductImage] Error: {ex.Message}");
+                        throw;
                     }
                 }
             }

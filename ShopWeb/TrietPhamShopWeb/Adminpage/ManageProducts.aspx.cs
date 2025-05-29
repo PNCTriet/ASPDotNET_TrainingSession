@@ -33,16 +33,20 @@ namespace TrietPhamShopWeb.Adminpage
             }
             else
             {
-                // Kiểm tra và hiển thị thông báo từ Session nếu có
+                // Check and display messages from Session
                 if (Session["SuccessMessage"] != null)
                 {
-                    ShowSuccessMessage(Session["SuccessMessage"].ToString());
+                    string message = Session["SuccessMessage"].ToString();
                     Session.Remove("SuccessMessage");
+                    ScriptManager.RegisterStartupScript(this, GetType(), "ShowSuccess", 
+                        $"showToast('Thành công', '{message.Replace("'", "\\'")}', 'success');", true);
                 }
                 if (Session["ErrorMessage"] != null)
                 {
-                    ShowErrorMessage(Session["ErrorMessage"].ToString());
+                    string message = Session["ErrorMessage"].ToString();
                     Session.Remove("ErrorMessage");
+                    ScriptManager.RegisterStartupScript(this, GetType(), "ShowError", 
+                        $"showToast('Lỗi', '{message.Replace("'", "\\'")}', 'error');", true);
                 }
             }
         }
@@ -399,14 +403,15 @@ namespace TrietPhamShopWeb.Adminpage
         {
             try
             {
+                // 1. Get button info
                 Button btn = (Button)sender;
                 int imageNumber = Convert.ToInt32(btn.CommandArgument);
                 bool isNewProduct = btn.ID.StartsWith("btnNewUpload");
-                
+
+                // 2. Get FileUpload control
                 FileUpload fileUpload = null;
                 WebImage preview = null;
 
-                // Xác định FileUpload và Image control tương ứng
                 if (isNewProduct)
                 {
                     switch (imageNumber)
@@ -444,130 +449,50 @@ namespace TrietPhamShopWeb.Adminpage
                     }
                 }
 
-                if (fileUpload.HasFile)
+                // 3. Get product info
+                int productId = isNewProduct ? 0 : Convert.ToInt32(hdnProductId.Value);
+                string productName = isNewProduct ? txtNewProductName.Text.Trim() : txtProductName.Text.Trim();
+                string mainImage = imageNumber == 1 ? "Y" : "N";
+
+                // 4. Process image upload
+                var imageService = new ImageService();
+                var result = imageService.ProcessImageUpload(fileUpload, productId, imageNumber);
+
+                if (result.Success)
                 {
-                    // Kiểm tra kích thước file (5MB)
-                    if (fileUpload.FileBytes.Length > 5 * 1024 * 1024)
+                    // 5. Update preview
+                    preview.ImageUrl = result.ImagePath;
+
+                    // 6. Save to database if not new product
+                    if (!isNewProduct && productId > 0)
                     {
-                        ShowErrorMessage("Kích thước file không được vượt quá 5MB");
-                        return;
-                    }
-
-                    // Kiểm tra định dạng file
-                    string extension = Path.GetExtension(fileUpload.FileName).ToLower();
-                    if (extension != ".jpg" && extension != ".jpeg" && extension != ".png")
-                    {
-                        ShowErrorMessage("Chỉ chấp nhận file ảnh định dạng JPG, JPEG hoặc PNG");
-                        return;
-                    }
-
-                    // Tạo thư mục nếu chưa tồn tại
-                    string uploadDir = Server.MapPath("/images/products/");
-                    if (!Directory.Exists(uploadDir))
-                    {
-                        Directory.CreateDirectory(uploadDir);
-                    }
-
-                    // Tạo tên file ngẫu nhiên
-                    string fileName = Guid.NewGuid().ToString() + extension;
-                    string filePath = Path.Combine(uploadDir, fileName);
-
-                    // Lưu file tạm thời
-                    fileUpload.SaveAs(filePath);
-
-                    try
-                    {
-                        // Resize ảnh nếu cần
-                        using (DrawingImage originalImage = DrawingImage.FromFile(filePath))
+                        if (ProductBLL.AddProductImage(productId, result.ImagePath, productName, mainImage, result.ImageBytes))
                         {
-                            if (originalImage.Width > 800 || originalImage.Height > 800)
-                            {
-                                int newWidth = originalImage.Width;
-                                int newHeight = originalImage.Height;
-
-                                if (newWidth > newHeight)
-                                {
-                                    if (newWidth > 800)
-                                    {
-                                        newHeight = (int)((float)newHeight * 800 / newWidth);
-                                        newWidth = 800;
-                                    }
-                                }
-                                else
-                                {
-                                    if (newHeight > 800)
-                                    {
-                                        newWidth = (int)((float)newWidth * 800 / newHeight);
-                                        newHeight = 800;
-                                    }
-                                }
-
-                                using (Bitmap resizedImage = new Bitmap(newWidth, newHeight))
-                                {
-                                    using (Graphics g = Graphics.FromImage(resizedImage))
-                                    {
-                                        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                                        g.DrawImage(originalImage, 0, 0, newWidth, newHeight);
-                                    }
-
-                                    // Lưu ảnh đã resize
-                                    if (extension == ".jpg" || extension == ".jpeg")
-                                    {
-                                        ImageCodecInfo jpgEncoder = GetEncoder(ImageFormat.Jpeg);
-                                        EncoderParameters encoderParams = new EncoderParameters(1);
-                                        encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, 90L);
-                                        resizedImage.Save(filePath, jpgEncoder, encoderParams);
-                                    }
-                                    else
-                                    {
-                                        resizedImage.Save(filePath, originalImage.RawFormat);
-                                    }
-                                }
-                            }
+                            ShowSuccessMessage("Upload ảnh thành công!");
                         }
-
-                        // Cập nhật preview
-                        preview.ImageUrl = "/images/products/" + fileName;
-                        ShowSuccessMessage("Upload ảnh thành công");
-
-                        // Nếu là edit mode và có productId, lưu vào database
-                        if (!isNewProduct && !string.IsNullOrEmpty(hdnProductId.Value))
+                        else
                         {
-                            int productId = Convert.ToInt32(hdnProductId.Value);
-                            string imagePath = "/images/products/" + fileName;
-                            string altText = txtProductName.Text;
-                            string mainImage = imageNumber == 1 ? "Y" : "N";
-                            
-                            // Đọc file ảnh thành byte array
-                            byte[] imageBytes = File.ReadAllBytes(filePath);
-                            
-                            // Save image path and BLOB to database
-                            if (ProductBLL.AddProductImage(productId, imagePath, altText, mainImage, imageBytes))
-                            {
-                                ShowSuccessMessage("Đã lưu ảnh sản phẩm thành công!");
-                            }
-                            else
-                            {
-                                ShowErrorMessage("Không thể lưu ảnh sản phẩm!");
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        ShowErrorMessage("Lỗi xử lý ảnh: " + ex.Message);
-                        if (File.Exists(filePath))
-                        {
-                            File.Delete(filePath);
+                            ShowErrorMessage("Không thể lưu ảnh vào database!");
                         }
                     }
                 }
                 else
                 {
-                    ShowErrorMessage("Vui lòng chọn file ảnh");
+                    Session["ErrorMessage"] = result.Message;
+                    ShowErrorMessage(result.Message);
+                }
+
+                // Reset the file upload control in all cases
+                fileUpload.Attributes.Clear();
+                fileUpload.Controls.Clear();
+                if (fileUpload.PostedFile != null)
+                {
+                    fileUpload.PostedFile.InputStream.Dispose();
                 }
             }
             catch (Exception ex)
             {
+                Session["ErrorMessage"] = "Lỗi upload ảnh: " + ex.Message;
                 ShowErrorMessage("Lỗi upload ảnh: " + ex.Message);
             }
         }
