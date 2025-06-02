@@ -60,6 +60,42 @@ namespace TrietPhamShopWeb.Adminpage
         protected global::System.Web.UI.WebControls.TextBox txtNewStock;
 
         /// <summary>
+        /// txtNewQuantityPerUnit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNewQuantityPerUnit;
+
+        /// <summary>
+        /// txtNewUnitsOnOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNewUnitsOnOrder;
+
+        /// <summary>
+        /// txtNewReorderLevel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNewReorderLevel;
+
+        /// <summary>
+        /// chkNewDiscontinued control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkNewDiscontinued;
+
+        /// <summary>
         /// txtNewDescription control.
         /// </summary>
         /// <remarks>
@@ -193,6 +229,42 @@ namespace TrietPhamShopWeb.Adminpage
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtStock;
+
+        /// <summary>
+        /// txtQuantityPerUnit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtQuantityPerUnit;
+
+        /// <summary>
+        /// txtUnitsOnOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtUnitsOnOrder;
+
+        /// <summary>
+        /// txtReorderLevel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtReorderLevel;
+
+        /// <summary>
+        /// chkDiscontinued control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkDiscontinued;
 
         /// <summary>
         /// preview1 control.

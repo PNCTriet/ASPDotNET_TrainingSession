@@ -36,13 +36,23 @@
                         OnPageIndexChanging="gvProducts_PageIndexChanging"
                         AllowPaging="True"
                         PageSize="10"
-                        DataKeyNames="ProductID,ProductName,Price,Stock">
+                        DataKeyNames="ProductID,ProductName,Price,Stock,QuantityPerUnit,UnitsOnOrder,ReorderLevel,Discontinued">
                         <Columns>
                             <asp:BoundField DataField="ProductID" HeaderText="ID" />
                             <asp:BoundField DataField="ProductName" HeaderText="Tên sản phẩm" HtmlEncode="false" />
                             <asp:BoundField DataField="CategoryName" HeaderText="Danh mục" />
+                            <asp:BoundField DataField="QuantityPerUnit" HeaderText="Đơn vị tính" />
                             <asp:BoundField DataField="Price" HeaderText="Giá" DataFormatString="{0:N0} đ" />
                             <asp:BoundField DataField="Stock" HeaderText="Tồn kho" />
+                            <asp:BoundField DataField="UnitsOnOrder" HeaderText="Đặt hàng" />
+                            <asp:BoundField DataField="ReorderLevel" HeaderText="Mức đặt lại" />
+                            <asp:TemplateField HeaderText="Trạng thái">
+                                <ItemTemplate>
+                                    <span class='<%# Convert.ToBoolean(Eval("Discontinued")) ? "text-danger" : "text-success" %>'>
+                                        <%# Convert.ToBoolean(Eval("Discontinued")) ? "Ngừng kinh doanh" : "Đang kinh doanh" %>
+                                    </span>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="Thao tác">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-primary btn-sm btn-edit"
@@ -50,7 +60,11 @@
                                         data-id='<%# Eval("ProductID") %>'
                                         data-name='<%# Eval("ProductName") %>'
                                         data-price='<%# Eval("Price") %>'
-                                        data-stock='<%# Eval("Stock") %>'>
+                                        data-stock='<%# Eval("Stock") %>'
+                                        data-quantityperunit='<%# Eval("QuantityPerUnit") %>'
+                                        data-unitsonorder='<%# Eval("UnitsOnOrder") %>'
+                                        data-reorderlevel='<%# Eval("ReorderLevel") %>'
+                                        data-discontinued='<%# Eval("Discontinued") %>'>
                                         <i class="fas fa-edit"></i> Sửa
                                     </asp:LinkButton>
                                     <asp:LinkButton ID="btnDelete" runat="server" CssClass="btn btn-danger btn-sm"
@@ -150,6 +164,44 @@
                                     Display="Dynamic"
                                     ValidationGroup="CreateProduct">
                                 </asp:RangeValidator>
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtNewQuantityPerUnit" class="form-label">Đơn vị tính</label>
+                                <asp:TextBox ID="txtNewQuantityPerUnit" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtNewUnitsOnOrder" class="form-label">Số lượng đặt hàng</label>
+                                <asp:TextBox ID="txtNewUnitsOnOrder" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                                <asp:RangeValidator ID="rvUnitsOnOrder" runat="server"
+                                    ControlToValidate="txtNewUnitsOnOrder"
+                                    Type="Integer"
+                                    MinimumValue="0"
+                                    MaximumValue="999999"
+                                    ErrorMessage="Số lượng đặt hàng phải lớn hơn 0"
+                                    CssClass="text-danger"
+                                    Display="Dynamic"
+                                    ValidationGroup="CreateProduct">
+                                </asp:RangeValidator>
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtNewReorderLevel" class="form-label">Mức đặt lại</label>
+                                <asp:TextBox ID="txtNewReorderLevel" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                                <asp:RangeValidator ID="rvReorderLevel" runat="server"
+                                    ControlToValidate="txtNewReorderLevel"
+                                    Type="Integer"
+                                    MinimumValue="0"
+                                    MaximumValue="999999"
+                                    ErrorMessage="Mức đặt lại phải lớn hơn 0"
+                                    CssClass="text-danger"
+                                    Display="Dynamic"
+                                    ValidationGroup="CreateProduct">
+                                </asp:RangeValidator>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <asp:CheckBox ID="chkNewDiscontinued" runat="server" CssClass="form-check-input" />
+                                    <label class="form-check-label" for="chkNewDiscontinued">Ngừng kinh doanh</label>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="txtNewDescription" class="form-label">Mô tả</label>
@@ -274,6 +326,44 @@
                                     ValidationGroup="EditProduct">
                                 </asp:RangeValidator>
                             </div>
+                            <div class="mb-3">
+                                <label for="txtQuantityPerUnit" class="form-label">Đơn vị tính</label>
+                                <asp:TextBox ID="txtQuantityPerUnit" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtUnitsOnOrder" class="form-label">Số lượng đặt hàng</label>
+                                <asp:TextBox ID="txtUnitsOnOrder" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                                <asp:RangeValidator ID="rvEditUnitsOnOrder" runat="server"
+                                    ControlToValidate="txtUnitsOnOrder"
+                                    Type="Integer"
+                                    MinimumValue="0"
+                                    MaximumValue="999999"
+                                    ErrorMessage="Số lượng đặt hàng phải lớn hơn 0"
+                                    CssClass="text-danger"
+                                    Display="Dynamic"
+                                    ValidationGroup="EditProduct">
+                                </asp:RangeValidator>
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtReorderLevel" class="form-label">Mức đặt lại</label>
+                                <asp:TextBox ID="txtReorderLevel" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                                <asp:RangeValidator ID="rvEditReorderLevel" runat="server"
+                                    ControlToValidate="txtReorderLevel"
+                                    Type="Integer"
+                                    MinimumValue="0"
+                                    MaximumValue="999999"
+                                    ErrorMessage="Mức đặt lại phải lớn hơn 0"
+                                    CssClass="text-danger"
+                                    Display="Dynamic"
+                                    ValidationGroup="EditProduct">
+                                </asp:RangeValidator>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <asp:CheckBox ID="chkDiscontinued" runat="server" CssClass="form-check-input" />
+                                    <label class="form-check-label" for="chkDiscontinued">Ngừng kinh doanh</label>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="images" role="tabpanel">
                             <div class="row">
@@ -362,12 +452,20 @@
                 var productName = $(this).data('name');
                 var price = $(this).data('price');
                 var stock = $(this).data('stock');
+                var quantityPerUnit = $(this).data('quantityperunit');
+                var unitsOnOrder = $(this).data('unitsonorder');
+                var reorderLevel = $(this).data('reorderlevel');
+                var discontinued = $(this).data('discontinued');
 
                 // Điền dữ liệu vào form
                 $('#<%= hdnProductId.ClientID %>').val(productId);
                 $('#<%= txtProductName.ClientID %>').val(productName);
                 $('#<%= txtPrice.ClientID %>').val(price);
                 $('#<%= txtStock.ClientID %>').val(stock);
+                $('#<%= txtQuantityPerUnit.ClientID %>').val(quantityPerUnit);
+                $('#<%= txtUnitsOnOrder.ClientID %>').val(unitsOnOrder);
+                $('#<%= txtReorderLevel.ClientID %>').val(reorderLevel);
+                $('#<%= chkDiscontinued.ClientID %>').prop('checked', discontinued === 'True');
 
                 // Hiển thị modal
                 var editModal = new bootstrap.Modal(document.getElementById('editProductModal'));
@@ -436,6 +534,10 @@
                 $('#<%= ddlCategory.ClientID %>').val('');
                 $('#<%= txtNewPrice.ClientID %>').val('');
                 $('#<%= txtNewStock.ClientID %>').val('');
+                $('#<%= txtNewQuantityPerUnit.ClientID %>').val('');
+                $('#<%= txtNewUnitsOnOrder.ClientID %>').val('');
+                $('#<%= txtNewReorderLevel.ClientID %>').val('');
+                $('#<%= chkNewDiscontinued.ClientID %>').prop('checked', false);
                 $('#<%= txtNewDescription.ClientID %>').val('');
                 $('.card-body img').attr('src', '../images/no-image.png');
                 $('input[type="file"]').val('');

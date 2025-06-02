@@ -1,6 +1,72 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="TrietPhamShopWeb._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <!-- User Info Panel -->
+    <asp:Panel ID="pnlUserInfo" runat="server" CssClass="user-info-panel mb-3">
+        <div class="container">
+            <div class="alert alert-info">
+                Xin chào,
+                <asp:Label ID="lblUsername" runat="server"></asp:Label>
+            
+            </div>
+        </div>
+    </asp:Panel>
+
+    <!-- Product Grid Section -->
+    <section class="product-grid-section py-5">
+        <div class="container">
+            <div class="section-header d-flex justify-content-between align-items-center mb-4">
+                <h2 class="section-title">Sản Phẩm Mới</h2>
+                <div class="view-options">
+                    <select class="form-select sort-select">
+                        <option>Sắp xếp theo</option>
+                        <option>Giá: Thấp đến Cao</option>
+                        <option>Giá: Cao đến Thấp</option>
+                        <option>Mới nhất</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <asp:Repeater ID="ProductGridRepeater" runat="server">
+                    <ItemTemplate>
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <a href='<%# "ProductDetail.aspx?id=" + Eval("ProductID") %>'>
+                                        <img src='<%# GetProductImage(Eval("Images")) %>'
+                                            alt='<%# Eval("ProductName") %>'
+                                            class="main-image" />
+                                        <!-- <img src='<%# GetProductHoverImage(Eval("Images")) %>'
+                                            alt='<%# Eval("ProductName") %>'
+                                            class="hover-image" /> -->
+                                    </a>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">
+                                        <a href='<%# "ProductDetail.aspx?id=" + Eval("ProductID") %>'>
+                                            <%# Eval("ProductName") %>
+                                        </a>
+                                    </h3>
+                                    <div class="product-price">
+                                        <span class="current-price">
+                                            <%# string.Format("{0:N0}đ", Eval("UnitPrice")) %>
+                                        </span>
+                                        <%# ShowDiscount(Eval("UnitPrice")) %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </div>
+
+            <div class="text-center mt-5">
+                <button class="btn btn-outline-dark btn-load-more">Xem thêm sản phẩm</button>
+            </div>
+        </div>
+    </section>
+
     <div class="container-fluid px-0">
         <!-- Featured Product Section -->
         <section class="featured-product py-5">
@@ -21,7 +87,7 @@
                             <h3 class="mb-4">Top 10 Sản Phẩm Hot</h3>
                             <div class="hot-products-list">
                                 <% for (int i = 1; i <= 10; i++)
-                                { %>
+                                    { %>
                                 <div class="hot-product-item">
                                     <img src="https://placehold.co/100x100" alt="Hot Product <%= i %>" class="rounded-3">
                                     <div class="hot-product-info">
@@ -53,7 +119,7 @@
                             <div class="product-slider">
                                 <div class="row flex-nowrap">
                                     <% for (int j = 1; j <= 6; j++)
-                                    { %>
+                                        { %>
                                     <div class="col-md-3 col-sm-6">
                                         <div class="product-card">
                                             <div class="product-image">
@@ -91,15 +157,15 @@
             height: 600px;
         }
 
-            .featured-product-card:hover {
-                transform: translateY(-5px);
-            }
+        .featured-product-card:hover {
+            transform: translateY(-5px);
+        }
 
-            .featured-product-card img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
+        .featured-product-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
         .featured-product-info {
             position: absolute;

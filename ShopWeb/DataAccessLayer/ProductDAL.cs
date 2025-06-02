@@ -18,9 +18,11 @@ namespace DataAccessLayer
             using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
             {
                 string query = @"SELECT p.ProductID, p.ProductName, c.CategoryName,
-                             p.UnitPrice as Price, p.UnitsInStock as Stock
+                             p.UnitPrice, p.UnitsInStock, p.QuantityPerUnit,
+                             p.UnitsOnOrder, p.ReorderLevel, p.Discontinued
                              FROM Products p
-                             LEFT JOIN Categories c ON p.CategoryID = c.CategoryID";
+                             LEFT JOIN Categories c ON p.CategoryID = c.CategoryID
+                             ORDER BY p.ProductID DESC";
                 using (OracleCommand cmd = new OracleCommand(query, conn))
                 {
                     conn.Open();
@@ -28,14 +30,46 @@ namespace DataAccessLayer
                     {
                         while (reader.Read())
                         {
-                            list.Add(new Product
+                            var product = new Product
                             {
                                 ProductID = Convert.ToInt32(reader["ProductID"]),
                                 ProductName = reader["ProductName"].ToString(),
                                 CategoryName = reader["CategoryName"].ToString(),
-                                Price = Convert.ToDecimal(reader["Price"]),
-                                Stock = Convert.ToInt32(reader["Stock"])
-                            });
+                                UnitPrice = Convert.ToDecimal(reader["UnitPrice"]),
+                                UnitsInStock = Convert.ToInt32(reader["UnitsInStock"]),
+                                QuantityPerUnit = reader["QuantityPerUnit"] == DBNull.Value ? null : reader["QuantityPerUnit"].ToString(),
+                                UnitsOnOrder = Convert.ToInt32(reader["UnitsOnOrder"]),
+                                ReorderLevel = Convert.ToInt32(reader["ReorderLevel"]),
+                                Discontinued = Convert.ToInt32(reader["Discontinued"]) == 1,
+                                Images = new List<ProductImage>()
+                            };
+
+                            // Lấy hình ảnh của sản phẩm
+                            string imageQuery = @"SELECT ImageID, ProductID, ImagePath, AltText, MainImage, CreatedAt
+                                                FROM ProductImages 
+                                                WHERE ProductID = :ProductID
+                                                ORDER BY MainImage DESC, CreatedAt DESC";
+                            using (OracleCommand imageCmd = new OracleCommand(imageQuery, conn))
+                            {
+                                imageCmd.Parameters.Add(":ProductID", OracleDbType.Int32).Value = product.ProductID;
+                                using (OracleDataReader imageReader = imageCmd.ExecuteReader())
+                                {
+                                    while (imageReader.Read())
+                                    {
+                                        product.Images.Add(new ProductImage
+                                        {
+                                            ImageID = Convert.ToInt32(imageReader["ImageID"]),
+                                            ProductID = Convert.ToInt32(imageReader["ProductID"]),
+                                            ImagePath = imageReader["ImagePath"].ToString(),
+                                            AltText = imageReader["AltText"].ToString(),
+                                            MainImage = imageReader["MainImage"].ToString(),
+                                            CreatedAt = Convert.ToDateTime(imageReader["CreatedAt"])
+                                        });
+                                    }
+                                }
+                            }
+
+                            list.Add(product);
                         }
                     }
                 }
@@ -67,7 +101,8 @@ namespace DataAccessLayer
             }
         }
 
-        public static bool UpdateProduct(int productId, string productName, decimal price, int stock)
+        public static bool UpdateProduct(int productId, string productName, decimal price, int stock, 
+            string quantityPerUnit, int unitsOnOrder, int reorderLevel, bool discontinued)
         {
             try
             {
@@ -76,7 +111,11 @@ namespace DataAccessLayer
                     string query = @"UPDATE Products 
                                    SET ProductName = :ProductName,
                                        UnitPrice = :Price,
-                                       UnitsInStock = :Stock
+                                       UnitsInStock = :Stock,
+                                       QuantityPerUnit = :QuantityPerUnit,
+                                       UnitsOnOrder = :UnitsOnOrder,
+                                       ReorderLevel = :ReorderLevel,
+                                       Discontinued = :Discontinued
                                    WHERE ProductID = :ProductID";
 
                     using (OracleCommand cmd = new OracleCommand(query, conn))
@@ -84,6 +123,10 @@ namespace DataAccessLayer
                         cmd.Parameters.Add(":ProductName", OracleDbType.Varchar2).Value = productName;
                         cmd.Parameters.Add(":Price", OracleDbType.Decimal).Value = price;
                         cmd.Parameters.Add(":Stock", OracleDbType.Int32).Value = stock;
+                        cmd.Parameters.Add(":QuantityPerUnit", OracleDbType.Varchar2).Value = (object)quantityPerUnit ?? DBNull.Value;
+                        cmd.Parameters.Add(":UnitsOnOrder", OracleDbType.Int32).Value = unitsOnOrder;
+                        cmd.Parameters.Add(":ReorderLevel", OracleDbType.Int32).Value = reorderLevel;
+                        cmd.Parameters.Add(":Discontinued", OracleDbType.Int32).Value = discontinued ? 1 : 0;
                         cmd.Parameters.Add(":ProductID", OracleDbType.Int32).Value = productId;
 
                         conn.Open();
@@ -312,9 +355,13 @@ namespace DataAccessLayer
         {
             using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
             {
-                string query = @"INSERT INTO Products (ProductID, ProductName, CategoryID, UnitPrice, UnitsInStock, Description)
-                               VALUES (products_seq.nextval, :ProductName, :CategoryID, :Price, :Stock, :Description)
-                               RETURNING ProductID INTO :ProductID";
+                string query = @"INSERT INTO Products (
+                                    ProductID, ProductName, CategoryID, UnitPrice, UnitsInStock,
+                                    QuantityPerUnit, UnitsOnOrder, ReorderLevel, Discontinued
+                                ) VALUES (
+                                    products_seq.nextval, :ProductName, :CategoryID, :Price, :Stock,
+                                    :QuantityPerUnit, 0, 0, 0
+                                ) RETURNING ProductID INTO :ProductID";
 
                 using (OracleCommand cmd = new OracleCommand(query, conn))
                 {
@@ -322,7 +369,7 @@ namespace DataAccessLayer
                     cmd.Parameters.Add(":CategoryID", OracleDbType.Int32).Value = categoryId;
                     cmd.Parameters.Add(":Price", OracleDbType.Decimal).Value = price;
                     cmd.Parameters.Add(":Stock", OracleDbType.Int32).Value = stock;
-                    cmd.Parameters.Add(":Description", OracleDbType.Varchar2).Value = (object)description ?? DBNull.Value;
+                    cmd.Parameters.Add(":QuantityPerUnit", OracleDbType.Varchar2).Value = (object)description ?? DBNull.Value;
 
                     var productIdParam = new OracleParameter(":ProductID", OracleDbType.Int32);
                     productIdParam.Direction = System.Data.ParameterDirection.Output;
@@ -340,7 +387,8 @@ namespace DataAccessLayer
             using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
             {
                 string query = @"SELECT p.ProductID, p.ProductName, p.CategoryID, c.CategoryName,
-                             p.UnitPrice as Price, p.UnitsInStock as Stock, p.Description
+                             p.UnitPrice as Price, p.UnitsInStock as Stock, p.QuantityPerUnit,
+                             p.UnitsOnOrder, p.ReorderLevel, p.Discontinued
                              FROM Products p
                              LEFT JOIN Categories c ON p.CategoryID = c.CategoryID
                              WHERE p.ProductID = :ProductID";
@@ -361,7 +409,10 @@ namespace DataAccessLayer
                                 CategoryName = reader["CategoryName"].ToString(),
                                 Price = Convert.ToDecimal(reader["Price"]),
                                 Stock = Convert.ToInt32(reader["Stock"]),
-                                Description = reader["Description"] == DBNull.Value ? null : reader["Description"].ToString()
+                                QuantityPerUnit = reader["QuantityPerUnit"] == DBNull.Value ? null : reader["QuantityPerUnit"].ToString(),
+                                UnitsOnOrder = Convert.ToInt32(reader["UnitsOnOrder"]),
+                                ReorderLevel = Convert.ToInt32(reader["ReorderLevel"]),
+                                Discontinued = Convert.ToInt32(reader["Discontinued"]) == 1
                             };
                         }
                     }

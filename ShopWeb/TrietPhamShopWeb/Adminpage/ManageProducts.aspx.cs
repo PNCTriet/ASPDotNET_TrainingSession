@@ -123,13 +123,20 @@ namespace TrietPhamShopWeb.Adminpage
         // <================================>
         private void LoadProductForEdit(int productId)
         {
-            GridViewRow row = (GridViewRow)(((LinkButton)CommandSource).NamingContainer);
-            txtProductName.Text = gvProducts.DataKeys[row.RowIndex]["ProductName"].ToString();
-            txtPrice.Text = gvProducts.DataKeys[row.RowIndex]["Price"].ToString();
-            txtStock.Text = gvProducts.DataKeys[row.RowIndex]["Stock"].ToString();
-            hdnProductId.Value = productId.ToString();
-            LoadProductImages(productId);
-            ScriptManager.RegisterStartupScript(this, GetType(), "ShowEditModal", "showEditModal();", true);
+            var product = ProductBLL.GetProductById(productId);
+            if (product != null)
+            {
+                hdnProductId.Value = product.ProductID.ToString();
+                txtProductName.Text = product.ProductName;
+                txtPrice.Text = product.Price.ToString();
+                txtStock.Text = product.Stock.ToString();
+                txtQuantityPerUnit.Text = product.QuantityPerUnit;
+                txtUnitsOnOrder.Text = product.UnitsOnOrder.ToString();
+                txtReorderLevel.Text = product.ReorderLevel.ToString();
+                chkDiscontinued.Checked = product.Discontinued;
+                LoadProductImages(productId);
+                ScriptManager.RegisterStartupScript(this, GetType(), "ShowEditModal", "showEditModal();", true);
+            }
         }
 
         private void LoadProductImages(int productId)
@@ -145,9 +152,14 @@ namespace TrietPhamShopWeb.Adminpage
                 string productName = txtProductName.Text.Trim();
                 decimal price = Convert.ToDecimal(txtPrice.Text);
                 int stock = Convert.ToInt32(txtStock.Text);
+                string quantityPerUnit = txtQuantityPerUnit.Text.Trim();
+                int unitsOnOrder = string.IsNullOrEmpty(txtUnitsOnOrder.Text) ? 0 : Convert.ToInt32(txtUnitsOnOrder.Text);
+                int reorderLevel = string.IsNullOrEmpty(txtReorderLevel.Text) ? 0 : Convert.ToInt32(txtReorderLevel.Text);
+                bool discontinued = chkDiscontinued.Checked;
 
                 // Cập nhật thông tin sản phẩm
-                if (ProductBLL.UpdateProduct(productId, productName, price, stock))
+                if (ProductBLL.UpdateProduct(productId, productName, price, stock, 
+                    quantityPerUnit, unitsOnOrder, reorderLevel, discontinued))
                 {
                     // Xử lý upload ảnh nếu có
                     if (FileUpload1.HasFile)
@@ -178,10 +190,7 @@ namespace TrietPhamShopWeb.Adminpage
                         }
                     }
 
-                    // Hiển thị thông báo trước
                     ShowSuccessMessage("Cập nhật sản phẩm thành công!");
-                    
-                    // Sau đó mới load lại dữ liệu và đóng modal
                     LoadProducts();
                     ScriptManager.RegisterStartupScript(this, GetType(), "CloseModal", 
                         "$('#editProductModal').modal('hide');", true);
@@ -210,9 +219,12 @@ namespace TrietPhamShopWeb.Adminpage
                 string productName = txtNewProductName.Text.Trim();
                 decimal price = Convert.ToDecimal(txtNewPrice.Text);
                 int stock = Convert.ToInt32(txtNewStock.Text);
-                string description = txtNewDescription.Text.Trim();
+                string quantityPerUnit = txtNewQuantityPerUnit.Text.Trim();
+                int unitsOnOrder = string.IsNullOrEmpty(txtNewUnitsOnOrder.Text) ? 0 : Convert.ToInt32(txtNewUnitsOnOrder.Text);
+                int reorderLevel = string.IsNullOrEmpty(txtNewReorderLevel.Text) ? 0 : Convert.ToInt32(txtNewReorderLevel.Text);
+                bool discontinued = chkNewDiscontinued.Checked;
 
-                int productId = ProductBLL.InsertProduct(productName, categoryId, price, stock, description);
+                int productId = ProductBLL.InsertProduct(productName, categoryId, price, stock, quantityPerUnit);
 
                 if (productId > 0)
                 {
@@ -249,7 +261,6 @@ namespace TrietPhamShopWeb.Adminpage
                     LoadProducts();
                     ScriptManager.RegisterStartupScript(this, GetType(), "CloseModal", 
                         "$('#createProductModal').modal('hide');", true);
-                    
                 }
                 else
                 {
@@ -259,7 +270,6 @@ namespace TrietPhamShopWeb.Adminpage
             catch (Exception ex)
             {
                 ShowErrorMessage("Lỗi tạo sản phẩm: " + ex.Message);
-                //ShowErrorMessage("Lỗi tạo sản phẩm: ");
                 LoadProducts();
                 ScriptManager.RegisterStartupScript(this, GetType(), "CloseModal",
                     "$('#createProductModal').modal('hide');", true);
