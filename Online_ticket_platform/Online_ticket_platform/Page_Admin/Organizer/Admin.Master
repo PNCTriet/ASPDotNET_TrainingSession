@@ -1,0 +1,36 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.Master.cs" Inherits="Online_ticket_platform.Page_Admin.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="~/Styles/AdminPage.css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <header class="header">
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="User_Home.aspx">Trang chủ</a></li>
+                    <li><a href="User_Profile.aspx">Thông tin cá nhân</a></li>
+                    <li><a href="User_Orders.aspx">Đơn hàng</a></li>
+                    <li><a href="User_Cart.aspx">Giỏ hàng</a></li>
+                    <li><a href="../Login.aspx">Đăng xuất</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="main-content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2024 Online Ticket Platform. All rights reserved.</p>
+        </footer>
+    </form>
+</body>
+</html>

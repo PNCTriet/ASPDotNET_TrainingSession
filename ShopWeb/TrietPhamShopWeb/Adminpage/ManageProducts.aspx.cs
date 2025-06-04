@@ -158,8 +158,7 @@ namespace TrietPhamShopWeb.Adminpage
                 bool discontinued = chkDiscontinued.Checked;
 
                 // Cập nhật thông tin sản phẩm
-                if (ProductBLL.UpdateProduct(productId, productName, price, stock, 
-                    quantityPerUnit, unitsOnOrder, reorderLevel, discontinued))
+                if (ProductBLL.UpdateProduct(productId, productName, price, stock, quantityPerUnit))
                 {
                     // Xử lý upload ảnh nếu có
                     if (FileUpload1.HasFile)

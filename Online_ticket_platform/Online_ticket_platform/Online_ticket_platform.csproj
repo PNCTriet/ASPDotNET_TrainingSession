@@ -121,6 +121,715 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Page_Admin\Admin_Dashboard.aspx" />
+    <Content Include="Page_Admin\Controls\Footer.aspx" />
+    <Content Include="Page_Admin\Controls\Header.aspx" />
+    <Content Include="Page_Admin\Controls\navbar.aspx" />
+    <Content Include="Page_Admin\Controls\sidebar.aspx" />
+    <Content Include="Page_User\Controls\Footer.aspx" />
+    <Content Include="Page_User\Controls\Header.aspx" />
+    <Content Include="Page_User\Controls\Navbar.aspx" />
+    <Content Include="Page_User\Controls\Sidebar.aspx" />
+    <Content Include="Page_User\User_Home.aspx" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\.gitignore" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\404.html" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\blank.html" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\buttons.html" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\cards.html" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\charts.html" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\css\sb-admin-2.css" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\css\sb-admin-2.min.css" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\forgot-password.html" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\gulpfile.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\img\undraw_posting_photo.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\img\undraw_profile.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\img\undraw_profile_1.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\img\undraw_profile_2.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\img\undraw_profile_3.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\img\undraw_rocket.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\index.html" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\js\demo\chart-area-demo.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\js\demo\chart-bar-demo.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\js\demo\chart-pie-demo.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\js\demo\datatables-demo.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\js\sb-admin-2.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\js\sb-admin-2.min.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\login.html" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\PRO_UPGRADE.txt" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\register.html" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\tables.html" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\utilities-animation.html" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\utilities-border.html" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\utilities-color.html" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\utilities-other.html" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\chart.js\Chart.bundle.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\chart.js\Chart.bundle.min.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\chart.js\Chart.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\chart.js\Chart.min.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\datatables\dataTables.bootstrap4.css" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\datatables\dataTables.bootstrap4.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\datatables\dataTables.bootstrap4.min.css" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\datatables\dataTables.bootstrap4.min.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\datatables\jquery.dataTables.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\datatables\jquery.dataTables.min.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\attribution.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\css\all.css" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\css\all.min.css" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\css\brands.css" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\css\brands.min.css" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\css\fontawesome.css" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\css\fontawesome.min.css" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\css\regular.css" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\css\regular.min.css" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\css\solid.css" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\css\solid.min.css" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\css\svg-with-js.css" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\css\svg-with-js.min.css" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\css\v4-shims.css" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\css\v4-shims.min.css" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\js\all.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\js\all.min.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\js\brands.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\js\brands.min.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\js\conflict-detection.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\js\conflict-detection.min.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\js\fontawesome.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\js\fontawesome.min.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\js\regular.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\js\regular.min.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\js\solid.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\js\solid.min.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\js\v4-shims.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\js\v4-shims.min.js" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\LICENSE.txt" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\sprites\brands.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\sprites\regular.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\sprites\solid.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\500px.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\accessible-icon.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\accusoft.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\acquisitions-incorporated.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\adn.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\adversal.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\affiliatetheme.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\airbnb.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\algolia.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\alipay.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\amazon-pay.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\amazon.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\amilia.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\android.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\angellist.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\angrycreative.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\angular.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\app-store-ios.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\app-store.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\apper.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\apple-pay.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\apple.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\artstation.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\asymmetrik.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\atlassian.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\audible.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\autoprefixer.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\avianex.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\aviato.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\aws.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\bandcamp.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\battle-net.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\behance-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\behance.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\bimobject.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\bitbucket.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\bitcoin.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\bity.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\black-tie.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\blackberry.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\blogger-b.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\blogger.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\bluetooth-b.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\bluetooth.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\bootstrap.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\btc.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\buffer.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\buromobelexperte.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\buy-n-large.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\buysellads.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\canadian-maple-leaf.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\cc-amazon-pay.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\cc-amex.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\cc-apple-pay.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\cc-diners-club.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\cc-discover.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\cc-jcb.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\cc-mastercard.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\cc-paypal.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\cc-stripe.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\cc-visa.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\centercode.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\centos.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\chrome.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\chromecast.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\cloudflare.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\cloudscale.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\cloudsmith.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\cloudversify.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\codepen.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\codiepie.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\confluence.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\connectdevelop.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\contao.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\cotton-bureau.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\cpanel.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\creative-commons-by.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\creative-commons-nc-eu.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\creative-commons-nc-jp.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\creative-commons-nc.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\creative-commons-nd.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\creative-commons-pd-alt.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\creative-commons-pd.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\creative-commons-remix.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\creative-commons-sa.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\creative-commons-sampling-plus.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\creative-commons-sampling.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\creative-commons-share.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\creative-commons-zero.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\creative-commons.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\critical-role.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\css3-alt.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\css3.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\cuttlefish.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\d-and-d-beyond.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\d-and-d.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\dailymotion.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\dashcube.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\deezer.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\delicious.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\deploydog.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\deskpro.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\dev.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\deviantart.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\dhl.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\diaspora.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\digg.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\digital-ocean.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\discord.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\discourse.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\dochub.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\docker.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\draft2digital.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\dribbble-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\dribbble.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\dropbox.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\drupal.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\dyalog.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\earlybirds.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\ebay.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\edge-legacy.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\edge.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\elementor.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\ello.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\ember.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\empire.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\envira.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\erlang.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\ethereum.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\etsy.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\evernote.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\expeditedssl.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\facebook-f.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\facebook-messenger.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\facebook-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\facebook.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\fantasy-flight-games.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\fedex.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\fedora.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\figma.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\firefox-browser.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\firefox.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\first-order-alt.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\first-order.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\firstdraft.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\flickr.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\flipboard.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\fly.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\font-awesome-alt.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\font-awesome-flag.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\font-awesome-logo-full.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\font-awesome.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\fonticons-fi.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\fonticons.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\fort-awesome-alt.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\fort-awesome.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\forumbee.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\foursquare.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\free-code-camp.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\freebsd.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\fulcrum.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\galactic-republic.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\galactic-senate.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\get-pocket.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\gg-circle.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\gg.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\git-alt.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\git-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\git.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\github-alt.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\github-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\github.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\gitkraken.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\gitlab.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\gitter.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\glide-g.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\glide.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\gofore.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\goodreads-g.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\goodreads.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\google-drive.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\google-pay.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\google-play.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\google-plus-g.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\google-plus-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\google-plus.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\google-wallet.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\google.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\gratipay.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\grav.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\gripfire.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\grunt.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\guilded.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\gulp.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\hacker-news-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\hacker-news.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\hackerrank.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\hips.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\hire-a-helper.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\hive.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\hooli.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\hornbill.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\hotjar.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\houzz.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\html5.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\hubspot.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\ideal.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\imdb.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\innosoft.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\instagram-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\instagram.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\instalod.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\intercom.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\internet-explorer.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\invision.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\ioxhost.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\itch-io.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\itunes-note.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\itunes.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\java.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\jedi-order.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\jenkins.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\jira.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\joget.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\joomla.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\js-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\js.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\jsfiddle.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\kaggle.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\keybase.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\keycdn.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\kickstarter-k.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\kickstarter.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\korvue.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\laravel.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\lastfm-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\lastfm.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\leanpub.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\less.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\line.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\linkedin-in.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\linkedin.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\linode.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\linux.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\lyft.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\magento.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\mailchimp.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\mandalorian.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\markdown.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\mastodon.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\maxcdn.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\mdb.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\medapps.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\medium-m.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\medium.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\medrt.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\meetup.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\megaport.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\mendeley.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\microblog.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\microsoft.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\mix.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\mixcloud.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\mixer.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\mizuni.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\modx.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\monero.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\napster.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\neos.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\nimblr.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\node-js.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\node.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\npm.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\ns8.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\nutritionix.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\octopus-deploy.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\odnoklassniki-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\odnoklassniki.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\old-republic.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\opencart.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\openid.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\opera.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\optin-monster.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\orcid.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\osi.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\page4.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\pagelines.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\palfed.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\patreon.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\paypal.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\penny-arcade.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\perbyte.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\periscope.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\phabricator.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\phoenix-framework.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\phoenix-squadron.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\php.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\pied-piper-alt.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\pied-piper-hat.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\pied-piper-pp.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\pied-piper-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\pied-piper.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\pinterest-p.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\pinterest-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\pinterest.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\playstation.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\product-hunt.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\pushed.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\python.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\qq.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\quinscape.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\quora.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\r-project.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\raspberry-pi.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\ravelry.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\react.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\reacteurope.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\readme.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\rebel.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\red-river.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\reddit-alien.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\reddit-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\reddit.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\redhat.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\renren.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\replyd.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\researchgate.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\resolving.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\rev.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\rocketchat.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\rockrms.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\rust.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\safari.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\salesforce.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\sass.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\schlix.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\scribd.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\searchengin.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\sellcast.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\sellsy.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\servicestack.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\shirtsinbulk.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\shopify.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\shopware.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\simplybuilt.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\sistrix.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\sith.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\sketch.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\skyatlas.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\skype.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\slack-hash.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\slack.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\slideshare.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\snapchat-ghost.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\snapchat-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\snapchat.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\soundcloud.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\sourcetree.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\speakap.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\speaker-deck.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\spotify.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\squarespace.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\stack-exchange.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\stack-overflow.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\stackpath.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\staylinked.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\steam-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\steam-symbol.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\steam.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\sticker-mule.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\strava.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\stripe-s.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\stripe.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\studiovinari.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\stumbleupon-circle.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\stumbleupon.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\superpowers.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\supple.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\suse.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\swift.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\symfony.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\teamspeak.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\telegram-plane.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\telegram.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\tencent-weibo.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\the-red-yeti.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\themeco.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\themeisle.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\think-peaks.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\tiktok.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\trade-federation.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\trello.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\tripadvisor.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\tumblr-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\tumblr.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\twitch.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\twitter-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\twitter.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\typo3.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\uber.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\ubuntu.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\uikit.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\umbraco.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\uncharted.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\uniregistry.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\unity.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\unsplash.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\untappd.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\ups.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\usb.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\usps.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\ussunnah.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\vaadin.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\viacoin.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\viadeo-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\viadeo.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\viber.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\vimeo-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\vimeo-v.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\vimeo.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\vine.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\vk.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\vnv.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\vuejs.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\watchman-monitoring.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\waze.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\weebly.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\weibo.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\weixin.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\whatsapp-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\whatsapp.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\whmcs.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\wikipedia-w.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\windows.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\wix.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\wizards-of-the-coast.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\wodu.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\wolf-pack-battalion.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\wordpress-simple.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\wordpress.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\wpbeginner.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\wpexplorer.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\wpforms.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\wpressr.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\xbox.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\xing-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\xing.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\y-combinator.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\yahoo.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\yammer.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\yandex-international.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\yandex.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\yarn.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\yelp.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\yoast.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\youtube-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\youtube.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\brands\zhihu.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\address-book.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\address-card.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\angry.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\arrow-alt-circle-down.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\arrow-alt-circle-left.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\arrow-alt-circle-right.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\arrow-alt-circle-up.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\bell-slash.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\bell.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\bookmark.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\building.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\calendar-alt.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\calendar-check.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\calendar-minus.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\calendar-plus.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\calendar-times.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\calendar.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\caret-square-down.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\caret-square-left.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\caret-square-right.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\caret-square-up.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\chart-bar.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\check-circle.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\check-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\circle.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\clipboard.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\clock.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\clone.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\closed-captioning.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\comment-alt.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\comment-dots.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\comment.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\comments.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\compass.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\copy.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\copyright.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\credit-card.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\dizzy.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\dot-circle.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\edit.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\envelope-open.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\envelope.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\eye-slash.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\eye.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\file-alt.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\file-archive.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\file-audio.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\file-code.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\file-excel.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\file-image.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\file-pdf.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\file-powerpoint.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\file-video.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\file-word.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\file.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\flag.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\flushed.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\folder-open.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\folder.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\font-awesome-logo-full.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\frown-open.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\frown.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\futbol.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\gem.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\grimace.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\grin-alt.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\grin-beam-sweat.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\grin-beam.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\grin-hearts.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\grin-squint-tears.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\grin-squint.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\grin-stars.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\grin-tears.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\grin-tongue-squint.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\grin-tongue-wink.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\grin-tongue.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\grin-wink.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\grin.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\hand-lizard.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\hand-paper.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\hand-peace.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\hand-point-down.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\hand-point-left.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\hand-point-right.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\hand-point-up.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\hand-pointer.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\hand-rock.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\hand-scissors.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\hand-spock.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\handshake.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\hdd.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\heart.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\hospital.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\hourglass.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\id-badge.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\id-card.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\image.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\images.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\keyboard.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\kiss-beam.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\kiss-wink-heart.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\kiss.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\laugh-beam.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\laugh-squint.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\laugh-wink.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\laugh.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\lemon.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\life-ring.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\lightbulb.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\list-alt.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\map.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\meh-blank.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\meh-rolling-eyes.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\meh.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\minus-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\money-bill-alt.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\moon.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\newspaper.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\object-group.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\object-ungroup.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\paper-plane.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\pause-circle.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\play-circle.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\plus-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\question-circle.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\registered.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\sad-cry.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\sad-tear.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\save.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\share-square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\smile-beam.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\smile-wink.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\smile.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\snowflake.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\square.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\star-half.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\star.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\sticky-note.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\stop-circle.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\sun.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\surprise.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\thumbs-down.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\thumbs-up.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\times-circle.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\tired.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\trash-alt.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\user-circle.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\user.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\window-close.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\window-maximize.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\window-minimize.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\regular\window-restore.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\solid\ad.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\solid\address-book.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\solid\address-card.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\solid\adjust.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\solid\air-freshener.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\solid\align-center.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\solid\align-justify.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\solid\align-left.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\solid\align-right.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\solid\allergies.svg" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\svgs\solid\ambulance.svg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -149,6 +858,172 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Page_User\User.Master" />
+    <Content Include="Page_Admin\Admin.Master" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\.browserslistrc" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\.travis.yml" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\LICENSE" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\package-lock.json" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\package.json" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\README.md" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\navs\_global.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\navs\_sidebar.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\navs\_topbar.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\sb-admin-2.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\utilities\_animation.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\utilities\_background.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\utilities\_border.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\utilities\_display.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\utilities\_progress.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\utilities\_rotate.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\utilities\_text.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\_buttons.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\_cards.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\_charts.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\_dropdowns.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\_error.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\_footer.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\_global.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\_login.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\_mixins.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\_navs.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\_utilities.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\scss\_variables.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\js\bootstrap.js.map" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\bootstrap-grid.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\bootstrap-reboot.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\bootstrap.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_alert.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_background-variant.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_badge.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_border-radius.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_box-shadow.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_breakpoints.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_buttons.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_caret.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_clearfix.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_deprecate.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_float.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_forms.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_gradients.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_grid-framework.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_grid.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_hover.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_image.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_list-group.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_lists.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_nav-divider.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_pagination.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_reset-text.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_resize.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_screen-reader.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_size.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_table-row.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_text-emphasis.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_text-hide.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_text-truncate.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_transition.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\mixins\_visibility.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\utilities\_align.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\utilities\_background.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\utilities\_borders.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\utilities\_clearfix.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\utilities\_display.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\utilities\_embed.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\utilities\_flex.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\utilities\_float.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\utilities\_interactions.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\utilities\_overflow.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\utilities\_position.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\utilities\_screenreaders.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\utilities\_shadows.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\utilities\_sizing.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\utilities\_spacing.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\utilities\_stretched-link.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\utilities\_text.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\utilities\_visibility.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\vendor\_rfs.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_alert.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_badge.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_breadcrumb.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_button-group.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_buttons.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_card.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_carousel.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_close.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_code.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_custom-forms.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_dropdown.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_forms.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_functions.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_grid.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_images.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_input-group.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_jumbotron.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_list-group.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_media.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_mixins.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_modal.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_nav.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_navbar.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_pagination.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_popover.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_print.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_progress.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_reboot.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_root.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_spinners.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_tables.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_toasts.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_tooltip.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_transitions.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_type.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_utilities.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\bootstrap\scss\_variables.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\less\brands.less" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\less\fontawesome.less" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\less\regular.less" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\less\solid.less" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\less\v4-shims.less" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\less\_animated.less" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\less\_bordered-pulled.less" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\less\_core.less" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\less\_fixed-width.less" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\less\_icons.less" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\less\_larger.less" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\less\_list.less" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\less\_mixins.less" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\less\_rotated-flipped.less" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\less\_screen-reader.less" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\less\_shims.less" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\less\_stacked.less" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\less\_variables.less" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\metadata\categories.yml" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\metadata\icons.yml" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\metadata\shims.yml" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\metadata\sponsors.yml" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\package.json" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\scss\brands.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\scss\fontawesome.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\scss\regular.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\scss\solid.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\scss\v4-shims.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\scss\_animated.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\scss\_bordered-pulled.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\scss\_core.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\scss\_fixed-width.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\scss\_icons.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\scss\_larger.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\scss\_list.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\scss\_mixins.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\scss\_rotated-flipped.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\scss\_screen-reader.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\scss\_shims.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\scss\_stacked.scss" />
+    <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\vendor\fontawesome-free\scss\_variables.scss" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -177,6 +1052,8 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="Styles\AdminPage.css" />
+    <Content Include="Styles\UserPage.css" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -209,6 +1086,90 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Page_Admin\Admin.Master.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Admin.Master.designer.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Admin\Admin_Dashboard.aspx.cs">
+      <DependentUpon>Admin_Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Admin_Dashboard.aspx.designer.cs">
+      <DependentUpon>Admin_Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Admin\Controls\Footer.aspx.cs">
+      <DependentUpon>Footer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Controls\Footer.aspx.designer.cs">
+      <DependentUpon>Footer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Admin\Controls\Header.aspx.cs">
+      <DependentUpon>Header.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Controls\Header.aspx.designer.cs">
+      <DependentUpon>Header.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Admin\Controls\navbar.aspx.cs">
+      <DependentUpon>navbar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Controls\navbar.aspx.designer.cs">
+      <DependentUpon>navbar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Admin\Controls\sidebar.aspx.cs">
+      <DependentUpon>sidebar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Controls\sidebar.aspx.designer.cs">
+      <DependentUpon>sidebar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_User\Controls\Footer.aspx.cs">
+      <DependentUpon>Footer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\Controls\Footer.aspx.designer.cs">
+      <DependentUpon>Footer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_User\Controls\Header.aspx.cs">
+      <DependentUpon>Header.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\Controls\Header.aspx.designer.cs">
+      <DependentUpon>Header.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_User\Controls\Navbar.aspx.cs">
+      <DependentUpon>Navbar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\Controls\Navbar.aspx.designer.cs">
+      <DependentUpon>Navbar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_User\Controls\Sidebar.aspx.cs">
+      <DependentUpon>Sidebar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\Controls\Sidebar.aspx.designer.cs">
+      <DependentUpon>Sidebar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_User\User.Master.cs">
+      <DependentUpon>User.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\User.Master.designer.cs">
+      <DependentUpon>User.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Page_User\User_Home.aspx.cs">
+      <DependentUpon>User_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\User_Home.aspx.designer.cs">
+      <DependentUpon>User_Home.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -219,12 +1180,14 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
@@ -232,6 +1195,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controls\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -243,6 +1207,16 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Online_ticket_platform_BLL\Online_ticket_platform_BLL.csproj">
+      <Project>{16ae845e-6e38-4d80-9842-9a8dcd29f534}</Project>
+      <Name>Online_ticket_platform_BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Online_ticket_platform_Model\Online_ticket_platform_Model.csproj">
+      <Project>{634c41af-072d-4482-81c7-513432327d90}</Project>
+      <Name>Online_ticket_platform_Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -259,7 +1233,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55929</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44372/</IISUrl>
+          <IISUrl>http://localhost:55929/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
