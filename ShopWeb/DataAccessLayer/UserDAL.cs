@@ -22,7 +22,7 @@ namespace DataAccessLayer
                 string query = @"
                     SELECT u.UserID, u.Username, u.Email, u.IsActive, u.CreatedAt, u.UpdatedAt,
                             e.FirstName, e.LastName, e.Title, e.HomePhone,
-                            r.RoleID, r.RoleName
+                            r.RoleID , r.RoleName
                     FROM Users u
                     LEFT JOIN Employees e ON u.EmployeeID = e.EmployeeID
                     LEFT JOIN Roles r ON u.RoleID = r.RoleID";
@@ -76,6 +76,7 @@ namespace DataAccessLayer
                         SET Username = :Username,
                             Email = :Email,
                             IsActive = :IsActive,
+                            RoleID = :RoleID,
                             UpdatedAt = SYSDATE
                         WHERE UserID = :UserID";
 
@@ -85,6 +86,7 @@ namespace DataAccessLayer
                         cmd.Parameters.Add(":Username", OracleDbType.Varchar2).Value = user.Username;
                         cmd.Parameters.Add(":Email", OracleDbType.Varchar2).Value = user.Email;
                         cmd.Parameters.Add(":IsActive", OracleDbType.Int32).Value = user.IsActive ? 1 : 0;
+                        cmd.Parameters.Add(":RoleID", OracleDbType.Int32).Value = user.RoleID;
                         cmd.Parameters.Add(":UserID", OracleDbType.Int32).Value = user.UserID;
 
                         conn.Open();
@@ -129,7 +131,7 @@ namespace DataAccessLayer
                 string query = @"
                     SELECT u.UserID, u.Username, u.Email, u.IsActive, u.CreatedAt, u.UpdatedAt,
                            e.FirstName, e.LastName, e.Title, e.HomePhone,
-                           r.RoleID, r.RoleName
+                           r.RoleID , r.RoleName
                     FROM Users u
                     LEFT JOIN Employees e ON u.EmployeeID = e.EmployeeID
                     LEFT JOIN Roles r ON u.RoleID = r.RoleID
@@ -178,7 +180,7 @@ namespace DataAccessLayer
             var list = new List<Role>();
             using (OracleConnection conn = new OracleConnection(Connection.GetConnectionString()))
             {
-                string query = "SELECT RoleID, RoleName FROM Roles";
+                string query = "SELECT RoleID , RoleName FROM Roles";
                 
                 using (OracleCommand cmd = new OracleCommand(query, conn))
                 {
@@ -281,7 +283,7 @@ namespace DataAccessLayer
                     {
                         // Tạo User với EmployeeID đã có
                         string userQuery = @"
-                            INSERT INTO Users (UserID, RoleID, EmployeeID, Username, PasswordHash, Email, IsActive, CreatedAt, UpdatedAt)
+                            INSERT INTO Users (UserID, RoleID , EmployeeID, Username, PasswordHash, Email, IsActive, CreatedAt, UpdatedAt)
                             VALUES (:UserID, :RoleID, :EmployeeID, :Username, :PasswordHash, :Email, :IsActive, SYSDATE, SYSDATE)";
 
                         using (OracleCommand cmd = new OracleCommand(userQuery, conn))
@@ -319,7 +321,7 @@ namespace DataAccessLayer
                 string query = @"
                     SELECT u.UserID, u.Username, u.Email, u.PasswordHash, u.IsActive, u.CreatedAt, u.UpdatedAt,
                            e.FirstName, e.LastName, e.Title,
-                           r.RoleID, r.RoleName
+                           r.RoleID , r.RoleName
                     FROM Users u
                     LEFT JOIN Employees e ON u.EmployeeID = e.EmployeeID
                     LEFT JOIN Roles r ON u.RoleID = r.RoleID
