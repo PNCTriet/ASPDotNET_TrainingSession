@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="User_404.aspx.cs" Inherits="Online_ticket_platform.Page_User.User_404" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="User_Login.aspx.cs" Inherits="Online_ticket_platform.Page_User.User_404" %>
 
 <!DOCTYPE html>
 

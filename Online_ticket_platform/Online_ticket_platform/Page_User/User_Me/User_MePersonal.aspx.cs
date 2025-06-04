@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Online_ticket_platform.Page_User
 {
-    public partial class User_404 : System.Web.UI.Page
+    public partial class User_MePersonal : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

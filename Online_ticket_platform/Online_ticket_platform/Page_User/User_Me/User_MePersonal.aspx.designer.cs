@@ -11,7 +11,7 @@ namespace Online_ticket_platform.Page_User
 {
 
 
-    public partial class User_404
+    public partial class User_MePersonal
     {
 
         /// <summary>

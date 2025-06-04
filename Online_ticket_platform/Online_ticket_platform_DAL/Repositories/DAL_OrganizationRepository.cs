@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Online_ticket_platform_DAL.Repositories
 {
-    internal class OrganizationRepository
+    internal class DAL_OrganizationRepository
     {
     }
 }

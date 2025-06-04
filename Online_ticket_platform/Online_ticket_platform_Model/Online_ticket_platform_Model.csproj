@@ -41,8 +41,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\MOD_EventSetting.cs" />
+    <Compile Include="Entities\MOD_UserOrganization.cs" />
+    <Compile Include="Entities\MOD_TrackingVisit.cs" />
+    <Compile Include="Entities\MOD_WebhookSubscription.cs" />
+    <Compile Include="Entities\MOD_WebhookLog.cs" />
+    <Compile Include="Entities\MOD_EmailLog.cs" />
+    <Compile Include="Entities\MOD_ReferralCode.cs" />
+    <Compile Include="Entities\MOD_Customer.cs" />
+    <Compile Include="Entities\MOD_PromoCode.cs" />
+    <Compile Include="Entities\MOD_CheckinLog.cs" />
+    <Compile Include="Entities\MOD_Payment.cs" />
+    <Compile Include="Entities\MOD_OrderItem.cs" />
+    <Compile Include="Entities\MOD_Order.cs" />
+    <Compile Include="Entities\MOD_OrderPromo.cs" />
+    <Compile Include="Entities\MOD_Event.cs" />
+    <Compile Include="Entities\MOD_User.cs" />
+    <Compile Include="Entities\MOD_Ticket.cs" />
+    <Compile Include="Entities\MOD_Organization.cs" />
     <Compile Include="OTP_Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

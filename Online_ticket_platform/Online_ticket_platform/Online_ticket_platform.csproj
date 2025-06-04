@@ -121,7 +121,13 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Page_Admin\Admin_Dashboard.aspx" />
+    <Content Include="Page_Admin\Organizer\Admin_Feeconfig.aspx" />
+    <Content Include="Page_Admin\Organizer\Admin_Seatmap.aspx" />
+    <Content Include="Page_Admin\Organizer\Admin_Promotion.aspx" />
+    <Content Include="Page_Admin\Organizer\Admin_Payout.aspx" />
+    <Content Include="Page_Admin\Organizer\Admin_Order.aspx" />
+    <Content Include="Page_Admin\Organizer\Admin_Setting.aspx" />
+    <Content Include="Page_Admin\Organizer\Admin_Home.aspx" />
     <Content Include="Page_Admin\Controls\Footer.aspx" />
     <Content Include="Page_Admin\Controls\Header.aspx" />
     <Content Include="Page_Admin\Controls\navbar.aspx" />
@@ -130,7 +136,19 @@
     <Content Include="Page_User\Controls\Header.aspx" />
     <Content Include="Page_User\Controls\Navbar.aspx" />
     <Content Include="Page_User\Controls\Sidebar.aspx" />
+    <Content Include="Page_User\User_Me\User_MeTicket.aspx" />
+    <Content Include="Page_User\User_Me\User_MePersonal.aspx" />
+    <Content Include="Page_User\User_Whyus.aspx" />
+    <Content Include="Page_User\User_Organization.aspx" />
+    <Content Include="Page_User\User_Checkout.aspx" />
+    <Content Include="Page_User\User_Event.aspx" />
+    <Content Include="Page_User\User_Reservation.aspx" />
+    <Content Include="Page_User\User_Login.aspx" />
+    <Content Include="Page_User\User_Me\User_MeOrder.aspx" />
+    <Content Include="Page_User\User_404.aspx" />
     <Content Include="Page_User\User_Home.aspx" />
+    <Content Include="Public\database\ocx_oracle_sample.sql" />
+    <Content Include="Public\database\ocx_oracle_schema.sql" />
     <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\.gitignore" />
     <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\404.html" />
     <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\blank.html" />
@@ -859,7 +877,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Page_User\User.Master" />
-    <Content Include="Page_Admin\Admin.Master" />
+    <Content Include="Page_Admin\Organizer\Admin.Master" />
     <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\.browserslistrc" />
     <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\.travis.yml" />
     <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\LICENSE" />
@@ -1086,19 +1104,61 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Page_Admin\Admin.Master.cs">
+    <Compile Include="Page_Admin\Organizer\Admin.Master.cs">
       <DependentUpon>Admin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Page_Admin\Admin.Master.designer.cs">
+    <Compile Include="Page_Admin\Organizer\Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
     </Compile>
-    <Compile Include="Page_Admin\Admin_Dashboard.aspx.cs">
-      <DependentUpon>Admin_Dashboard.aspx</DependentUpon>
+    <Compile Include="Page_Admin\Organizer\Admin_Feeconfig.aspx.cs">
+      <DependentUpon>Admin_Feeconfig.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Page_Admin\Admin_Dashboard.aspx.designer.cs">
-      <DependentUpon>Admin_Dashboard.aspx</DependentUpon>
+    <Compile Include="Page_Admin\Organizer\Admin_Feeconfig.aspx.designer.cs">
+      <DependentUpon>Admin_Feeconfig.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Admin_Seatmap.aspx.cs">
+      <DependentUpon>Admin_Seatmap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Admin_Seatmap.aspx.designer.cs">
+      <DependentUpon>Admin_Seatmap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Admin_Promotion.aspx.cs">
+      <DependentUpon>Admin_Promotion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Admin_Promotion.aspx.designer.cs">
+      <DependentUpon>Admin_Promotion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Admin_Payout.aspx.cs">
+      <DependentUpon>Admin_Payout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Admin_Payout.aspx.designer.cs">
+      <DependentUpon>Admin_Payout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Admin_Order.aspx.cs">
+      <DependentUpon>Admin_Order.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Admin_Order.aspx.designer.cs">
+      <DependentUpon>Admin_Order.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Admin_Setting.aspx.cs">
+      <DependentUpon>Admin_Setting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Admin_Setting.aspx.designer.cs">
+      <DependentUpon>Admin_Setting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Admin_Home.aspx.cs">
+      <DependentUpon>Admin_Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Admin_Home.aspx.designer.cs">
+      <DependentUpon>Admin_Home.aspx</DependentUpon>
     </Compile>
     <Compile Include="Page_Admin\Controls\Footer.aspx.cs">
       <DependentUpon>Footer.aspx</DependentUpon>
@@ -1162,6 +1222,76 @@
     </Compile>
     <Compile Include="Page_User\User.Master.designer.cs">
       <DependentUpon>User.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Page_User\User_Me\User_MeTicket.aspx.cs">
+      <DependentUpon>User_MeTicket.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\User_Me\User_MeTicket.aspx.designer.cs">
+      <DependentUpon>User_MeTicket.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_User\User_Me\User_MePersonal.aspx.cs">
+      <DependentUpon>User_MePersonal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\User_Me\User_MePersonal.aspx.designer.cs">
+      <DependentUpon>User_MePersonal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_User\User_Whyus.aspx.cs">
+      <DependentUpon>User_Whyus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\User_Whyus.aspx.designer.cs">
+      <DependentUpon>User_Whyus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_User\User_Organization.aspx.cs">
+      <DependentUpon>User_Organization.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\User_Organization.aspx.designer.cs">
+      <DependentUpon>User_Organization.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_User\User_Checkout.aspx.cs">
+      <DependentUpon>User_Checkout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\User_Checkout.aspx.designer.cs">
+      <DependentUpon>User_Checkout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_User\User_Event.aspx.cs">
+      <DependentUpon>User_Event.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\User_Event.aspx.designer.cs">
+      <DependentUpon>User_Event.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_User\User_Reservation.aspx.cs">
+      <DependentUpon>User_Reservation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\User_Reservation.aspx.designer.cs">
+      <DependentUpon>User_Reservation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_User\User_Login.aspx.cs">
+      <DependentUpon>User_Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\User_Login.aspx.designer.cs">
+      <DependentUpon>User_Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_User\User_Me\User_MeOrder.aspx.cs">
+      <DependentUpon>User_MeOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\User_Me\User_MeOrder.aspx.designer.cs">
+      <DependentUpon>User_MeOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_User\User_404.aspx.cs">
+      <DependentUpon>User_404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\User_404.aspx.designer.cs">
+      <DependentUpon>User_404.aspx</DependentUpon>
     </Compile>
     <Compile Include="Page_User\User_Home.aspx.cs">
       <DependentUpon>User_Home.aspx</DependentUpon>

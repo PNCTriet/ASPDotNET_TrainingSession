@@ -41,8 +41,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\DAL_ICheckinLogRepository.cs" />
+    <Compile Include="Interfaces\DAL_ICustomerRepository.cs" />
+    <Compile Include="Interfaces\DAL_IEmailLogRepository.cs" />
+    <Compile Include="Interfaces\DAL_IEventRepository.cs" />
+    <Compile Include="Interfaces\DAL_IEventSettingRepository.cs" />
+    <Compile Include="Interfaces\DAL_IOrderItemRepository.cs" />
+    <Compile Include="Interfaces\DAL_IOrderPromoRepository.cs" />
+    <Compile Include="Interfaces\DAL_IOrderRepository.cs" />
+    <Compile Include="Interfaces\DAL_IOrganizationRepository.cs" />
+    <Compile Include="Interfaces\DAL_IPaymentRepository.cs" />
+    <Compile Include="Interfaces\DAL_IPromoCodeRepository.cs" />
+    <Compile Include="Interfaces\DAL_IReferralCodeRepository.cs" />
+    <Compile Include="Interfaces\DAL_ITicketRepository.cs" />
+    <Compile Include="Interfaces\DAL_ITrackingVisitRepository.cs" />
+    <Compile Include="Interfaces\DAL_IUserOrganizationRepository.cs" />
+    <Compile Include="Interfaces\DAL_IUserRepository.cs" />
+    <Compile Include="Interfaces\DAL_IWebhookLogRepository.cs" />
+    <Compile Include="Interfaces\DAL_IWebhookSubscriptionRepository.cs" />
     <Compile Include="OTP_DAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\DAL_CheckinLogRepository.cs" />
+    <Compile Include="Repositories\DAL_CustomerRepository.cs" />
+    <Compile Include="Repositories\DAL_EmailLogRepository.cs" />
+    <Compile Include="Repositories\DAL_EventRepository.cs" />
+    <Compile Include="Repositories\DAL_EventSettingRepository.cs" />
+    <Compile Include="Repositories\DAL_OrderItemRepository.cs" />
+    <Compile Include="Repositories\DAL_OrderPromoRepository.cs" />
+    <Compile Include="Repositories\DAL_OrderRepository.cs" />
+    <Compile Include="Repositories\DAL_PaymentRepository.cs" />
+    <Compile Include="Repositories\DAL_PromoCodeRepository.cs" />
+    <Compile Include="Repositories\DAL_ReferralCodeRepository.cs" />
+    <Compile Include="Repositories\DAL_TicketRepository.cs" />
+    <Compile Include="Repositories\DAL_TrackingVisitRepository.cs" />
+    <Compile Include="Repositories\DAL_UserOrganizationRepository.cs" />
+    <Compile Include="Repositories\DAL_UserRepository.cs" />
+    <Compile Include="Repositories\DAL_OrganizationRepository.cs" />
+    <Compile Include="Repositories\DAL_WebhookLogRepository.cs" />
+    <Compile Include="Repositories\DAL_WebhookSubscriptionRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Online_ticket_platform_Model\Online_ticket_platform_Model.csproj">
@@ -50,5 +86,6 @@
       <Name>Online_ticket_platform_Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

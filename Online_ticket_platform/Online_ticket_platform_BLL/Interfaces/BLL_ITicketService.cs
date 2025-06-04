@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Online_ticket_platform_BLL.Interfaces
 {
-    internal class ITicketService
+    internal class BLL_ITicketService
     {
     }
 }

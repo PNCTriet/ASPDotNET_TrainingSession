@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page_Admin/Admin.Master" AutoEventWireup="true" CodeBehind="Admin_Dashboard.aspx.cs" Inherits="Online_ticket_platform.Page_Admin.Admin_Dashboard" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page_Admin/Admin.Master" AutoEventWireup="true" CodeBehind="Admin_Feeconfig.aspx.cs" Inherits="Online_ticket_platform.Page_Admin.Admin_Dashboard" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

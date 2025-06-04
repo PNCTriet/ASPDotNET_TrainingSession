@@ -41,8 +41,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\BLL_IEventSettingService.cs" />
+    <Compile Include="Interfaces\BLL_IUserOrganizationService.cs" />
+    <Compile Include="Interfaces\BLL_ITrackingService.cs" />
+    <Compile Include="Interfaces\BLL_IWebhookService.cs" />
+    <Compile Include="Interfaces\BLL_IEmailLogService.cs" />
+    <Compile Include="Interfaces\BLL_IReferralCodeService.cs" />
+    <Compile Include="Interfaces\BLL_IPromoCodeService.cs" />
+    <Compile Include="Interfaces\BLL_ICheckinLogService.cs" />
+    <Compile Include="Interfaces\BLL_IPaymentService.cs" />
+    <Compile Include="Interfaces\BLL_IOrganizationService.cs" />
+    <Compile Include="Interfaces\BLL_IEventService.cs" />
+    <Compile Include="Interfaces\BLL_IOrderService.cs" />
+    <Compile Include="Interfaces\BLL_ICustomerService.cs" />
+    <Compile Include="Interfaces\BLL_IUserService.cs" />
+    <Compile Include="Interfaces\BLL_ITicketService.cs" />
     <Compile Include="OTP_BLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BLL_CheckinLogService.cs" />
+    <Compile Include="Services\BLL_CustomerService.cs" />
+    <Compile Include="Services\BLL_EmailLogService.cs" />
+    <Compile Include="Services\BLL_EventService.cs" />
+    <Compile Include="Services\BLL_EventSettingService.cs" />
+    <Compile Include="Services\BLL_OrderService.cs" />
+    <Compile Include="Services\BLL_PaymentService.cs" />
+    <Compile Include="Services\BLL_PromoCodeService.cs" />
+    <Compile Include="Services\BLL_ReferralCodeService.cs" />
+    <Compile Include="Services\BLL_TicketService.cs" />
+    <Compile Include="Services\BLL_TrackingService.cs" />
+    <Compile Include="Services\BLL_UserOrganizationService.cs" />
+    <Compile Include="Services\BLL_UserService.cs" />
+    <Compile Include="Services\BLL_OrganizationService.cs" />
+    <Compile Include="Services\BLL_WebhookService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Online_ticket_platform_DAL\Online_ticket_platform_DAL.csproj">
@@ -54,5 +84,6 @@
       <Name>Online_ticket_platform_Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Online_ticket_platform.Page_Admin
 {
-    public partial class Admin_Dashboard : System.Web.UI.Page
+    public partial class Admin_Promotion : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

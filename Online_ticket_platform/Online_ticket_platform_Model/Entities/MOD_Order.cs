@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Online_ticket_platform_Model
 {
-    public class OTP_Model
+    public class MOD_Order
     {
     }
 }
