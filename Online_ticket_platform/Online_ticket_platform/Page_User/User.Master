@@ -1,36 +1,45 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="User.Master.cs" Inherits="Online_ticket_platform.Page_User.UserMaster" %>
 
+<%@ Register Src="~/Page_User/Controls/Header.ascx" TagPrefix="uc1" TagName="Header" %>
+<%@ Register Src="~/Page_User/Controls/Navbar.ascx" TagPrefix="uc2" TagName="Navbar" %>
+<%@ Register Src="~/Page_User/Controls/Sidebar.ascx" TagPrefix="uc3" TagName="Sidebar" %>
+<%@ Register Src="~/Page_User/Controls/Footer.ascx" TagPrefix="uc4" TagName="Footer" %>
+
 <!DOCTYPE html>
 
 <html>
 <head runat="server">
-    <title></title>
-    <link rel="stylesheet" type="text/css" href="~/Styles/UserPage.css" />
+    <title>OCX - Nền tảng bán vé trực tuyến</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body class="bg-gray-50">
     <form id="form1" runat="server">
-        <header class="header">
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="User_Home.aspx">Trang chủ</a></li>
-                    <li><a href="User_Profile.aspx">Thông tin cá nhân</a></li>
-                    <li><a href="User_Orders.aspx">Đơn hàng</a></li>
-                    <li><a href="User_Cart.aspx">Giỏ hàng</a></li>
-                    <li><a href="../Login.aspx">Đăng xuất</a></li>
-                </ul>
-            </nav>
-        </header>
+        <!-- Header -->
+        <uc1:Header ID="Header1" runat="server" />
 
-        <div class="main-content">
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+        <!-- Navbar -->
+        <uc2:Navbar ID="Navbar1" runat="server" />
+
+        <div class="flex min-h-screen">
+            <!-- Sidebar -->
+            <div class="hidden md:block">
+                <uc3:Sidebar ID="Sidebar1" runat="server" />
+            </div>
+
+            <!-- Main Content -->
+            <div class="flex-1 p-8">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
         </div>
 
-        <footer class="footer">
-            <p>&copy; 2024 Online Ticket Platform. All rights reserved.</p>
-        </footer>
+        <!-- Footer -->
+        <uc4:Footer ID="Footer1" runat="server" />
     </form>
 </body>
 </html>

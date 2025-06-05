@@ -132,10 +132,10 @@
     <Content Include="Page_Admin\Controls\Header.aspx" />
     <Content Include="Page_Admin\Controls\navbar.aspx" />
     <Content Include="Page_Admin\Controls\sidebar.aspx" />
-    <Content Include="Page_User\Controls\Footer.aspx" />
-    <Content Include="Page_User\Controls\Header.aspx" />
-    <Content Include="Page_User\Controls\Navbar.aspx" />
-    <Content Include="Page_User\Controls\Sidebar.aspx" />
+    <Content Include="Page_User\Controls\Footer.ascx" />
+    <Content Include="Page_User\Controls\Navbar.ascx" />
+    <Content Include="Page_User\Controls\Sidebar.ascx" />
+    <Content Include="Page_User\Controls\Header.ascx" />
     <Content Include="Page_User\User_Me\User_MeTicket.aspx" />
     <Content Include="Page_User\User_Me\User_MePersonal.aspx" />
     <Content Include="Page_User\User_Whyus.aspx" />
@@ -149,6 +149,7 @@
     <Content Include="Page_User\User_Home.aspx" />
     <Content Include="Public\database\ocx_oracle_sample.sql" />
     <Content Include="Public\database\ocx_oracle_schema.sql" />
+    <Content Include="Public\readme\general_info.txt" />
     <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\.gitignore" />
     <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\404.html" />
     <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\blank.html" />
@@ -1188,33 +1189,33 @@
     <Compile Include="Page_Admin\Controls\sidebar.aspx.designer.cs">
       <DependentUpon>sidebar.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Page_User\Controls\Footer.aspx.cs">
-      <DependentUpon>Footer.aspx</DependentUpon>
+    <Compile Include="Page_User\Controls\Footer.ascx.cs">
+      <DependentUpon>Footer.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Page_User\Controls\Footer.aspx.designer.cs">
-      <DependentUpon>Footer.aspx</DependentUpon>
+    <Compile Include="Page_User\Controls\Footer.ascx.designer.cs">
+      <DependentUpon>Footer.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Page_User\Controls\Header.aspx.cs">
-      <DependentUpon>Header.aspx</DependentUpon>
+    <Compile Include="Page_User\Controls\Navbar.ascx.cs">
+      <DependentUpon>Navbar.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Page_User\Controls\Header.aspx.designer.cs">
-      <DependentUpon>Header.aspx</DependentUpon>
+    <Compile Include="Page_User\Controls\Navbar.ascx.designer.cs">
+      <DependentUpon>Navbar.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Page_User\Controls\Navbar.aspx.cs">
-      <DependentUpon>Navbar.aspx</DependentUpon>
+    <Compile Include="Page_User\Controls\Sidebar.ascx.cs">
+      <DependentUpon>Sidebar.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Page_User\Controls\Navbar.aspx.designer.cs">
-      <DependentUpon>Navbar.aspx</DependentUpon>
+    <Compile Include="Page_User\Controls\Sidebar.ascx.designer.cs">
+      <DependentUpon>Sidebar.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Page_User\Controls\Sidebar.aspx.cs">
-      <DependentUpon>Sidebar.aspx</DependentUpon>
+    <Compile Include="Page_User\Controls\Header.ascx.cs">
+      <DependentUpon>Header.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Page_User\Controls\Sidebar.aspx.designer.cs">
-      <DependentUpon>Sidebar.aspx</DependentUpon>
+    <Compile Include="Page_User\Controls\Header.ascx.designer.cs">
+      <DependentUpon>Header.ascx</DependentUpon>
     </Compile>
     <Compile Include="Page_User\User.Master.cs">
       <DependentUpon>User.Master</DependentUpon>

@@ -1,0 +1,87 @@
+﻿# 📘 OCX Online Ticketing Platform - README
+
+## 🧩 Tổng Quan
+
+OCX là một nền tảng bán vé trực tuyến, được thiết kế theo mô hình SaaS để phục vụ các sự kiện âm nhạc lớn như "Ớt Cay Xè" mùa 3. Hệ thống này hướng tới việc đơn giản hoá quá trình tổ chức sự kiện, tối ưu hoá trải nghiệm người dùng khi mua vé, đồng thời hỗ trợ tracking truyền thông, kiểm soát check-in, và tích hợp thanh toán nhanh chóng qua nhiều cổng như Flip, SEPAY, MoMo, VNPAY.
+
+## 🛠️ Kiến Trúc Hệ Thống
+
+* Backend: Node.js/NestJS (đề xuất cho khả năng mở rộng cao)
+* Frontend: React + TailwindCSS
+* Database: PostgreSQL (thiết kế đa tổ chức - multi-tenant)
+* CDN & Storage: Cloudflare + S3
+* CI/CD: GitHub Actions + Docker
+* Hosting: AWS / Vercel
+
+## 🔑 Các Thành Phần Chính
+
+### 1. Người Dùng & Nhà Tổ Chức
+
+* Hỗ trợ vai trò: `guest`, `user`, `org_admin`, `super_admin`
+* Cho phép khách vãng lai mua vé không cần đăng ký tài khoản
+* Hệ thống tổ chức (organizations) hỗ trợ nhiều user với vai trò khác nhau
+
+### 2. Sự Kiện & Vé
+
+* Tạo nhiều sự kiện, cấu hình tuỳ chỉnh giao diện từng event (`event_settings`)
+* Phân loại vé: Regular, VIP, Early Bird, sold-out tracking
+* Quản lý thời gian bán vé, số lượng vé tối đa/tối thiểu
+
+### 3. Đơn Hàng & Thanh Toán
+
+* Tạo đơn hàng qua API REST hoặc checkout UI
+* Hỗ trợ nhiều phương thức thanh toán: MoMo, VNPAY, SEPAY, Flip
+* Quản lý trạng thái thanh toán, log giao dịch (success, failed)
+
+### 4. Gửi Email & Webhook
+
+* Gửi email xác nhận, nhắc show, khuyến mãi tự động
+* Hỗ trợ webhook cho CRM, Zapier... khi có event như `payment_success`, `check-in`
+
+### 5. Mã Giảm Giá & Giới Thiệu
+
+* Tạo mã khuyến mãi (giảm giá %, giá cố định)
+* Mã giới thiệu giúp đo hiệu quả referral campaign
+
+### 6. Theo Dõi Truy Cập & Hiệu Suất Truyền Thông
+
+* Tracking UTM từ Facebook Ads, Email, Google...
+* Ghi lại pageview, chuyển đổi từ chiến dịch digital
+
+### 7. Check-in QR tại Sân
+
+* Hệ thống quét QR để xác thực vé nhanh chóng
+* Ghi log nhân sự xác nhận, thời điểm check-in
+
+## 🌐 Tích Hợp Đối Tác
+
+* **Flip**: Đề xuất làm cổng chuyển khoản bank transfer (manual confirmation, realtime in future)
+* **SEPAY**: Cổng thanh toán QR đa ngân hàng, phù hợp cho onsite POS & thanh toán di động
+* **MoMo/VNPAY**: Cổng truyền thống dùng phổ biến cho thanh toán online tại VN
+
+## 🧭 Flow Thực Tế Cho "Ớt Cay Xè Mùa 3"
+
+1. BTC tạo sự kiện + upload banner
+2. Cấu hình vé Early Bird, VIP, mở bán từng đợt
+3. Tích hợp tracking Facebook Ads
+4. Người dùng mua vé guest / đăng ký tài khoản
+5. Thanh toán qua Flip/SEPAY/MoMo
+6. Gửi email xác nhận, webhook tới CRM
+7. Ngày diễn: check-in QR tại cổng
+
+## 🚀 Tầm Nhìn Mở Rộng
+
+* Resell/transfer vé P2P
+* Tích điểm thưởng & loyalty
+* Thu thập feedback sau sự kiện
+* CMS builder cho landing page nghệ sĩ/show
+
+## 📎 Tài Liệu Liên Quan
+
+* `database_design_VI.md`: Thiết kế CSDL đầy đủ
+* `OCX_MUA3_PROPOSAL.pdf`: Kế hoạch sự kiện cụ thể
+* `flip_proposal.pdf`, `SEPAY_CỔNG_THANH_TOÁN.pdf`: Phân tích cổng thanh toán
+
+---
+
+Mọi đóng góp/xây dựng thêm về tính năng vui lòng gửi qua GitHub Issue hoặc liên hệ Product Owner.

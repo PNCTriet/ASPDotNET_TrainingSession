@@ -9,18 +9,21 @@
 
 namespace Online_ticket_platform.Page_User.Controls
 {
-
-
-    public partial class Sidebar
+    public partial class Navbar
     {
+        /// <summary>
+        /// MainMenu control.
+        /// </summary>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MainMenu;
 
         /// <summary>
-        /// form1 control.
+        /// MobileMenuButton control.
         /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlButton MobileMenuButton;
+
+        /// <summary>
+        /// MobileMenu control.
+        /// </summary>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MobileMenu;
     }
 }

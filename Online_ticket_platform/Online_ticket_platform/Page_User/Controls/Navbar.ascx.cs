@@ -7,11 +7,14 @@ using System.Web.UI.WebControls;
 
 namespace Online_ticket_platform.Page_User.Controls
 {
-    public partial class Navbar : System.Web.UI.Page
+    public partial class Navbar : UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                // Initialize controls here if needed
+            }
         }
     }
 }
