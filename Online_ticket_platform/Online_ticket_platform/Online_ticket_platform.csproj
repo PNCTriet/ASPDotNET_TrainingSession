@@ -136,6 +136,7 @@
     <Content Include="Page_User\Controls\Navbar.ascx" />
     <Content Include="Page_User\Controls\Sidebar.ascx" />
     <Content Include="Page_User\Controls\Header.ascx" />
+    <Content Include="Page_User\Controls\Slidebar.ascx" />
     <Content Include="Page_User\User_Me\User_MeTicket.aspx" />
     <Content Include="Page_User\User_Me\User_MePersonal.aspx" />
     <Content Include="Page_User\User_Whyus.aspx" />
@@ -1216,6 +1217,13 @@
     </Compile>
     <Compile Include="Page_User\Controls\Header.ascx.designer.cs">
       <DependentUpon>Header.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_User\Controls\Slidebar.ascx.cs">
+      <DependentUpon>Slidebar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\Controls\Slidebar.ascx.designer.cs">
+      <DependentUpon>Slidebar.ascx</DependentUpon>
     </Compile>
     <Compile Include="Page_User\User.Master.cs">
       <DependentUpon>User.Master</DependentUpon>

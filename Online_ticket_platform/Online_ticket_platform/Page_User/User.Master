@@ -12,34 +12,82 @@
     <title>OCX - Nền tảng bán vé trực tuyến</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            'bg-primary': '#1a1a1a',
+                            'bg-secondary': '#2d2d2d',
+                            'text-primary': '#ffffff',
+                            'text-secondary': '#a0aec0'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 dark:bg-dark-bg-primary transition-colors duration-200">
     <form id="form1" runat="server">
-        <!-- Header -->
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true">
+        </asp:ScriptManager>
+
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" class="fixed top-4 right-4 p-2 rounded-lg bg-gray-200 dark:bg-dark-bg-secondary text-gray-800 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors duration-200">
+            <i class="fas fa-sun dark:hidden"></i>
+            <i class="fas fa-moon hidden dark:block"></i>
+        </button>
+
+        <%--<!-- Header --> 
         <uc1:Header ID="Header1" runat="server" />
-
+        
         <!-- Navbar -->
-        <uc2:Navbar ID="Navbar1" runat="server" />
-
+        <uc2:Navbar ID="Navbar1" runat="server" />--%>
+        
         <div class="flex min-h-screen">
-            <!-- Sidebar -->
+            <%--<!-- Sidebar -->
             <div class="hidden md:block">
                 <uc3:Sidebar ID="Sidebar1" runat="server" />
-            </div>
-
+            </div>--%>
+            
             <!-- Main Content -->
-            <div class="flex-1 p-8">
+            <div class="flex-1 p-8 text-gray-800 dark:text-dark-text-primary">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
         </div>
 
-        <!-- Footer -->
-        <uc4:Footer ID="Footer1" runat="server" />
+       <%-- <!-- Footer -->
+        <uc4:Footer ID="Footer1" runat="server" />--%>
+      
     </form>
+
+    <script>
+        // Check for saved theme preference or use system preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', function() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark')
+                localStorage.theme = 'light'
+            } else {
+                document.documentElement.classList.add('dark')
+                localStorage.theme = 'dark'
+            }
+        });
+    </script>
 </body>
 </html>

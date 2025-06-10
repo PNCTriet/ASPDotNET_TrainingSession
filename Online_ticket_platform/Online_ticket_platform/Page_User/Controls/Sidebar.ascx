@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Sidebar.ascx.cs" Inherits="Online_ticket_platform.Page_User.Controls.Sidebar" %>
 
-<div class="bg-white h-full w-64 border-r border-gray-200">
+<div class="bg-white h-full w-62 border-r border-gray-200">
     <!-- User Profile Section -->
     <div class="p-4 border-b border-gray-200">
         <div class="flex items-center space-x-3">
