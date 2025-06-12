@@ -117,6 +117,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\dark-mode.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
@@ -148,6 +149,8 @@
     <Content Include="Page_User\User_Me\User_MeOrder.aspx" />
     <Content Include="Page_User\User_404.aspx" />
     <Content Include="Page_User\User_Home.aspx" />
+    <Content Include="Public\assets\images\logo.jpg" />
+    <Content Include="Public\assets\images\default-avatar.jpg" />
     <Content Include="Public\database\ocx_oracle_sample.sql" />
     <Content Include="Public\database\ocx_oracle_schema.sql" />
     <Content Include="Public\readme\general_info.txt" />

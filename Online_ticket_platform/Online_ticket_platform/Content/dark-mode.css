@@ -1,0 +1,195 @@
+﻿/* Dark Mode Styles */
+.dark-mode {
+    background-color: #1a1a1a;
+    color: #e5e5e5;
+}
+
+    /* Header Dark Mode */
+    .dark-mode .bg-white {
+        background-color: #2d2d2d !important;
+    }
+
+    .dark-mode .text-gray-900 {
+        color: #e5e5e5 !important;
+    }
+
+    .dark-mode .text-gray-600 {
+        color: #a0a0a0 !important;
+    }
+
+    .dark-mode .border-gray-200 {
+        border-color: #404040 !important;
+    }
+
+    .dark-mode .border-gray-300 {
+        border-color: #404040 !important;
+    }
+
+    .dark-mode input {
+        background-color: #333333 !important;
+        border-color: #404040 !important;
+        color: #e5e5e5 !important;
+    }
+
+        .dark-mode input::placeholder {
+            color: #808080 !important;
+        }
+
+    /* Navbar Dark Mode */
+    .dark-mode .bg-white {
+        background-color: #2d2d2d !important;
+    }
+
+    .dark-mode .hover\:bg-gray-50:hover {
+        background-color: #404040 !important;
+    }
+
+    .dark-mode .hover\:text-blue-600:hover {
+        color: #60a5fa !important;
+    }
+
+    /* Sidebar Dark Mode */
+    .dark-mode .bg-white {
+        background-color: #2d2d2d !important;
+    }
+
+    .dark-mode .border-r {
+        border-color: #404040 !important;
+    }
+
+    .dark-mode .text-gray-500 {
+        color: #a0a0a0 !important;
+    }
+
+    /* Footer Dark Mode */
+    .dark-mode .bg-gray-900 {
+        background-color: #1a1a1a !important;
+    }
+
+    .dark-mode .text-gray-400 {
+        color: #808080 !important;
+    }
+
+    .dark-mode .border-gray-800 {
+        border-color: #404040 !important;
+    }
+
+    /* Common Dark Mode Elements */
+    .dark-mode .shadow-sm {
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3) !important;
+    }
+
+    .dark-mode .hover\:text-white:hover {
+        color: #ffffff !important;
+    }
+
+    .dark-mode .hover\:bg-gray-100:hover {
+        background-color: #404040 !important;
+    }
+
+    /* Button Styles */
+    .dark-mode .bg-blue-600 {
+        background-color: #2563eb !important;
+    }
+
+    .dark-mode .hover\:bg-blue-700:hover {
+        background-color: #1d4ed8 !important;
+    }
+
+    /* Dropdown Menus */
+    .dark-mode .dropdown-menu {
+        background-color: #2d2d2d !important;
+        border-color: #404040 !important;
+    }
+
+    .dark-mode .dropdown-item {
+        color: #e5e5e5 !important;
+    }
+
+        .dark-mode .dropdown-item:hover {
+            background-color: #404040 !important;
+        }
+
+    /* Modal Styles */
+    .dark-mode .modal-content {
+        background-color: #2d2d2d !important;
+        color: #e5e5e5 !important;
+    }
+
+    .dark-mode .modal-header {
+        border-bottom-color: #404040 !important;
+    }
+
+    .dark-mode .modal-footer {
+        border-top-color: #404040 !important;
+    }
+
+    /* Form Elements */
+    .dark-mode .form-control {
+        background-color: #333333 !important;
+        border-color: #404040 !important;
+        color: #e5e5e5 !important;
+    }
+
+        .dark-mode .form-control:focus {
+            border-color: #60a5fa !important;
+            box-shadow: 0 0 0 0.2rem rgba(96, 165, 250, 0.25) !important;
+        }
+
+    /* Table Styles */
+    .dark-mode table {
+        color: #e5e5e5 !important;
+    }
+
+    .dark-mode .table {
+        background-color: #2d2d2d !important;
+    }
+
+        .dark-mode .table td,
+        .dark-mode .table th {
+            border-color: #404040 !important;
+        }
+
+    /* Card Styles */
+    .dark-mode .card {
+        background-color: #2d2d2d !important;
+        border-color: #404040 !important;
+    }
+
+    /* Alert Styles */
+    .dark-mode .alert {
+        background-color: #2d2d2d !important;
+        border-color: #404040 !important;
+        color: #e5e5e5 !important;
+    }
+
+    /* Badge Styles */
+    .dark-mode .badge {
+        background-color: #404040 !important;
+        color: #e5e5e5 !important;
+    }
+
+    /* Tooltip Styles */
+    .dark-mode .tooltip {
+        background-color: #2d2d2d !important;
+        color: #e5e5e5 !important;
+    }
+
+    /* Scrollbar Styles */
+    .dark-mode ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .dark-mode ::-webkit-scrollbar-track {
+        background: #2d2d2d;
+    }
+
+    .dark-mode ::-webkit-scrollbar-thumb {
+        background: #404040;
+        border-radius: 4px;
+    }
+
+        .dark-mode ::-webkit-scrollbar-thumb:hover {
+            background: #505050;
+        }

@@ -2,14 +2,17 @@
 
 <%@ Register Src="~/Page_User/Controls/Header.ascx" TagPrefix="uc1" TagName="Header" %>
 <%@ Register Src="~/Page_User/Controls/Navbar.ascx" TagPrefix="uc2" TagName="Navbar" %>
-<%@ Register Src="~/Page_User/Controls/Sidebar.ascx" TagPrefix="uc3" TagName="Sidebar" %>
-<%@ Register Src="~/Page_User/Controls/Footer.ascx" TagPrefix="uc4" TagName="Footer" %>
+<%@ Register Src="~/Page_User/Controls/Footer.ascx" TagPrefix="uc3" TagName="Footer" %>
+<%@ Register Src="~/Page_User/Controls/Sidebar.ascx" TagPrefix="uc4" TagName="Sidebar" %>
 
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>OCX - Nền tảng bán vé trực tuyến</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title><%: Page.Title %> - OCX Online Ticketing Platform</title>
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -19,74 +22,93 @@
                 extend: {
                     colors: {
                         dark: {
-                            'bg-primary': '#1a1a1a',
-                            'bg-secondary': '#2d2d2d',
-                            'text-primary': '#ffffff',
-                            'text-secondary': '#a0aec0'
+                            bg: '#1a1a1a',
+                            text: '#e5e5e5',
+                            border: '#404040',
+                            hover: '#2d2d2d'
                         }
                     }
                 }
             }
         }
     </script>
+    
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- Custom CSS -->
+    <%--<link href="~/Content/dark-mode.css" rel="stylesheet" />--%>
+    
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body class="bg-gray-50 dark:bg-dark-bg-primary transition-colors duration-200">
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900">
     <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+            </Scripts>
         </asp:ScriptManager>
 
         <!-- Theme Toggle Button -->
-        <button id="theme-toggle" class="fixed top-4 right-4 p-2 rounded-lg bg-gray-200 dark:bg-dark-bg-secondary text-gray-800 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors duration-200">
+        <button id="themeToggle" 
+                class="fixed bottom-4 right-4 p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white shadow-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors z-50">
             <i class="fas fa-sun dark:hidden"></i>
             <i class="fas fa-moon hidden dark:block"></i>
         </button>
 
-        <%--<!-- Header --> 
-        <uc1:Header ID="Header1" runat="server" />
+        <!-- Header -->
+        <uc1:Header runat="server" ID="Header" />
         
         <!-- Navbar -->
-        <uc2:Navbar ID="Navbar1" runat="server" />--%>
+        <uc2:Navbar runat="server" ID="Navbar" />
         
-        <div class="flex min-h-screen">
-            <%--<!-- Sidebar -->
-            <div class="hidden md:block">
-                <uc3:Sidebar ID="Sidebar1" runat="server" />
-            </div>--%>
-            
-            <!-- Main Content -->
-            <div class="flex-1 p-8 text-gray-800 dark:text-dark-text-primary">
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                </asp:ContentPlaceHolder>
+        <!-- Main Content -->
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex flex-col md:flex-row gap-8">
+                <!-- Sidebar -->
+                <div class="w-full md:w-64 flex-shrink-0">
+                    <uc4:Sidebar runat="server" ID="Sidebar" />
+                </div>
+                
+                <!-- Content -->
+                <div class="flex-1">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
             </div>
         </div>
-
-       <%-- <!-- Footer -->
-        <uc4:Footer ID="Footer1" runat="server" />--%>
-      
+        
+        <!-- Footer -->
+        <uc3:Footer runat="server" ID="Footer" />
     </form>
 
+    <!-- Theme Toggle Script -->
     <script>
         // Check for saved theme preference or use system preference
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark')
-        } else {
-            document.documentElement.classList.remove('dark')
+        const theme = localStorage.getItem('theme') || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        // Apply theme on load
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
         }
-
+        
         // Theme toggle functionality
-        const themeToggle = document.getElementById('theme-toggle');
-        themeToggle.addEventListener('click', function() {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark')
-                localStorage.theme = 'light'
-            } else {
-                document.documentElement.classList.add('dark')
-                localStorage.theme = 'dark'
-            }
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
         });
     </script>
 </body>
