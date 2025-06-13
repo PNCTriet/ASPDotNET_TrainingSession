@@ -1,9 +1,9 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="User.Master.cs" Inherits="Online_ticket_platform.Page_User.UserMaster" %>
 
-<%@ Register Src="~/Page_User/Controls/Header.ascx" TagPrefix="uc1" TagName="Header" %>
-<%@ Register Src="~/Page_User/Controls/Navbar.ascx" TagPrefix="uc2" TagName="Navbar" %>
-<%@ Register Src="~/Page_User/Controls/Footer.ascx" TagPrefix="uc3" TagName="Footer" %>
-<%@ Register Src="~/Page_User/Controls/Sidebar.ascx" TagPrefix="uc4" TagName="Sidebar" %>
+<%@ Register Src="~/Page_User/Controls/Layouts/Header.ascx" TagPrefix="uc1" TagName="Header" %>
+<%@ Register Src="~/Page_User/Controls/Layouts/Navbar.ascx" TagPrefix="uc2" TagName="Navbar" %>
+<%@ Register Src="~/Page_User/Controls/Layouts/Footer.ascx" TagPrefix="uc3" TagName="Footer" %>
+<%@ Register Src="~/Page_User/Controls/Layouts/Sidebar.ascx" TagPrefix="uc4" TagName="Sidebar" %>
 
 <!DOCTYPE html>
 

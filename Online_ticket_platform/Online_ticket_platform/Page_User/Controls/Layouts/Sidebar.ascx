@@ -5,10 +5,10 @@
     <div class="p-4 border-b border-gray-200 dark:border-gray-700">
         <div class="flex items-center space-x-3">
             <img id="UserAvatar"
-                 runat="server"
-                 src="~/Public/assets/images/default-avatar.jpg" 
-                 alt="User Avatar" 
-                 class="h-10 w-10 rounded-full" />
+                runat="server"
+                src="~/Public/assets/images/default-avatar.jpg"
+                alt="User Avatar"
+                class="h-10 w-10 rounded-full" />
             <div>
                 <p class="text-sm font-medium text-gray-900 dark:text-white">
                     <asp:Label ID="UserName" runat="server" Text="Nguyễn Văn A" />
@@ -43,8 +43,7 @@
 
         <!-- Account Settings Section -->
         <div id="AccountSettings" runat="server" class="mt-8">
-            <h3 class="px-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                Tài khoản
+            <h3 class="px-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Tài khoản
             </h3>
             <div class="mt-2 px-4 space-y-1">
                 <a href="/profile" class="flex items-center px-2 py-2 text-sm font-medium text-gray-900 dark:text-gray-100 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">

@@ -126,3 +126,94 @@ VALUES (
   'sent',
   SYSTIMESTAMP
 );
+
+-- 11.
+INSERT INTO referral_codes (id, user_id, code, created_at)
+VALUES (
+  seq_referral_codes.NEXTVAL,
+  (SELECT id FROM users WHERE email = 'guest01@example.com'),
+  'KHACHTRAN01',
+  SYSTIMESTAMP
+);
+
+INSERT INTO webhook_subscriptions (id, organization_id, target_url, event_type)
+VALUES (
+  seq_webhook_subscriptions.NEXTVAL,
+  (SELECT id FROM organizations WHERE name = 'OCX Organization'),
+  'https://crm.ocx.vn/webhooks/payment',
+  'payment_success'
+);
+
+INSERT INTO webhook_logs (
+  id, target_url, event_type, order_id, event_id, user_id, payload, status_code, response_text, triggered_at
+)
+VALUES (
+  seq_webhook_logs.NEXTVAL,
+  'https://crm.ocx.vn/webhooks/payment',
+  'payment_success',
+  (SELECT MAX(id) FROM orders),
+  (SELECT id FROM events WHERE name = 'OCX Concert 2025'),
+  (SELECT id FROM users WHERE email = 'guest01@example.com'),
+  '{"order_id": 123, "status": "paid"}',
+  200,
+  'OK',
+  SYSTIMESTAMP
+);
+
+
+INSERT INTO checkin_logs (id, user_id, ticket_id, event_id, checkin_time, verified_by)
+VALUES (
+  seq_checkin_logs.NEXTVAL,
+  (SELECT id FROM users WHERE email = 'guest01@example.com'),
+  (SELECT id FROM tickets WHERE name = 'Vé Regular'),
+  (SELECT id FROM events WHERE name = 'OCX Concert 2025'),
+  SYSTIMESTAMP,
+  'CheckinBot'
+);
+
+
+INSERT INTO tracking_visits (
+  id, user_id, event_id, utm_source, utm_medium, utm_campaign, utm_content, referrer_url, landing_page
+)
+VALUES (
+  seq_tracking_visits.NEXTVAL,
+  (SELECT id FROM users WHERE email = 'guest01@example.com'),
+  (SELECT id FROM events WHERE name = 'OCX Concert 2025'),
+  'facebook',
+  'cpc',
+  'early_bird_push',
+  'cta_mua_ve',
+  'https://facebook.com/ad-ocx',
+  'https://ocx.vn/events/ocx-concert-2025'
+);
+
+
+INSERT INTO images (id, file_path, file_name, file_type, file_size, alt_text, uploaded_by, uploaded_at)
+VALUES (
+  seq_images.NEXTVAL,
+  '/uploads/events/banner_ocx2025.jpg',
+  'banner_ocx2025.jpg',
+  'image/jpeg',
+  204800,
+  'Banner OCX Concert 2025',
+  (SELECT id FROM users WHERE email = 'admin@ocx.vn'),
+  SYSTIMESTAMP
+);
+
+INSERT INTO image_links (
+  id, image_id, entity_type, entity_id, organization_id, event_id, usage_type, linked_at
+)
+VALUES (
+  seq_image_links.NEXTVAL,
+  (SELECT MAX(id) FROM images),
+  'event',
+  (SELECT id FROM events WHERE name = 'OCX Concert 2025'),
+  (SELECT id FROM organizations WHERE name = 'OCX Organization'),
+  (SELECT id FROM events WHERE name = 'OCX Concert 2025'),
+  'banner',
+  SYSTIMESTAMP
+);
+
+
+
+

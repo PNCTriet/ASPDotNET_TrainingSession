@@ -13,5 +13,44 @@ namespace Online_ticket_platform.Page_User
 
     public partial class User_Home
     {
+
+        /// <summary>
+        /// Slidebar1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Online_ticket_platform.Page_User.Controls.Slidebar Slidebar1;
+
+        /// <summary>
+        /// EventCarte1 control.
+        /// </summary>
+        protected global::Online_ticket_platform.Page_User.Controls.User_Home.EventCarte EventCarte1;
+
+        /// <summary>
+        /// EventCarte2 control.
+        /// </summary>
+        protected global::Online_ticket_platform.Page_User.Controls.User_Home.EventCarte EventCarte2;
+
+        /// <summary>
+        /// EventCarte3 control.
+        /// </summary>
+        protected global::Online_ticket_platform.Page_User.Controls.User_Home.EventCarte EventCarte3;
+
+        /// <summary>
+        /// EventCarte4 control.
+        /// </summary>
+        protected global::Online_ticket_platform.Page_User.Controls.User_Home.EventCarte EventCarte4;
+
+        /// <summary>
+        /// EventCarte5 control.
+        /// </summary>
+        protected global::Online_ticket_platform.Page_User.Controls.User_Home.EventCarte EventCarte5;
+
+        /// <summary>
+        /// EventCarte6 control.
+        /// </summary>
+        protected global::Online_ticket_platform.Page_User.Controls.User_Home.EventCarte EventCarte6;
     }
 }

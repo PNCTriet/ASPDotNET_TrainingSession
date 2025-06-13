@@ -200,6 +200,33 @@ CREATE TABLE tracking_visits (
 );
 CREATE SEQUENCE seq_tracking_visits START WITH 1 INCREMENT BY 1;
 
+CREATE TABLE images (
+  id NUMBER  PRIMARY KEY,
+  file_path VARCHAR2(500) NOT NULL,
+  file_name VARCHAR2(255),
+  file_type VARCHAR2(100),
+  file_size NUMBER,
+  alt_text VARCHAR2(255),
+  uploaded_by NUMBER,
+  uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE SEQUENCE seq_images START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE image_links (
+  id NUMBER PRIMARY KEY,
+  image_id NUMBER,
+  entity_type VARCHAR2(50) NOT NULL,
+  entity_id NUMBER NOT NULL,
+  organization_id NUMBER,
+  event_id NUMBER,
+  usage_type VARCHAR2(50) NOT NULL,
+  linked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE SEQUENCE seq_image_links START WITH 1 INCREMENT BY 1;
+
+
 -- Foreign Keys
 ALTER TABLE user_organizations ADD FOREIGN KEY (user_id) REFERENCES users(id);
 ALTER TABLE user_organizations ADD FOREIGN KEY (organization_id) REFERENCES organizations(id);
@@ -224,3 +251,7 @@ ALTER TABLE webhook_logs ADD FOREIGN KEY (user_id) REFERENCES users(id);
 ALTER TABLE webhook_subscriptions ADD FOREIGN KEY (organization_id) REFERENCES organizations(id);
 ALTER TABLE tracking_visits ADD FOREIGN KEY (user_id) REFERENCES users(id);
 ALTER TABLE tracking_visits ADD FOREIGN KEY (event_id) REFERENCES events(id);
+ALTER TABLE images ADD FOREIGN KEY (uploaded_by) REFERENCES users(id);
+ALTER TABLE image_links ADD FOREIGN KEY (image_id) REFERENCES images(id);
+ALTER TABLE image_links ADD FOREIGN KEY (organization_id) REFERENCES organizations(id);
+ALTER TABLE image_links ADD FOREIGN KEY (event_id) REFERENCES events(id);

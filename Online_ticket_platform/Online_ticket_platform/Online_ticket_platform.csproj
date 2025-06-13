@@ -133,11 +133,12 @@
     <Content Include="Page_Admin\Controls\Header.aspx" />
     <Content Include="Page_Admin\Controls\navbar.aspx" />
     <Content Include="Page_Admin\Controls\sidebar.aspx" />
-    <Content Include="Page_User\Controls\Footer.ascx" />
-    <Content Include="Page_User\Controls\Navbar.ascx" />
-    <Content Include="Page_User\Controls\Sidebar.ascx" />
-    <Content Include="Page_User\Controls\Header.ascx" />
-    <Content Include="Page_User\Controls\Slidebar.ascx" />
+    <Content Include="Page_User\Controls\Layouts\Footer.ascx" />
+    <Content Include="Page_User\Controls\Layouts\Navbar.ascx" />
+    <Content Include="Page_User\Controls\Layouts\Sidebar.ascx" />
+    <Content Include="Page_User\Controls\Layouts\Header.ascx" />
+    <Content Include="Page_User\Controls\User_Home\EventCarte.ascx" />
+    <Content Include="Page_User\Controls\User_Home\Slidebar.ascx" />
     <Content Include="Page_User\User_Me\User_MeTicket.aspx" />
     <Content Include="Page_User\User_Me\User_MePersonal.aspx" />
     <Content Include="Page_User\User_Whyus.aspx" />
@@ -149,9 +150,16 @@
     <Content Include="Page_User\User_Me\User_MeOrder.aspx" />
     <Content Include="Page_User\User_404.aspx" />
     <Content Include="Page_User\User_Home.aspx" />
+    <Content Include="Public\assets\images\events\concert1.png" />
+    <Content Include="Public\assets\images\events\concert2.png" />
+    <Content Include="Public\assets\images\events\concert3.png" />
+    <Content Include="Public\assets\images\events\concert4.png" />
+    <Content Include="Public\assets\images\events\concert5.png" />
+    <Content Include="Public\assets\images\events\concert6.png" />
     <Content Include="Public\assets\images\logo.jpg" />
     <Content Include="Public\assets\images\default-avatar.jpg" />
     <Content Include="Public\database\ocx_oracle_sample.sql" />
+    <Content Include="Public\database\ocx_oracle_Drop.sql" />
     <Content Include="Public\database\ocx_oracle_schema.sql" />
     <Content Include="Public\readme\general_info.txt" />
     <Content Include="Public\Template\startbootstrap-sb-admin-2-master\startbootstrap-sb-admin-2-master\.gitignore" />
@@ -1193,39 +1201,46 @@
     <Compile Include="Page_Admin\Controls\sidebar.aspx.designer.cs">
       <DependentUpon>sidebar.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Page_User\Controls\Footer.ascx.cs">
+    <Compile Include="Page_User\Controls\Layouts\Footer.ascx.cs">
       <DependentUpon>Footer.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Page_User\Controls\Footer.ascx.designer.cs">
+    <Compile Include="Page_User\Controls\Layouts\Footer.ascx.designer.cs">
       <DependentUpon>Footer.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Page_User\Controls\Navbar.ascx.cs">
+    <Compile Include="Page_User\Controls\Layouts\Navbar.ascx.cs">
       <DependentUpon>Navbar.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Page_User\Controls\Navbar.ascx.designer.cs">
+    <Compile Include="Page_User\Controls\Layouts\Navbar.ascx.designer.cs">
       <DependentUpon>Navbar.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Page_User\Controls\Sidebar.ascx.cs">
+    <Compile Include="Page_User\Controls\Layouts\Sidebar.ascx.cs">
       <DependentUpon>Sidebar.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Page_User\Controls\Sidebar.ascx.designer.cs">
+    <Compile Include="Page_User\Controls\Layouts\Sidebar.ascx.designer.cs">
       <DependentUpon>Sidebar.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Page_User\Controls\Header.ascx.cs">
+    <Compile Include="Page_User\Controls\Layouts\Header.ascx.cs">
       <DependentUpon>Header.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Page_User\Controls\Header.ascx.designer.cs">
+    <Compile Include="Page_User\Controls\Layouts\Header.ascx.designer.cs">
       <DependentUpon>Header.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Page_User\Controls\Slidebar.ascx.cs">
+    <Compile Include="Page_User\Controls\User_Home\EventCarte.ascx.cs">
+      <DependentUpon>EventCarte.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\Controls\User_Home\EventCarte.ascx.designer.cs">
+      <DependentUpon>EventCarte.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_User\Controls\User_Home\Slidebar.ascx.cs">
       <DependentUpon>Slidebar.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Page_User\Controls\Slidebar.ascx.designer.cs">
+    <Compile Include="Page_User\Controls\User_Home\Slidebar.ascx.designer.cs">
       <DependentUpon>Slidebar.ascx</DependentUpon>
     </Compile>
     <Compile Include="Page_User\User.Master.cs">
@@ -1338,6 +1353,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controls\" />
+    <Folder Include="Page_User\Controls\User_Event\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
