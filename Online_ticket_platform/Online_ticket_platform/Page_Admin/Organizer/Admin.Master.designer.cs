@@ -33,6 +33,11 @@ namespace Online_ticket_platform.Page_Admin
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// sidebar control.
+        /// </summary>
+        protected global::Online_ticket_platform.Page_Admin.Controls.sidebar sidebar;
+
+        /// <summary>
         /// ContentPlaceHolder1 control.
         /// </summary>
         /// <remarks>

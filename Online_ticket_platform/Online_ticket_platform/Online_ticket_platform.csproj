@@ -45,6 +45,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.19.18.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -122,6 +125,14 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Page_Admin\Controls\Sidebar.ascx" />
+    <Content Include="Page_Admin\Controls\Sidebar.ascx.designer.cs">
+      <DependentUpon>Sidebar.ascx</DependentUpon>
+    </Content>
+    <Content Include="Page_Admin\Controls\sidebar.ascx.cs">
+      <DependentUpon>Sidebar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="Page_Admin\Organizer\Admin_Feeconfig.aspx" />
     <Content Include="Page_Admin\Organizer\Admin_Seatmap.aspx" />
     <Content Include="Page_Admin\Organizer\Admin_Promotion.aspx" />
@@ -132,7 +143,9 @@
     <Content Include="Page_Admin\Controls\Footer.aspx" />
     <Content Include="Page_Admin\Controls\Header.aspx" />
     <Content Include="Page_Admin\Controls\navbar.aspx" />
-    <Content Include="Page_Admin\Controls\sidebar.aspx" />
+    <Content Include="Page_Admin\Organizer\Event_List.aspx" />
+    <Content Include="Page_Admin\Organizer\Organization_List.aspx" />
+    <Content Include="Page_Admin\Organizer\User_List.aspx" />
     <Content Include="Page_User\Controls\Layouts\Footer.ascx" />
     <Content Include="Page_User\Controls\Layouts\Navbar.ascx" />
     <Content Include="Page_User\Controls\Layouts\Sidebar.ascx" />
@@ -1117,6 +1130,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Page_Admin\Controls\Sidebar.ascx.cs">
+      <DependentUpon>Sidebar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Controls\Sidebar.ascx.designer.cs">
+      <DependentUpon>Sidebar.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Page_Admin\Organizer\Admin.Master.cs">
       <DependentUpon>Admin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1194,12 +1214,26 @@
     <Compile Include="Page_Admin\Controls\navbar.aspx.designer.cs">
       <DependentUpon>navbar.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Page_Admin\Controls\sidebar.aspx.cs">
-      <DependentUpon>sidebar.aspx</DependentUpon>
+    <Compile Include="Page_Admin\Organizer\Event_List.aspx.cs">
+      <DependentUpon>Event_List.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Page_Admin\Controls\sidebar.aspx.designer.cs">
-      <DependentUpon>sidebar.aspx</DependentUpon>
+    <Compile Include="Page_Admin\Organizer\Event_List.aspx.designer.cs">
+      <DependentUpon>Event_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Organization_List.aspx.cs">
+      <DependentUpon>Organization_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Organization_List.aspx.designer.cs">
+      <DependentUpon>Organization_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\User_List.aspx.cs">
+      <DependentUpon>User_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\User_List.aspx.designer.cs">
+      <DependentUpon>User_List.aspx</DependentUpon>
     </Compile>
     <Compile Include="Page_User\Controls\Layouts\Footer.ascx.cs">
       <DependentUpon>Footer.ascx</DependentUpon>

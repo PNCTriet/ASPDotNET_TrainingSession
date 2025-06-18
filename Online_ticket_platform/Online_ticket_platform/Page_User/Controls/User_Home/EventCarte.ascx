@@ -17,7 +17,7 @@
                 <img id="imgEventBanner" runat="server" 
                      src="/assets/images/event-placeholder.jpg" 
                      alt="Event Banner" 
-                     class="absolute inset-0 w-full h-full object-contain" />
+                     class="absolute inset-0 w-full h-full object-contain rounded-2xl" />
             </div>
         </div>
         <!-- Ticket Count Badge -->

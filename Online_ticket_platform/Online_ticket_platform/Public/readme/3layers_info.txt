@@ -1,0 +1,278 @@
+﻿3 LAYERS INFO
+
+1. CẤU TRÚC HIỆN TẠI (TỔ CHỨC - ORGANIZATIONS)
+
+A. MODEL LAYER (MOD_Organization.cs)
+- Định nghĩa các thuộc tính của entity
+- Mapping với các cột trong bảng organizations
+- Các thuộc tính cơ bản: Id, Name, ContactEmail, Phone, Address, CreatedAt
+- Các thuộc tính mở rộng: Description, Website, LogoUrl, Status, UpdatedAt
+
+B. DATA ACCESS LAYER (DAL)
+- Interface (DAL_IOrganizationRepository.cs):
+  + GetAllOrganizations()
+  + GetOrganizationById(int id)
+  + AddOrganization(MOD_Organization org)
+  + UpdateOrganization(MOD_Organization org)
+  + DeleteOrganization(int id)
+  + HasRelatedData(int orgId)
+  + DeleteRelatedData(int orgId)
+  + GetRelatedDataInfo(int orgId)
+
+- Repository (DAL_OrganizationRepository.cs):
+  + Implement các phương thức từ interface
+  + Xử lý truy vấn SQL trực tiếp với Oracle
+  + Sử dụng OracleCommand và OracleConnection
+  + Xử lý các ràng buộc khóa ngoại
+
+C. BUSINESS LOGIC LAYER (BLL)
+- Interface (BLL_IOrganizationService.cs):
+  + Định nghĩa các phương thức business logic
+  + Tương tự DAL interface nhưng thêm xử lý nghiệp vụ
+
+- Service (BLL_OrganizationService.cs):
+  + Implement các phương thức từ interface
+  + Validate dữ liệu đầu vào
+  + Xử lý logic nghiệp vụ
+  + Gọi các phương thức từ DAL
+  + Xử lý exception và trả về thông báo lỗi
+
+2. PHƯƠNG PHÁP TRIỂN KHAI CRUD CHUẨN (Dựa trên User Management)
+
+A. UI LAYER (ASPX + Code-behind)
+1. Giao diện chuẩn:
+   - GridView hiển thị danh sách
+   - Modal cho Create/Edit/Delete
+   - Màu sắc đồng bộ:
+     + Create: #4e73df (Primary Blue)
+     + Edit: #f6c23e (Warning Yellow)
+     + Delete: #e74a3b (Danger Red)
+   - Validation client-side và server-side
+   - Debug info hiển thị lỗi chi tiết
+
+2. Code-behind chuẩn:
+   - Chỉ làm việc với BLL Service
+   - Xử lý sự kiện CRUD
+   - Validate dữ liệu
+   - Hiển thị thông báo
+   - Không chứa logic nghiệp vụ
+
+B. BLL LAYER
+1. Interface chuẩn:
+   - GetAll()
+   - GetById(int id)
+   - Add(T entity)
+   - Update(T entity)
+   - Delete(int id)
+   - HasRelatedData(int id)
+   - GetRelatedDataInfo(int id)
+   - DeleteRelatedData(int id)
+
+2. Service chuẩn:
+   - Validate dữ liệu đầu vào
+   - Xử lý logic nghiệp vụ
+   - Gọi DAL Repository
+   - Xử lý exception
+   - Trả về kết quả/thông báo lỗi
+
+C. DAL LAYER
+1. Interface chuẩn:
+   - Tương tự BLL Interface
+   - Định nghĩa các phương thức truy vấn DB
+
+2. Repository chuẩn:
+   - Implement các phương thức từ interface
+   - Xử lý SQL trực tiếp
+   - Sử dụng OracleCommand
+   - Xử lý transaction
+   - Map dữ liệu với Model
+
+D. MODEL LAYER
+1. Entity chuẩn:
+   - Properties mapping với DB columns
+   - Data annotations nếu cần
+   - Validation attributes
+   - Navigation properties
+
+3. QUY TRÌNH TRIỂN KHAI CRUD
+
+A. Bước 1: Tạo Model
+1. Tạo class entity trong Model layer
+2. Định nghĩa properties mapping với DB
+3. Thêm validation attributes
+
+B. Bước 2: Tạo DAL
+1. Tạo interface trong DAL/Interfaces
+2. Tạo repository implement interface
+3. Implement các phương thức CRUD
+4. Xử lý SQL và mapping
+
+C. Bước 3: Tạo BLL
+1. Tạo interface trong BLL/Interfaces
+2. Tạo service implement interface
+3. Thêm business logic
+4. Validate và xử lý dữ liệu
+
+D. Bước 4: Tạo UI
+1. Tạo ASPX page với GridView
+2. Tạo các modal CRUD
+3. Implement code-behind
+4. Thêm validation và xử lý sự kiện
+
+4. DANH SÁCH CÁC BẢNG CẦN TRIỂN KHAI
+
+1. Users (users) - Đã triển khai
+2. Organizations (organizations) - Đã triển khai
+3. Events (events)
+4. Event Settings (event_settings)
+5. Tickets (tickets)
+6. Orders (orders)
+7. Order Items (order_items)
+8. Payments (payments)
+9. Checkin Logs (checkin_logs)
+10. Promo Codes (promo_codes)
+11. Order Promos (order_promos)
+12. Referral Codes (referral_codes)
+13. Email Logs (email_logs)
+14. Webhook Logs (webhook_logs)
+15. Webhook Subscriptions (webhook_subscriptions)
+16. Tracking Visits (tracking_visits)
+17. Images (images)
+18. Image Links (image_links)
+19. User Organizations (user_organizations)
+
+5. CẤU TRÚC FILE CẦN TẠO
+
+1. MODEL LAYER (/Online_ticket_platform_Model/Entities/):
+- MOD_User.cs
+- MOD_Event.cs
+- MOD_EventSetting.cs
+- MOD_Ticket.cs
+- MOD_Order.cs
+- MOD_OrderItem.cs
+- MOD_Payment.cs
+- MOD_CheckinLog.cs
+- MOD_PromoCode.cs
+- MOD_OrderPromo.cs
+- MOD_ReferralCode.cs
+- MOD_EmailLog.cs
+- MOD_WebhookLog.cs
+- MOD_WebhookSubscription.cs
+- MOD_TrackingVisit.cs
+- MOD_Image.cs
+- MOD_ImageLink.cs
+- MOD_UserOrganization.cs
+
+2. DAL LAYER (/Online_ticket_platform_DAL/):
+
+Interfaces:
+- DAL_IUserRepository.cs
+- DAL_IEventRepository.cs
+- DAL_IEventSettingRepository.cs
+- DAL_ITicketRepository.cs
+- DAL_IOrderRepository.cs
+- DAL_IOrderItemRepository.cs
+- DAL_IPaymentRepository.cs
+- DAL_ICheckinLogRepository.cs
+- DAL_IPromoCodeRepository.cs
+- DAL_IOrderPromoRepository.cs
+- DAL_IReferralCodeRepository.cs
+- DAL_IEmailLogRepository.cs
+- DAL_IWebhookLogRepository.cs
+- DAL_IWebhookSubscriptionRepository.cs
+- DAL_ITrackingVisitRepository.cs
+- DAL_IImageRepository.cs
+- DAL_IImageLinkRepository.cs
+- DAL_IUserOrganizationRepository.cs
+
+Repositories:
+- DAL_UserRepository.cs
+- DAL_EventRepository.cs
+- DAL_EventSettingRepository.cs
+- DAL_TicketRepository.cs
+- DAL_OrderRepository.cs
+- DAL_OrderItemRepository.cs
+- DAL_PaymentRepository.cs
+- DAL_CheckinLogRepository.cs
+- DAL_PromoCodeRepository.cs
+- DAL_OrderPromoRepository.cs
+- DAL_ReferralCodeRepository.cs
+- DAL_EmailLogRepository.cs
+- DAL_WebhookLogRepository.cs
+- DAL_WebhookSubscriptionRepository.cs
+- DAL_TrackingVisitRepository.cs
+- DAL_ImageRepository.cs
+- DAL_ImageLinkRepository.cs
+- DAL_UserOrganizationRepository.cs
+
+3. BLL LAYER (/Online_ticket_platform_BLL/):
+
+Interfaces:
+- BLL_IUserService.cs
+- BLL_IEventService.cs
+- BLL_IEventSettingService.cs
+- BLL_ITicketService.cs
+- BLL_IOrderService.cs
+- BLL_IOrderItemService.cs
+- BLL_IPaymentService.cs
+- BLL_ICheckinLogService.cs
+- BLL_IPromoCodeService.cs
+- BLL_IOrderPromoService.cs
+- BLL_IReferralCodeService.cs
+- BLL_IEmailLogService.cs
+- BLL_IWebhookLogService.cs
+- BLL_IWebhookSubscriptionService.cs
+- BLL_ITrackingVisitService.cs
+- BLL_IImageService.cs
+- BLL_IImageLinkService.cs
+- BLL_IUserOrganizationService.cs
+
+Services:
+- BLL_UserService.cs
+- BLL_EventService.cs
+- BLL_EventSettingService.cs
+- BLL_TicketService.cs
+- BLL_OrderService.cs
+- BLL_OrderItemService.cs
+- BLL_PaymentService.cs
+- BLL_CheckinLogService.cs
+- BLL_PromoCodeService.cs
+- BLL_OrderPromoService.cs
+- BLL_ReferralCodeService.cs
+- BLL_EmailLogService.cs
+- BLL_WebhookLogService.cs
+- BLL_WebhookSubscriptionService.cs
+- BLL_TrackingVisitService.cs
+- BLL_ImageService.cs
+- BLL_ImageLinkService.cs
+- BLL_UserOrganizationService.cs
+
+6. LƯU Ý QUAN TRỌNG
+
+1. Tuân thủ nguyên tắc:
+   - UI chỉ làm việc với BLL
+   - BLL chỉ làm việc với DAL
+   - DAL chỉ làm việc với Model
+   - Không tạo thêm file ngoài cấu trúc
+
+2. Đảm bảo:
+   - Validation đầy đủ
+   - Xử lý lỗi chi tiết
+   - Transaction khi cần
+   - Performance tối ưu
+   - Code sạch và dễ bảo trì
+
+3. Ưu tiên triển khai:
+   - Các bảng cốt lõi trước
+   - Các bảng phụ trợ sau
+   - Các bảng log và tracking cuối cùng
+
+4. Testing:
+   - Unit test cho BLL
+   - Integration test cho DAL
+   - UI test cho ASPX pages
+
+5. Documentation:
+   - Comment đầy đủ
+   - Ghi chú rõ ràng
+   - Cập nhật tài liệu
