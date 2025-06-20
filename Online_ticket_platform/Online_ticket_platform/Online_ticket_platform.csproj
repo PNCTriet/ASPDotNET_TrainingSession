@@ -144,8 +144,13 @@
     <Content Include="Page_Admin\Controls\Header.aspx" />
     <Content Include="Page_Admin\Controls\navbar.aspx" />
     <Content Include="Page_Admin\Organizer\Event_List.aspx" />
+    <Content Include="Page_Admin\Organizer\ImageLink_List.aspx" />
+    <Content Include="Page_Admin\Organizer\Image_List.aspx" />
+    <Content Include="Page_Admin\Organizer\OrderItem_List.aspx" />
+    <Content Include="Page_Admin\Organizer\Order_List.aspx" />
     <Content Include="Page_Admin\Organizer\Organization_List.aspx" />
     <Content Include="Page_Admin\Organizer\User_List.aspx" />
+    <Content Include="Page_Admin\Organizer\Ticket_List.aspx" />
     <Content Include="Page_User\Controls\Layouts\Footer.ascx" />
     <Content Include="Page_User\Controls\Layouts\Navbar.ascx" />
     <Content Include="Page_User\Controls\Layouts\Sidebar.ascx" />
@@ -1221,6 +1226,34 @@
     <Compile Include="Page_Admin\Organizer\Event_List.aspx.designer.cs">
       <DependentUpon>Event_List.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Page_Admin\Organizer\ImageLink_List.aspx.cs">
+      <DependentUpon>ImageLink_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\ImageLink_List.aspx.designer.cs">
+      <DependentUpon>ImageLink_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Image_List.aspx.cs">
+      <DependentUpon>Image_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Image_List.aspx.designer.cs">
+      <DependentUpon>Image_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\OrderItem_List.aspx.cs">
+      <DependentUpon>OrderItem_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\OrderItem_List.aspx.designer.cs">
+      <DependentUpon>OrderItem_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Order_List.aspx.cs">
+      <DependentUpon>Order_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Order_List.aspx.designer.cs">
+      <DependentUpon>Order_List.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Page_Admin\Organizer\Organization_List.aspx.cs">
       <DependentUpon>Organization_List.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1234,6 +1267,13 @@
     </Compile>
     <Compile Include="Page_Admin\Organizer\User_List.aspx.designer.cs">
       <DependentUpon>User_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Ticket_List.aspx.cs">
+      <DependentUpon>Ticket_List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_Admin\Organizer\Ticket_List.aspx.designer.cs">
+      <DependentUpon>Ticket_List.aspx</DependentUpon>
     </Compile>
     <Compile Include="Page_User\Controls\Layouts\Footer.ascx.cs">
       <DependentUpon>Footer.ascx</DependentUpon>

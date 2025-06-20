@@ -59,6 +59,8 @@
     <Compile Include="Entities\MOD_User.cs" />
     <Compile Include="Entities\MOD_Ticket.cs" />
     <Compile Include="Entities\MOD_Organization.cs" />
+    <Compile Include="Entities\MOD_Image.cs" />
+    <Compile Include="Entities\MOD_ImageLink.cs" />
     <Compile Include="OTP_Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

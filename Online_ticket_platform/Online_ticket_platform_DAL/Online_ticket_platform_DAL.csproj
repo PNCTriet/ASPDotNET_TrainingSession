@@ -50,6 +50,8 @@
     <Compile Include="Interfaces\DAL_IEmailLogRepository.cs" />
     <Compile Include="Interfaces\DAL_IEventRepository.cs" />
     <Compile Include="Interfaces\DAL_IEventSettingRepository.cs" />
+    <Compile Include="Interfaces\DAL_IImageRepository.cs" />
+    <Compile Include="Interfaces\DAL_IImageLinkRepository.cs" />
     <Compile Include="Interfaces\DAL_IOrderItemRepository.cs" />
     <Compile Include="Interfaces\DAL_IOrderPromoRepository.cs" />
     <Compile Include="Interfaces\DAL_IOrderRepository.cs" />
@@ -63,13 +65,14 @@
     <Compile Include="Interfaces\DAL_IUserRepository.cs" />
     <Compile Include="Interfaces\DAL_IWebhookLogRepository.cs" />
     <Compile Include="Interfaces\DAL_IWebhookSubscriptionRepository.cs" />
-    <Compile Include="OTP_DAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DAL_CheckinLogRepository.cs" />
     <Compile Include="Repositories\DAL_CustomerRepository.cs" />
     <Compile Include="Repositories\DAL_EmailLogRepository.cs" />
     <Compile Include="Repositories\DAL_EventRepository.cs" />
     <Compile Include="Repositories\DAL_EventSettingRepository.cs" />
+    <Compile Include="Repositories\DAL_ImageRepository.cs" />
+    <Compile Include="Repositories\DAL_ImageLinkRepository.cs" />
     <Compile Include="Repositories\DAL_OrderItemRepository.cs" />
     <Compile Include="Repositories\DAL_OrderPromoRepository.cs" />
     <Compile Include="Repositories\DAL_OrderRepository.cs" />

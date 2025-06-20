@@ -99,16 +99,17 @@ namespace Online_ticket_platform.Page_Admin.Organizer
         }
 
         [WebMethod]
-        public static List<string> CheckConstraints(int eventId)
+        public static object CheckConstraints(int eventId)
         {
             try
             {
                 var eventService = new BLL_EventService();
-                return eventService.GetRelatedDataInfo(eventId);
+                var constraints = eventService.GetRelatedDataInfo(eventId);
+                return new { success = true, data = constraints };
             }
-            catch
+            catch (Exception ex)
             {
-                return new List<string>();
+                return new { success = false, message = ex.Message };
             }
         }
 
@@ -118,11 +119,28 @@ namespace Online_ticket_platform.Page_Admin.Organizer
             try
             {
                 var eventService = new BLL_EventService();
-                if (forceDelete)
+                
+                // Kiểm tra ràng buộc trước khi xóa
+                if (!forceDelete && eventService.HasRelatedData(eventId))
                 {
-                    eventService.DeleteRelatedData(eventId);
+                    var constraints = eventService.GetRelatedDataInfo(eventId);
+                    return new { 
+                        success = false, 
+                        message = "Không thể xóa sự kiện vì có dữ liệu liên quan!",
+                        constraints = constraints
+                    };
                 }
 
+                // Nếu force delete, xóa dữ liệu liên quan trước
+                if (forceDelete)
+                {
+                    if (!eventService.DeleteRelatedData(eventId))
+                    {
+                        return new { success = false, message = "Không thể xóa dữ liệu liên quan!" };
+                    }
+                }
+
+                // Xóa sự kiện
                 if (eventService.DeleteEvent(eventId))
                 {
                     return new { success = true, message = "Xóa sự kiện thành công!" };
@@ -156,6 +174,55 @@ namespace Online_ticket_platform.Page_Admin.Organizer
                     ScriptManager.RegisterStartupScript(this, GetType(), "showEditModal", 
                         "$(document).ready(function() { $('#editModal').modal('show'); });", true);
                 }
+            }
+        }
+
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int eventId = Convert.ToInt32(hdnDeleteId.Value);
+                bool forceDelete = hdnForceDelete.Value == "true";
+
+                // Kiểm tra ràng buộc nếu không force delete
+                if (!forceDelete && _eventService.HasRelatedData(eventId))
+                {
+                    var constraints = _eventService.GetRelatedDataInfo(eventId);
+                    var constraintMessage = "Không thể xóa sự kiện vì có dữ liệu liên quan:<br/>" + 
+                        string.Join("<br/>", constraints);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "error", 
+                        $"showError('{constraintMessage}');", true);
+                    return;
+                }
+
+                // Xóa dữ liệu liên quan nếu force delete
+                if (forceDelete)
+                {
+                    if (!_eventService.DeleteRelatedData(eventId))
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "error", 
+                            "showError('Không thể xóa dữ liệu liên quan!');", true);
+                        return;
+                    }
+                }
+
+                // Xóa sự kiện
+                if (_eventService.DeleteEvent(eventId))
+                {
+                    LoadEvents();
+                    ScriptManager.RegisterStartupScript(this, GetType(), "success", 
+                        "showSuccess('Xóa sự kiện thành công!');", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "error", 
+                        "showError('Không thể xóa sự kiện!');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "error", 
+                    $"showError('Có lỗi xảy ra: {ex.Message}');", true);
             }
         }
     }

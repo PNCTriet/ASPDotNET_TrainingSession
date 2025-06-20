@@ -25,17 +25,17 @@ namespace Online_ticket_platform_DAL.Repositories
                 connection.Open();
 
                 string query = @"
-            SELECT 
-                id,
-                organization_id,
-                name,
-                description,
-                event_date,
-                location
-            FROM 
-                events
-            ORDER BY 
-                event_date DESC";
+                SELECT 
+                    id,
+                    organization_id,
+                    name,
+                    description,
+                    event_date,
+                    location
+                FROM 
+                    events
+                ORDER BY 
+                    event_date DESC";
 
                 using (var command = new OracleCommand(query, connection))
                 using (var reader = command.ExecuteReader())
@@ -210,19 +210,17 @@ namespace Online_ticket_platform_DAL.Repositories
                 connection.Open();
                 using (var command = new OracleCommand(@"
                     SELECT COUNT(*) FROM (
-                        SELECT event_id FROM tickets WHERE event_id = :eventId
+                        SELECT id FROM tickets WHERE event_id = :eventId
                         UNION ALL
-                        SELECT event_id FROM orders WHERE event_id = :eventId
+                        SELECT id FROM checkin_logs WHERE event_id = :eventId
                         UNION ALL
-                        SELECT event_id FROM checkin_logs WHERE event_id = :eventId
+                        SELECT id FROM email_logs WHERE event_id = :eventId
                         UNION ALL
-                        SELECT event_id FROM email_logs WHERE event_id = :eventId
+                        SELECT id FROM webhook_logs WHERE event_id = :eventId
                         UNION ALL
-                        SELECT event_id FROM webhook_logs WHERE event_id = :eventId
+                        SELECT id FROM tracking_visits WHERE event_id = :eventId
                         UNION ALL
-                        SELECT event_id FROM tracking_visits WHERE event_id = :eventId
-                        UNION ALL
-                        SELECT event_id FROM image_links WHERE event_id = :eventId
+                        SELECT id FROM image_links WHERE event_id = :eventId
                     )", connection))
                 {
                     command.Parameters.Add(":eventId", OracleDbType.Int32).Value = eventId;
@@ -245,15 +243,6 @@ namespace Online_ticket_platform_DAL.Repositories
                     var count = Convert.ToInt32(command.ExecuteScalar());
                     if (count > 0)
                         constraints.Add($"Có {count} vé");
-                }
-
-                // Check orders
-                using (var command = new OracleCommand("SELECT COUNT(*) FROM orders WHERE event_id = :eventId", connection))
-                {
-                    command.Parameters.Add(":eventId", OracleDbType.Int32).Value = eventId;
-                    var count = Convert.ToInt32(command.ExecuteScalar());
-                    if (count > 0)
-                        constraints.Add($"Có {count} đơn hàng");
                 }
 
                 // Check checkin_logs
@@ -324,9 +313,9 @@ namespace Online_ticket_platform_DAL.Repositories
                             command.ExecuteNonQuery();
                         }
 
-                        // Xóa các bản ghi liên quan từ bảng event_images
+                        // Xóa các bản ghi liên quan từ bảng image_links
                         using (var command = new OracleCommand(@"
-                        DELETE FROM event_images 
+                        DELETE FROM image_links 
                         WHERE event_id = :eventId", connection))
                         {
                             command.Transaction = transaction;

@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Online_ticket_platform_Model;
 
-namespace Online_ticket_platform_DAL.Interfaces
+namespace Online_ticket_platform_BLL
 {
-    public interface DAL_IOrderItemRepository
+    public interface BLL_IOrderitemsService
     {
         List<MOD_OrderItem> GetAllOrderItems();
         MOD_OrderItem GetOrderItemById(int id);

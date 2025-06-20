@@ -11,7 +11,7 @@ namespace Online_ticket_platform.Page_Admin.Organizer
 {
 
 
-    public partial class Event_List
+    public partial class Order_List
     {
 
         /// <summary>
@@ -33,13 +33,13 @@ namespace Online_ticket_platform.Page_Admin.Organizer
         protected global::System.Web.UI.UpdatePanel UpdatePanel4;
 
         /// <summary>
-        /// gvEvents control.
+        /// gvOrders control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvEvents;
+        protected global::System.Web.UI.WebControls.GridView gvOrders;
 
         /// <summary>
         /// UpdatePanel1 control.
@@ -51,40 +51,40 @@ namespace Online_ticket_platform.Page_Admin.Organizer
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
-        /// txtName control.
+        /// txtUserId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtName;
+        protected global::System.Web.UI.WebControls.TextBox txtUserId;
 
         /// <summary>
-        /// txtDescription control.
+        /// txtStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescription;
+        protected global::System.Web.UI.WebControls.TextBox txtStatus;
 
         /// <summary>
-        /// txtEventDate control.
+        /// txtPaymentMethod control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEventDate;
+        protected global::System.Web.UI.WebControls.TextBox txtPaymentMethod;
 
         /// <summary>
-        /// txtLocation control.
+        /// txtAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLocation;
+        protected global::System.Web.UI.WebControls.TextBox txtAmount;
 
         /// <summary>
         /// btnCreate control.
@@ -114,49 +114,40 @@ namespace Online_ticket_platform.Page_Admin.Organizer
         protected global::System.Web.UI.WebControls.HiddenField hdnEditId;
 
         /// <summary>
-        /// txtEditName control.
+        /// txtEditUserId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEditName;
+        protected global::System.Web.UI.WebControls.TextBox txtEditUserId;
 
         /// <summary>
-        /// txtEditOrganizationId control.
+        /// txtEditStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEditOrganizationId;
+        protected global::System.Web.UI.WebControls.TextBox txtEditStatus;
 
         /// <summary>
-        /// txtEditDescription control.
+        /// txtEditPaymentMethod control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEditDescription;
+        protected global::System.Web.UI.WebControls.TextBox txtEditPaymentMethod;
 
         /// <summary>
-        /// txtEditEventDate control.
+        /// txtEditAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEditEventDate;
-
-        /// <summary>
-        /// txtEditLocation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEditLocation;
+        protected global::System.Web.UI.WebControls.TextBox txtEditAmount;
 
         /// <summary>
         /// btnUpdate control.

@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page_Admin/Organizer/Admin.Master" AutoEventWireup="true" CodeBehind="Event_List.aspx.cs" Inherits="Online_ticket_platform.Page_Admin.Organizer.Event_List" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Page_Admin/Organizer/Admin.Master" AutoEventWireup="true" CodeBehind="Image_List.aspx.cs" Inherits="Online_ticket_platform.Page_Admin.Organizer.Image_List" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <title>Danh sách sự kiện</title>
+    <title>Quản lý Hình ảnh</title>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap 5 CSS -->
@@ -70,18 +70,10 @@
             content: " *";
             color: red;
         }
-        .constraint-list {
-            margin-top: 15px;
-            padding: 10px;
-            background-color: #f8f9fc;
-            border-radius: 5px;
-        }
-        .constraint-list ul {
-            margin-bottom: 0;
-            padding-left: 20px;
-        }
-        .constraint-list li {
-            margin-bottom: 5px;
+        .image-preview {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: cover;
         }
     </style>
 </asp:Content>
@@ -94,10 +86,10 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Quản lý sự kiện</h3>
+                        <h3 class="card-title">Quản lý Hình ảnh</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
-                                <i class="fas fa-plus"></i> Thêm sự kiện mới
+                                <i class="fas fa-plus"></i> Thêm hình ảnh mới
                             </button>
                         </div>
                     </div>
@@ -106,7 +98,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm sự kiện...">
+                                    <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm hình ảnh...">
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-secondary" type="button" id="searchButton">
                                             <i class="fas fa-search"></i>
@@ -116,32 +108,39 @@
                             </div>
                         </div>
 
-                        <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                             <ContentTemplate>
-                                <asp:GridView ID="gvEvents" runat="server" CssClass="table table-bordered table-striped" 
-                                    AutoGenerateColumns="false" OnRowCommand="gvEvents_RowCommand"
-                                    DataKeyNames="Id">
+                                <asp:GridView ID="gvImages" runat="server" CssClass="table table-bordered table-striped" 
+                                    AutoGenerateColumns="false" OnRowCommand="gvImages_RowCommand"
+                                    DataKeyNames="Id" AllowPaging="True" PageSize="10" OnPageIndexChanging="gvImages_PageIndexChanging">
                                     <Columns>
                                         <asp:BoundField DataField="Id" HeaderText="ID" />
-                                        <asp:BoundField DataField="OrganizationId" HeaderText="Đơn vị tổ chức" />
-                                        <asp:BoundField DataField="Name" HeaderText="Tên sự kiện" />
-                                        <asp:BoundField DataField="Description" HeaderText="Mô tả" />
-                                        <asp:TemplateField HeaderText="Ngày diễn ra">
+                                        <asp:TemplateField HeaderText="Hình ảnh">
                                             <ItemTemplate>
-                                                <%# ((DateTime)Eval("EventDate")).ToString("yyyy-MM-dd") %>
+                                                <img src='<%# Eval("FilePath") %>' alt='<%# Eval("AltText") %>' 
+                                                     class="image-preview img-thumbnail" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="Location" HeaderText="Địa điểm" />
+                                        <asp:BoundField DataField="FileName" HeaderText="Tên file" />
+                                        <asp:BoundField DataField="FileType" HeaderText="Loại file" />
+                                        <asp:BoundField DataField="FileSize" HeaderText="Kích thước (KB)" />
+                                        <asp:BoundField DataField="AltText" HeaderText="Alt Text" />
+                                        <asp:TemplateField HeaderText="Ngày upload">
+                                            <ItemTemplate>
+                                                <%# ((DateTime)Eval("UploadedAt")).ToString("dd/MM/yyyy HH:mm") %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Thao tác">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-warning btn-sm" 
-                                                    CommandName="EditEvent" CommandArgument='<%# Eval("Id") %>'
+                                                    CommandName="EditRow" CommandArgument='<%# Eval("Id") %>'
                                                     data-id='<%# Eval("Id") %>'
-                                                    data-name='<%# Eval("Name") %>'
-                                                    data-description='<%# Eval("Description") %>'
-                                                    data-eventdate='<%# ((DateTime)Eval("EventDate")).ToString("yyyy-MM-dd") %>'
-                                                    data-location='<%# Eval("Location") %>'
-                                                    data-organizationid='<%# Eval("OrganizationId") %>'>
+                                                    data-filepath='<%# Eval("FilePath") %>'
+                                                    data-filename='<%# Eval("FileName") %>'
+                                                    data-filetype='<%# Eval("FileType") %>'
+                                                    data-filesize='<%# Eval("FileSize") %>'
+                                                    data-alttext='<%# Eval("AltText") %>'
+                                                    data-uploadedby='<%# Eval("UploadedBy") %>'>
                                                     <i class="fas fa-edit text-white"></i> Sửa
                                                 </asp:LinkButton>
                                                 <button type="button" class="btn btn-danger btn-sm" 
@@ -151,6 +150,7 @@
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
+                                    <PagerStyle CssClass="pagination" />
                                 </asp:GridView>
                             </ContentTemplate>
                         </asp:UpdatePanel>
@@ -162,30 +162,56 @@
 
     <!-- Create Modal -->
     <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header create">
-                    <h5 class="modal-title" id="createModalLabel">Thêm sự kiện mới</h5>
+                    <h5 class="modal-title" id="createModalLabel">Thêm hình ảnh mới</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                         <ContentTemplate>
-                            <div class="mb-3">
-                                <label for="txtName" class="form-label required-field">Tên sự kiện</label>
-                                <asp:TextBox ID="txtName" runat="server" CssClass="form-control" required></asp:TextBox>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="txtFilePath" class="form-label required-field">Đường dẫn file</label>
+                                        <asp:TextBox ID="txtFilePath" runat="server" CssClass="form-control" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="txtFileName" class="form-label">Tên file</label>
+                                        <asp:TextBox ID="txtFileName" runat="server" CssClass="form-control" />
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="txtDescription" class="form-label">Mô tả</label>
-                                <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="txtFileType" class="form-label">Loại file</label>
+                                        <asp:TextBox ID="txtFileType" runat="server" CssClass="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="txtFileSize" class="form-label">Kích thước (KB)</label>
+                                        <asp:TextBox ID="txtFileSize" runat="server" CssClass="form-control" TextMode="Number" />
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="txtEventDate" class="form-label required-field">Ngày diễn ra</label>
-                                <asp:TextBox ID="txtEventDate" runat="server" CssClass="form-control" TextMode="Date" required></asp:TextBox>
-                            </div>
-                            <div class="mb-3">
-                                <label for="txtLocation" class="form-label required-field">Địa điểm</label>
-                                <asp:TextBox ID="txtLocation" runat="server" CssClass="form-control" required></asp:TextBox>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="txtAltText" class="form-label">Alt Text</label>
+                                        <asp:TextBox ID="txtAltText" runat="server" CssClass="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="txtUploadedBy" class="form-label">Người upload</label>
+                                        <asp:TextBox ID="txtUploadedBy" runat="server" CssClass="form-control" TextMode="Number" />
+                                    </div>
+                                </div>
                             </div>
                             <!-- Debug Info -->
                             <div id="createDebugInfo" class="alert alert-danger" style="display: none;">
@@ -205,35 +231,57 @@
 
     <!-- Edit Modal -->
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header edit">
-                    <h5 class="modal-title" id="editModalLabel">Chỉnh sửa thông tin sự kiện</h5>
+                    <h5 class="modal-title" id="editModalLabel">Chỉnh sửa hình ảnh</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                         <ContentTemplate>
                             <asp:HiddenField ID="hdnEditId" runat="server" />
-                            <div class="mb-3">
-                                <label for="txtEditName" class="form-label required-field">Tên sự kiện</label>
-                                <asp:TextBox ID="txtEditName" runat="server" CssClass="form-control" required></asp:TextBox>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="txtEditFilePath" class="form-label required-field">Đường dẫn file</label>
+                                        <asp:TextBox ID="txtEditFilePath" runat="server" CssClass="form-control" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="txtEditFileName" class="form-label">Tên file</label>
+                                        <asp:TextBox ID="txtEditFileName" runat="server" CssClass="form-control" />
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="txtEditOrganizationId" class="form-label required-field">Đơn vị tổ chức</label>
-                                <asp:TextBox ID="txtEditOrganizationId" runat="server" CssClass="form-control" required></asp:TextBox>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="txtEditFileType" class="form-label">Loại file</label>
+                                        <asp:TextBox ID="txtEditFileType" runat="server" CssClass="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="txtEditFileSize" class="form-label">Kích thước (KB)</label>
+                                        <asp:TextBox ID="txtEditFileSize" runat="server" CssClass="form-control" TextMode="Number" />
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="txtEditDescription" class="form-label">Mô tả</label>
-                                <asp:TextBox ID="txtEditDescription" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="3"></asp:TextBox>
-                            </div>
-                            <div class="mb-3">
-                                <label for="txtEditEventDate" class="form-label required-field">Ngày diễn ra</label>
-                                <asp:TextBox ID="txtEditEventDate" runat="server" CssClass="form-control" TextMode="Date" required></asp:TextBox>
-                            </div>
-                            <div class="mb-3">
-                                <label for="txtEditLocation" class="form-label required-field">Địa điểm</label>
-                                <asp:TextBox ID="txtEditLocation" runat="server" CssClass="form-control" required></asp:TextBox>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="txtEditAltText" class="form-label">Alt Text</label>
+                                        <asp:TextBox ID="txtEditAltText" runat="server" CssClass="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="txtEditUploadedBy" class="form-label">Người upload</label>
+                                        <asp:TextBox ID="txtEditUploadedBy" runat="server" CssClass="form-control" TextMode="Number" />
+                                    </div>
+                                </div>
                             </div>
                             <!-- Debug Info -->
                             <div id="editDebugInfo" class="alert alert-danger" style="display: none;">
@@ -261,12 +309,7 @@
                 </div>
                 <div class="modal-body">
                     <asp:HiddenField ID="hdnDeleteId" runat="server" />
-                    <asp:HiddenField ID="hdnForceDelete" runat="server" Value="false" />
-                    <p>Bạn có chắc chắn muốn xóa sự kiện này?</p>
-                    <div id="constraintWarning" class="alert alert-warning" style="display: none;">
-                        <p><strong>Lưu ý:</strong> Sự kiện này có dữ liệu liên quan:</p>
-                        <ul id="constraintList"></ul>
-                    </div>
+                    <p>Bạn có chắc chắn muốn xóa hình ảnh này?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
@@ -329,16 +372,10 @@
 
         // Xử lý validation cho form edit
         function validateEditForm() {
-            var editName = document.getElementById('<%= txtEditName.ClientID %>');
-            var editEventDate = document.getElementById('<%= txtEditEventDate.ClientID %>');
-            var editLocation = document.getElementById('<%= txtEditLocation.ClientID %>');
-            var editOrganizationId = document.getElementById('<%= txtEditOrganizationId.ClientID %>');
+            var editFilePath = document.getElementById('<%= txtEditFilePath.ClientID %>');
 
-            if (!editName.value || !editEventDate.value || !editLocation.value || !editOrganizationId.value) {
-                if (!editName.value) editName.focus();
-                else if (!editEventDate.value) editEventDate.focus();
-                else if (!editLocation.value) editLocation.focus();
-                else if (!editOrganizationId.value) editOrganizationId.focus();
+            if (!editFilePath.value) {
+                editFilePath.focus();
                 return false;
             }
             return true;
@@ -346,14 +383,10 @@
 
         // Xử lý validation cho form create
         function validateCreateForm() {
-            var name = document.getElementById('<%= txtName.ClientID %>');
-            var eventDate = document.getElementById('<%= txtEventDate.ClientID %>');
-            var location = document.getElementById('<%= txtLocation.ClientID %>');
+            var filePath = document.getElementById('<%= txtFilePath.ClientID %>');
 
-            if (!name.value || !eventDate.value || !location.value) {
-                if (!name.value) name.focus();
-                else if (!eventDate.value) eventDate.focus();
-                else if (!location.value) location.focus();
+            if (!filePath.value) {
+                filePath.focus();
                 return false;
             }
             return true;
@@ -361,45 +394,19 @@
 
         // Xử lý validation cho form delete
         function validateDeleteForm() {
-            var eventId = document.getElementById('<%= hdnDeleteId.ClientID %>');
-            if (!eventId.value) {
-                showError('Không tìm thấy ID sự kiện!');
+            var imageId = document.getElementById('<%= hdnDeleteId.ClientID %>');
+            if (!imageId.value) {
+                showError('Không tìm thấy ID hình ảnh!');
                 return false;
             }
             return true;
         }
 
-        function showDeleteModal(eventId) {
-            // Reset force delete flag
-            document.getElementById('<%= hdnForceDelete.ClientID %>').value = 'false';
-            
-            // Kiểm tra ràng buộc
-            PageMethods.CheckConstraints(eventId, function(result) {
-                var constraintWarning = document.getElementById('constraintWarning');
-                var constraintList = document.getElementById('constraintList');
-                var hdnForceDelete = document.getElementById('<%= hdnForceDelete.ClientID %>');
-                
-                if (result.success && result.data && result.data.length > 0) {
-                    constraintWarning.style.display = 'block';
-                    constraintList.innerHTML = '';
-                    for (var i = 0; i < result.data.length; i++) {
-                        var li = document.createElement('li');
-                        li.textContent = result.data[i];
-                        constraintList.appendChild(li);
-                    }
-                    hdnForceDelete.value = 'true';
-                } else {
-                    constraintWarning.style.display = 'none';
-                    hdnForceDelete.value = 'false';
-                }
-                
-                // Hiển thị modal xóa
-                document.getElementById('<%= hdnDeleteId.ClientID %>').value = eventId;
-                var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-                deleteModal.show();
-            }, function(error) {
-                showError('Lỗi khi kiểm tra ràng buộc: ' + error);
-            });
+        function showDeleteModal(imageId) {
+            // Hiển thị modal xóa
+            document.getElementById('<%= hdnDeleteId.ClientID %>').value = imageId;
+            var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            deleteModal.show();
         }
 
         // Hàm hiển thị thông báo thành công
@@ -426,21 +433,21 @@
         $(document).ready(function() {
             $("#searchInput").on("keyup", function() {
                 var value = $(this).val().toLowerCase();
-                $("#<%= gvEvents.ClientID %> tr").filter(function() {
+                $("#<%= gvImages.ClientID %> tr").filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
             });
 
             $("#searchButton").on("click", function() {
                 var value = $("#searchInput").val().toLowerCase();
-                $("#<%= gvEvents.ClientID %> tr").filter(function() {
+                $("#<%= gvImages.ClientID %> tr").filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
             });
 
             $("#searchInput").on("input", function() {
                 if ($(this).val() === "") {
-                    $("#<%= gvEvents.ClientID %> tr").show();
+                    $("#<%= gvImages.ClientID %> tr").show();
                 }
             });
         });
