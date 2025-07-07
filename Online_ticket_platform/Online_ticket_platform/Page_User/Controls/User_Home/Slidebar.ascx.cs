@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Online_ticket_platform_BLL;
+using Online_ticket_platform_Model;
 
 namespace Online_ticket_platform.Page_User.Controls
 {
@@ -15,20 +15,33 @@ namespace Online_ticket_platform.Page_User.Controls
         {
             if (!IsPostBack)
             {
-                InitializeSlides();
+                LoadUserSlides();
                 BindSlides();
             }
         }
 
-        private void InitializeSlides()
+        private void LoadUserSlides()
         {
-            slides = new List<SlideItem>
+            slides = new List<SlideItem>();
+            var eventService = new BLL_EventService();
+            var events = eventService.GetAllEvents();
+            int maxSlides = 5;
+            int count = 0;
+            foreach (var evt in events)
             {
-                new SlideItem { ImageUrl = "https://flip.vn/_next/image?url=https%3A%2F%2Fflivnewbucket.s3.ap-southeast-1.amazonaws.com%2Fuploads%2Forganizations%2F3e14cc7d-e559-4a95-8106-b35cbd80a55c%2F8d192c3e-0515-4fe1-a2b9-37aaf324cd40.png&w=1920&q=75", AltText = "Slide 1" },
-                new SlideItem { ImageUrl = "https://flip.vn/_next/image?url=https%3A%2F%2Fflivnewbucket.s3.ap-southeast-1.amazonaws.com%2Fuploads%2Forganizations%2Ff795e606-7bab-4fe4-8843-031450a22333%2F1cf281f7-9c68-4612-8681-c5b0981f27da.webp&w=1920&q=75", AltText = "Slide 2" },
-                new SlideItem { ImageUrl = "https://flip.vn/_next/image?url=https%3A%2F%2Fflivnewbucket.s3.ap-southeast-1.amazonaws.com%2Fuploads%2Forganizations%2Ff6554ab4-a5b8-4838-bbab-3f305c56d624%2Feb58c96f-7a5e-4f53-ba86-6c2b2f14e368.png&w=1920&q=75", AltText = "Slide 3" },
-                new SlideItem { ImageUrl = "https://flip.vn/_next/image?url=https%3A%2F%2Fflivnewbucket.s3.ap-southeast-1.amazonaws.com%2Fuploads%2Forganizations%2F3e14cc7d-e559-4a95-8106-b35cbd80a55c%2F8d192c3e-0515-4fe1-a2b9-37aaf324cd40.png&w=1920&q=75", AltText = "Slide 4" }
-            };
+                slides.Add(new SlideItem
+                {
+                    ImageUrl = $"../../../Public/assets/images/events/concert{(count % 6) + 1}.png",
+                    AltText = evt.Name
+                });
+                count++;
+                if (count >= maxSlides) break;
+            }
+            // Nếu không có sự kiện, dùng ảnh mặc định
+            if (slides.Count == 0)
+            {
+                slides.Add(new SlideItem { ImageUrl = "../../../Public/assets/images/logo.jpg", AltText = "No events" });
+            }
         }
 
         private void BindSlides()

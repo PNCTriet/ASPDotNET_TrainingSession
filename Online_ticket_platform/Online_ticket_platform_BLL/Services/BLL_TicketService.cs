@@ -100,5 +100,10 @@ namespace Online_ticket_platform_BLL.Services
         {
             return _ticketRepository.GetRelatedDataInfo(ticketId);
         }
+
+        public List<MOD_Ticket> GetTicketsByEventId(int eventId)
+        {
+            return _ticketRepository.GetAllTickets().FindAll(t => t.EventId == eventId);
+        }
     }
 }

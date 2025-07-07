@@ -69,7 +69,8 @@
     <div class="p-4 pt-0">
         <asp:HyperLink ID="lnkDetail" runat="server" 
                       CssClass="block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                      NavigateUrl="#">
+                      NavigateUrl='<%# Eval("EventId", "/Page_User/User_Event.aspx?eventId={0}") %>'
+                      >
             Xem chi tiết
         </asp:HyperLink>
     </div>

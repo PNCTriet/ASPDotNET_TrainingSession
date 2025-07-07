@@ -69,5 +69,19 @@ namespace Online_ticket_platform_BLL
         {
             _userRepository.DeleteRelatedData(userId);
         }
+
+        public bool AuthenticateUser(string email, string password)
+        {
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+                return false;
+
+            var user = _userRepository.GetUserByEmail(email);
+            if (user == null)
+                return false;
+
+            // For now, using simple comparison
+            // In production, use proper password hashing verification (BCrypt, PBKDF2, etc.)
+            return password == user.PasswordHash && user.IsVerified;
+        }
     }
 }

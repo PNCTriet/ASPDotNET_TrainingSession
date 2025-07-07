@@ -157,8 +157,10 @@
     <Content Include="Page_User\Controls\Layouts\Header.ascx" />
     <Content Include="Page_User\Controls\User_Home\EventCarte.ascx" />
     <Content Include="Page_User\Controls\User_Home\Slidebar.ascx" />
+    <Content Include="Page_User\User_Logout.aspx" />
     <Content Include="Page_User\User_Me\User_MeTicket.aspx" />
     <Content Include="Page_User\User_Me\User_MePersonal.aspx" />
+    <Content Include="Page_User\User_Register.aspx" />
     <Content Include="Page_User\User_Whyus.aspx" />
     <Content Include="Page_User\User_Organization.aspx" />
     <Content Include="Page_User\User_Checkout.aspx" />
@@ -174,6 +176,7 @@
     <Content Include="Public\assets\images\events\concert4.png" />
     <Content Include="Public\assets\images\events\concert5.png" />
     <Content Include="Public\assets\images\events\concert6.png" />
+    <Content Include="Public\assets\images\superadmin-avatar.jpg" />
     <Content Include="Public\assets\images\logo.jpg" />
     <Content Include="Public\assets\images\default-avatar.jpg" />
     <Content Include="Public\database\ocx_oracle_sample.sql" />
@@ -1324,6 +1327,13 @@
     <Compile Include="Page_User\User.Master.designer.cs">
       <DependentUpon>User.Master</DependentUpon>
     </Compile>
+    <Compile Include="Page_User\User_Logout.aspx.cs">
+      <DependentUpon>User_Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\User_Logout.aspx.designer.cs">
+      <DependentUpon>User_Logout.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Page_User\User_Me\User_MeTicket.aspx.cs">
       <DependentUpon>User_MeTicket.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1337,6 +1347,13 @@
     </Compile>
     <Compile Include="Page_User\User_Me\User_MePersonal.aspx.designer.cs">
       <DependentUpon>User_MePersonal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page_User\User_Register.aspx.cs">
+      <DependentUpon>User_Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page_User\User_Register.aspx.designer.cs">
+      <DependentUpon>User_Register.aspx</DependentUpon>
     </Compile>
     <Compile Include="Page_User\User_Whyus.aspx.cs">
       <DependentUpon>User_Whyus.aspx</DependentUpon>

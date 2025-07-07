@@ -17,5 +17,6 @@ namespace Online_ticket_platform_BLL.Interfaces
         bool HasRelatedData(int ticketId);
         bool DeleteRelatedData(int ticketId);
         List<string> GetRelatedDataInfo(int ticketId);
+        List<MOD_Ticket> GetTicketsByEventId(int eventId);
     }
 }

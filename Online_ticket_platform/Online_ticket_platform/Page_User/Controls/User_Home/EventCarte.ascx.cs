@@ -14,6 +14,7 @@ namespace Online_ticket_platform.Page_User.Controls.User_Home
         private string _bannerUrl;
         private string _ticketCount;
         private string _detailUrl;
+        private string _eventId;
         private List<TicketType> _ticketTypes;
 
         public string EventTitle
@@ -52,6 +53,12 @@ namespace Online_ticket_platform.Page_User.Controls.User_Home
             set { _detailUrl = value; }
         }
 
+        public string EventId
+        {
+            get { return _eventId; }
+            set { _eventId = value; }
+        }
+
         public List<TicketType> TicketTypes
         {
             get { return _ticketTypes; }
@@ -72,7 +79,7 @@ namespace Online_ticket_platform.Page_User.Controls.User_Home
             if (lblEventDate != null) lblEventDate.Text = _eventDate;
             if (lblEventLocation != null) lblEventLocation.Text = _eventLocation;
             if (lblTicketCount != null) lblTicketCount.Text = _ticketCount;
-            if (lnkDetail != null) lnkDetail.NavigateUrl = _detailUrl;
+            if (lnkDetail != null) lnkDetail.NavigateUrl = $"/Page_User/User_Event.aspx?eventId={_eventId}";
 
             // Set image URL for both main image and background
             if (imgEventBanner != null) imgEventBanner.Src = _bannerUrl;

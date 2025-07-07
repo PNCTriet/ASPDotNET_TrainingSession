@@ -18,5 +18,6 @@ namespace Online_ticket_platform_BLL
         bool HasRelatedData(int userId);
         List<string> GetRelatedDataInfo(int userId);
         void DeleteRelatedData(int userId);
+        bool AuthenticateUser(string email, string password);
     }
 }

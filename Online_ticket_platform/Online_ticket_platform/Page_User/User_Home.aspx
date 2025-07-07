@@ -17,6 +17,9 @@
             <p class="text-gray-600 dark:text-gray-400 mt-2">Khám phá các sự kiện hấp dẫn và mua vé trực tuyến một cách dễ dàng.</p>
         </div>
 
+        <!-- Thêm nút chuyển đổi dark mode vào đầu Content2 -->
+        <button id="toggleDarkMode" class="btn btn-primary mb-3" type="button">Chuyển Dark/Light Mode</button>
+
         <!-- Events Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Event Card 1 -->
@@ -39,3 +42,19 @@
         </div>
     </div>
 </asp:Content>
+
+<!-- Thêm script dark mode trước khi đóng Content2 -->
+<script>
+    function applyDarkMode() {
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark');
+        } else {
+            document.body.classList.remove('dark');
+        }
+    }
+    applyDarkMode();
+    document.getElementById('toggleDarkMode').onclick = function() {
+        const isDark = document.body.classList.toggle('dark');
+        localStorage.setItem('darkMode', isDark);
+    };
+</script>

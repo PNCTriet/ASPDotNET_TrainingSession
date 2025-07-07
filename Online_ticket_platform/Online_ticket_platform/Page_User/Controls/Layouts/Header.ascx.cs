@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Online_ticket_platform.Page_User.Controls
 {
@@ -13,7 +9,17 @@ namespace Online_ticket_platform.Page_User.Controls
         {
             if (!IsPostBack)
             {
-                // Initialize controls here if needed
+                if (Session["UserID"] != null && Session["UserName"] != null)
+                {
+                    pnlUserInfo.Visible = true;
+                    pnlLogin.Visible = false;
+                    litUserName.Text = Session["UserName"].ToString();
+                }
+                else
+                {
+                    pnlUserInfo.Visible = false;
+                    pnlLogin.Visible = true;
+                }
             }
         }
     }

@@ -31,8 +31,15 @@
             <div class="flex items-center space-x-4">
                 <a href="/events" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Sự kiện</a>
                 <a href="/tickets" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Vé của tôi</a>
-                <a href="../../Page_User/User_Login.aspx" class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors">Đăng nhập
-                </a>
+                <asp:Panel ID="pnlUserInfo" runat="server" Visible="false">
+                    <span class="text-gray-700 dark:text-gray-200 font-semibold mr-2">
+                        Xin chào, <asp:Literal ID="litUserName" runat="server" />
+                    </span>
+                    <a href="../../Page_User/User_Logout.aspx" class="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors">Đăng xuất</a>
+                </asp:Panel>
+                <asp:Panel ID="pnlLogin" runat="server" Visible="true">
+                    <a href="../../Page_User/User_Login.aspx" class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors">Đăng nhập</a>
+                </asp:Panel>
             </div>
         </div>
     </div>

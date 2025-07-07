@@ -23,19 +23,19 @@
     <!-- Navigation Menu -->
     <nav class="mt-4">
         <div id="NavigationMenu" runat="server" class="px-4 space-y-1">
-            <a href="/dashboard" class="flex items-center px-2 py-2 text-sm font-medium text-gray-900 dark:text-gray-100 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">
+            <a href="#" onclick="alert('Tính năng đang phát triển'); return false;" class="flex items-center px-2 py-2 text-sm font-medium text-gray-900 dark:text-gray-100 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">
                 <i class="fas fa-home w-6 text-gray-400 dark:text-gray-500"></i>
                 Tổng quan
             </a>
-            <a href="/tickets" class="flex items-center px-2 py-2 text-sm font-medium text-gray-900 dark:text-gray-100 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">
+            <a href="#" onclick="alert('Tính năng đang phát triển'); return false;" class="flex items-center px-2 py-2 text-sm font-medium text-gray-900 dark:text-gray-100 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">
                 <i class="fas fa-ticket-alt w-6 text-gray-400 dark:text-gray-500"></i>
                 Vé của tôi
             </a>
-            <a href="/favorites" class="flex items-center px-2 py-2 text-sm font-medium text-gray-900 dark:text-gray-100 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">
+            <a href="#" onclick="alert('Tính năng đang phát triển'); return false;" class="flex items-center px-2 py-2 text-sm font-medium text-gray-900 dark:text-gray-100 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">
                 <i class="fas fa-heart w-6 text-gray-400 dark:text-gray-500"></i>
                 Yêu thích
             </a>
-            <a href="/notifications" class="flex items-center px-2 py-2 text-sm font-medium text-gray-900 dark:text-gray-100 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">
+            <a href="#" onclick="alert('Tính năng đang phát triển'); return false;" class="flex items-center px-2 py-2 text-sm font-medium text-gray-900 dark:text-gray-100 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">
                 <i class="fas fa-bell w-6 text-gray-400 dark:text-gray-500"></i>
                 Thông báo
             </a>
@@ -46,15 +46,15 @@
             <h3 class="px-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Tài khoản
             </h3>
             <div class="mt-2 px-4 space-y-1">
-                <a href="/profile" class="flex items-center px-2 py-2 text-sm font-medium text-gray-900 dark:text-gray-100 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">
+                <a href="#" onclick="alert('Tính năng đang phát triển'); return false;" class="flex items-center px-2 py-2 text-sm font-medium text-gray-900 dark:text-gray-100 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">
                     <i class="fas fa-user w-6 text-gray-400 dark:text-gray-500"></i>
                     Thông tin cá nhân
                 </a>
-                <a href="/settings" class="flex items-center px-2 py-2 text-sm font-medium text-gray-900 dark:text-gray-100 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">
+                <a href="#" onclick="alert('Tính năng đang phát triển'); return false;" class="flex items-center px-2 py-2 text-sm font-medium text-gray-900 dark:text-gray-100 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">
                     <i class="fas fa-cog w-6 text-gray-400 dark:text-gray-500"></i>
                     Cài đặt
                 </a>
-                <a href="/logout" class="flex items-center px-2 py-2 text-sm font-medium text-red-600 dark:text-red-400 rounded-md hover:bg-red-50 dark:hover:bg-red-900/20">
+                <a href="../../Page_User/User_Logout.aspx" class="flex items-center px-2 py-2 text-sm font-medium text-red-600 dark:text-red-400 rounded-md hover:bg-red-50 dark:hover:bg-red-900/20">
                     <i class="fas fa-sign-out-alt w-6 text-red-400 dark:text-red-500"></i>
                     Đăng xuất
                 </a>

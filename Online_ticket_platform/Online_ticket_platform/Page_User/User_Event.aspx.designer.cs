@@ -22,5 +22,12 @@ namespace Online_ticket_platform.Page_User
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+
+        protected global::System.Web.UI.WebControls.Image imgEvent;
+        protected global::System.Web.UI.WebControls.Label lblEventName;
+        protected global::System.Web.UI.WebControls.Label lblEventDescription;
+        protected global::System.Web.UI.WebControls.Label lblEventTime;
+        protected global::System.Web.UI.WebControls.Label lblEventLocation;
+        protected global::System.Web.UI.WebControls.Label lblEventPrice;
     }
 }

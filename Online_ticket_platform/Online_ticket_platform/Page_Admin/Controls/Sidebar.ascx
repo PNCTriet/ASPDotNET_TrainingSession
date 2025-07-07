@@ -54,12 +54,12 @@
     </li>
 
     <!-- Event Settings -->
-    <li class="nav-item" id="menu-event-settings">
+    <!-- <li class="nav-item" id="menu-event-settings">
         <a class="nav-link" href="EventSetting_List.aspx">
             <i class="fas fa-fw fa-cogs"></i>
             <span>Cài đặt sự kiện</span>
         </a>
-    </li>
+    </li> -->
 
     <!-- Tickets -->
     <li class="nav-item" id="menu-tickets">
@@ -86,76 +86,76 @@
     </li>
 
     <!-- Payments -->
-    <li class="nav-item" id="menu-payments">
+    <!-- <li class="nav-item" id="menu-payments">
         <a class="nav-link" href="Payment_List.aspx">
             <i class="fas fa-fw fa-credit-card"></i>
             <span>Thanh toán</span>
         </a>
-    </li>
+    </li> -->
 
     <!-- Checkin Logs -->
-    <li class="nav-item" id="menu-checkin-logs">
+    <!-- <li class="nav-item" id="menu-checkin-logs">
         <a class="nav-link" href="CheckinLog_List.aspx">
             <i class="fas fa-fw fa-clipboard-check"></i>
             <span>Nhật ký check-in</span>
         </a>
-    </li>
+    </li> -->
 
     <!-- Promo Codes -->
-    <li class="nav-item" id="menu-promo-codes">
+    <!-- <li class="nav-item" id="menu-promo-codes">
         <a class="nav-link" href="PromoCode_List.aspx">
             <i class="fas fa-fw fa-tags"></i>
             <span>Mã giảm giá</span>
         </a>
-    </li>
+    </li> -->
 
     <!-- Order Promos -->
-    <li class="nav-item" id="menu-order-promos">
+    <!-- <li class="nav-item" id="menu-order-promos">
         <a class="nav-link" href="OrderPromo_List.aspx">
             <i class="fas fa-fw fa-percentage"></i>
             <span>Áp dụng mã giảm giá</span>
         </a>
-    </li>
+    </li> -->
 
     <!-- Referral Codes -->
-    <li class="nav-item" id="menu-referral-codes">
+    <!-- <li class="nav-item" id="menu-referral-codes">
         <a class="nav-link" href="ReferralCode_List.aspx">
             <i class="fas fa-fw fa-user-plus"></i>
             <span>Mã giới thiệu</span>
         </a>
-    </li>
+    </li> -->
 
     <!-- Email Logs -->
-    <li class="nav-item" id="menu-email-logs">
+    <!-- <li class="nav-item" id="menu-email-logs">
         <a class="nav-link" href="EmailLog_List.aspx">
             <i class="fas fa-fw fa-envelope"></i>
             <span>Nhật ký email</span>
         </a>
-    </li>
+    </li> -->
 
     <!-- Webhook Logs -->
-    <li class="nav-item" id="menu-webhook-logs">
+    <!-- <li class="nav-item" id="menu-webhook-logs">
         <a class="nav-link" href="WebhookLog_List.aspx">
             <i class="fas fa-fw fa-exchange-alt"></i>
             <span>Nhật ký webhook</span>
         </a>
-    </li>
+    </li> -->
 
     <!-- Webhook Subscriptions -->
-    <li class="nav-item" id="menu-webhook-subscriptions">
+    <!-- <li class="nav-item" id="menu-webhook-subscriptions">
         <a class="nav-link" href="WebhookSubscription_List.aspx">
             <i class="fas fa-fw fa-bell"></i>
             <span>Đăng ký webhook</span>
         </a>
-    </li>
+    </li> -->
 
     <!-- Tracking Visits -->
-    <li class="nav-item" id="menu-tracking-visits">
+    <!-- <li class="nav-item" id="menu-tracking-visits">
         <a class="nav-link" href="TrackingVisit_List.aspx">
             <i class="fas fa-fw fa-chart-line"></i>
             <span>Theo dõi truy cập</span>
         </a>
-    </li>
+    </li> -->
 
     <!-- Images -->
     <li class="nav-item" id="menu-images">
@@ -174,12 +174,12 @@
     </li>
 
     <!-- User Organizations -->
-    <li class="nav-item" id="menu-user-organizations">
+    <!-- <li class="nav-item" id="menu-user-organizations">
         <a class="nav-link" href="UserOrganization_List.aspx">
             <i class="fas fa-fw fa-user-tie"></i>
             <span>Người dùng tổ chức</span>
         </a>
-    </li>
+    </li> -->
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
