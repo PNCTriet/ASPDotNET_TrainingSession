@@ -26,31 +26,55 @@ namespace Online_ticket_platform.Page_User
         /// <summary>
         /// EventCarte1 control.
         /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::Online_ticket_platform.Page_User.Controls.User_Home.EventCarte EventCarte1;
 
         /// <summary>
         /// EventCarte2 control.
         /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::Online_ticket_platform.Page_User.Controls.User_Home.EventCarte EventCarte2;
 
         /// <summary>
         /// EventCarte3 control.
         /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::Online_ticket_platform.Page_User.Controls.User_Home.EventCarte EventCarte3;
 
         /// <summary>
         /// EventCarte4 control.
         /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::Online_ticket_platform.Page_User.Controls.User_Home.EventCarte EventCarte4;
 
         /// <summary>
         /// EventCarte5 control.
         /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::Online_ticket_platform.Page_User.Controls.User_Home.EventCarte EventCarte5;
 
         /// <summary>
         /// EventCarte6 control.
         /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::Online_ticket_platform.Page_User.Controls.User_Home.EventCarte EventCarte6;
     }
 }

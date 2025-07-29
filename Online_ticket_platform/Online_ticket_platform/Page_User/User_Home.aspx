@@ -41,7 +41,7 @@
             <uc1:EventCarte ID="EventCarte6" runat="server" />
         </div>
     </div>
-</asp:Content>
+
 
 <!-- Thêm script dark mode trước khi đóng Content2 -->
 <script>
@@ -58,3 +58,4 @@
         localStorage.setItem('darkMode', isDark);
     };
 </script>
+</asp:Content>
